@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laserschneid- & Schweißanlagen — Predictive Maintenance | Forbach & Partners</title>
+<meta name="description" content="KI-gestützte Zustandsüberwachung für Faserlaser und Laserschweißanlagen. Strahlqualitäts-Diagnostik, Optik-Degradation und Schnittqualitäts-KI für 1–20 kW Anlagen.">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#e4b15e;--gold-light:#f8dfa5;--gold-dark:#c49040;
+  --black:#000;--dark:#0a0a0a;--dark-2:#111;--dark-3:#1a1a1a;--dark-card:#141414;
+  --border:rgba(228,177,94,0.15);--border-strong:rgba(228,177,94,0.38);
+  --text:#fff;--text-dim:#a0a0a0;--text-muted:#555;
+  --green:#00ff88;--red:#ff3860;--amber:#ffb800;--blue:#00b4ff;
+  --cyan:#00e5ff;--laser:#00e5ff;
+  --font-d:'Oswald',sans-serif;--font-b:'Raleway',sans-serif;--font-m:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--text);font-family:var(--font-b);line-height:1.6;overflow-x:hidden;}
+
+nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:100;background:rgba(0,0,0,0.88);backdrop-filter:blur(20px);border:1px solid var(--border-strong);border-radius:14px;padding:0 2rem;height:58px;display:flex;align-items:center;justify-content:space-between;gap:2rem;width:min(1200px,calc(100vw - 2rem));}
+.nav-logo{font-family:var(--font-d);font-size:1.2rem;letter-spacing:2px;background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;white-space:nowrap;}
+.nav-links{display:flex;gap:0.25rem;align-items:center;}
+.nav-link{color:var(--text-dim);text-decoration:none;font-size:0.8rem;padding:0.4rem 0.75rem;border-radius:6px;transition:all 0.2s;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,0.06);}
+.nav-link.active{color:var(--cyan);}
+.nav-cta{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);color:#000;padding:0.4rem 1.1rem;border-radius:6px;font-weight:700;font-size:0.78rem;text-decoration:none;white-space:nowrap;transition:all 0.2s;}
+.nav-cta:hover{box-shadow:0 4px 20px rgba(248,223,165,0.3);transform:translateY(-1px);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 2rem 80px;position:relative;overflow:hidden;}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 55% at 65% 35%,rgba(0,229,255,0.07) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 40% at 5% 80%,rgba(0,229,255,0.04) 0%,transparent 50%),
+    linear-gradient(180deg,#000 0%,#00080a 100%);
+}
+.hero-bg::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,229,255,0.028) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.028) 1px,transparent 1px);
+  background-size:55px 55px;
+  mask-image:radial-gradient(ellipse at 60% 40%,black 20%,transparent 70%);
+}
+/* Laser beam animation across the top */
+.hero-bg::after{content:'';position:absolute;left:-10%;right:-10%;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(0,229,255,0.0) 30%,rgba(0,229,255,0.9) 50%,rgba(0,229,255,0.0) 70%,transparent 100%);filter:blur(1px);animation:laserscan 3s ease-in-out infinite;}
+@keyframes laserscan{0%,100%{top:20%;opacity:0;}10%{opacity:1;}50%{top:80%;opacity:1;}90%{opacity:0;}99%{top:80%;}}
+
+.hero-inner{position:relative;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:5rem;align-items:center;width:100%;}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:3rem;}}
+
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-m);font-size:0.6rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem;}
+.breadcrumb a{color:var(--text-muted);text-decoration:none;transition:color 0.2s;}.breadcrumb a:hover{color:var(--gold);}.breadcrumb span{color:var(--cyan);}
+
+.eyebrow{display:flex;align-items:center;gap:0.75rem;font-family:var(--font-m);font-size:0.65rem;color:var(--cyan);letter-spacing:4px;text-transform:uppercase;margin-bottom:1.25rem;}
+.eyebrow::before{content:'';width:28px;height:1px;background:var(--cyan);}
+
+h1{font-family:var(--font-d);font-size:clamp(3rem,6vw,6.5rem);line-height:0.92;letter-spacing:2px;margin-bottom:1.5rem;}
+h1 .gold{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1 .cyan{background:linear-gradient(135deg,#00e5ff,#80f4ff,#00b4ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+
+.hero-sub{font-size:1.05rem;color:var(--text-dim);line-height:1.75;margin-bottom:2rem;max-width:500px;}
+.hero-sub strong{color:var(--text);}
+
+.lang-toggle{display:inline-flex;gap:0;border:1px solid var(--border-strong);border-radius:7px;overflow:hidden;margin-bottom:1.5rem;}
+.lang-btn{padding:0.3rem 0.85rem;font-family:var(--font-m);font-size:0.62rem;letter-spacing:1.5px;text-transform:uppercase;background:transparent;border:none;color:var(--text-muted);cursor:pointer;transition:all 0.2s;}
+.lang-btn.active{background:rgba(0,229,255,0.12);color:var(--cyan);}
+
+.hero-kpis{display:flex;gap:2rem;margin-bottom:2rem;flex-wrap:wrap;}
+.kpi-val{font-family:var(--font-m);font-size:1.6rem;font-weight:600;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:block;}
+.kpi-lbl{font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;}
+
+.hero-btns{display:flex;gap:0.75rem;flex-wrap:wrap;}
+.btn-gold{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);color:#000;padding:0.85rem 1.75rem;border-radius:8px;font-weight:700;font-size:0.875rem;text-decoration:none;border:none;cursor:pointer;transition:all 0.3s;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(248,223,165,0.35);}
+.btn-outline{background:transparent;color:var(--cyan);padding:0.85rem 1.75rem;border-radius:8px;font-weight:600;font-size:0.875rem;text-decoration:none;border:1px solid rgba(0,229,255,0.35);cursor:pointer;transition:all 0.3s;}
+.btn-outline:hover{background:rgba(0,229,255,0.06);}
+
+/* LASER LIVE PANEL */
+.laser-visual{background:var(--dark-card);border:1px solid rgba(0,229,255,0.3);border-radius:18px;padding:1.5rem;position:relative;overflow:hidden;}
+.laser-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);filter:blur(1px);}
+
+.cv-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;}
+.cv-title{font-family:var(--font-m);font-size:0.6rem;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;}
+.cv-live{display:flex;align-items:center;gap:6px;font-family:var(--font-m);font-size:0.58rem;color:var(--cyan);letter-spacing:2px;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:blink 1.2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+/* Beam quality ring */
+.beam-row{display:flex;align-items:center;gap:1.25rem;margin-bottom:1.25rem;}
+.beam-gauge{position:relative;width:88px;height:88px;flex-shrink:0;}
+.beam-gauge svg{transform:rotate(-90deg);}
+.bg-bg{fill:none;stroke:rgba(255,255,255,0.05);stroke-width:7;}
+.bg-fg{fill:none;stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset 0.8s ease;}
+.bg-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.bg-val{font-family:var(--font-m);font-size:1.1rem;font-weight:700;color:var(--cyan);}
+.bg-unit{font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:1px;}
+.beam-info{flex:1;}
+.bi-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.bi-label{font-family:var(--font-m);font-size:0.55rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;}
+.bi-val{font-family:var(--font-m);font-size:0.68rem;font-weight:600;}
+.bi-bar{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;margin-bottom:7px;overflow:hidden;}
+.bi-fill{height:100%;border-radius:2px;}
+.fill-cyan{background:linear-gradient(90deg,#00e5ff,#80f4ff);box-shadow:0 0 6px #00e5ff55;}
+.fill-ok{background:linear-gradient(90deg,#00ff88,#4ade80);box-shadow:0 0 5px #00ff8844;}
+.fill-warn{background:linear-gradient(90deg,#ffb800,#ffd33d);box-shadow:0 0 5px #ffb80044;}
+.fill-crit{background:linear-gradient(90deg,#ff3860,#ff7b9c);box-shadow:0 0 8px #ff386044;}
+
+/* Optic tiles */
+.optic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:1rem;}
+.optic-tile{background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.04);border-radius:8px;padding:9px;text-align:center;position:relative;overflow:hidden;}
+.ot-label{font-family:var(--font-m);font-size:0.48rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+.ot-val{font-family:var(--font-m);font-size:0.85rem;font-weight:700;line-height:1;}
+.ot-bar{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:4px;overflow:hidden;}
+.ot-fill{height:100%;border-radius:2px;}
+
+/* Cutting params */
+.cut-row{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:1rem;}
+.cut-tile{background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.04);border-radius:8px;padding:10px;}
+.ct-label{font-family:var(--font-m);font-size:0.5rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;}
+.ct-val{font-family:var(--font-m);font-size:0.95rem;font-weight:600;margin-top:3px;}
+
+/* Focus shift warning */
+.focus-warn{display:flex;align-items:center;gap:0.75rem;background:rgba(255,184,0,0.07);border:1px solid rgba(255,184,0,0.25);border-radius:8px;padding:10px 12px;}
+.fw-icon{font-size:1.1rem;}
+.fw-label{font-family:var(--font-m);font-size:0.55rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;}
+.fw-val{font-size:0.8rem;font-weight:700;color:var(--amber);}
+
+/* SECTIONS */
+.section{padding:5rem 2rem;max-width:1200px;margin:0 auto;}
+.section-full{padding:5rem 2rem;border-top:1px solid var(--border);}
+.section-full-inner{max-width:1200px;margin:0 auto;}
+.section-label{display:flex;align-items:center;gap:0.75rem;font-family:var(--font-m);font-size:0.62rem;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:0.85rem;}
+.section-label::before{content:'';width:22px;height:1px;background:var(--gold);}
+h2{font-family:var(--font-d);font-size:clamp(2.2rem,4vw,4rem);letter-spacing:1px;line-height:0.95;margin-bottom:0.85rem;}
+h2 .gold{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h2 .cyan{background:linear-gradient(135deg,#00e5ff,#80f4ff,#00b4ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.section-sub{font-size:0.95rem;color:var(--text-dim);max-width:580px;line-height:1.75;margin-bottom:3rem;}
+
+/* FEATURES */
+.feat-matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:900px){.feat-matrix{grid-template-columns:1fr;}}
+.feat-card{background:var(--dark-card);border:1px solid var(--border);border-radius:16px;padding:2rem;position:relative;overflow:hidden;transition:all 0.3s;}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity 0.3s;}
+.feat-card:hover::before{opacity:1;}
+.feat-card:hover{border-color:rgba(0,229,255,0.3);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.7);}
+.fc-icon{font-size:1.8rem;margin-bottom:1rem;}
+.fc-en{font-family:var(--font-m);font-size:0.55rem;color:rgba(0,229,255,0.4);letter-spacing:1px;margin-bottom:0.5rem;font-style:italic;}
+.fc-title{font-size:1.05rem;font-weight:700;margin-bottom:0.6rem;}
+.fc-desc{font-size:0.82rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.1rem;}
+.fc-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.fc-tag{font-family:var(--font-m);font-size:0.55rem;color:var(--text-muted);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;padding:3px 7px;letter-spacing:0.8px;text-transform:uppercase;}
+
+/* PARAMETER MATRIX — big visual */
+.param-matrix{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:2rem;}
+@media(max-width:800px){.param-matrix{grid-template-columns:repeat(2,1fr);}}
+.pm-card{background:var(--dark-card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-align:center;transition:all 0.3s;position:relative;overflow:hidden;}
+.pm-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;opacity:0;transition:opacity 0.3s;}
+.pm-card:hover::after{opacity:1;}
+.pm-card.c{border-color:rgba(0,229,255,0.25);}
+.pm-card.c::after{background:linear-gradient(90deg,transparent,var(--cyan),transparent);}
+.pm-card.g{border-color:rgba(0,255,136,0.2);}
+.pm-card.g::after{background:linear-gradient(90deg,transparent,var(--green),transparent);}
+.pm-card.a{border-color:rgba(255,184,0,0.2);}
+.pm-card.a::after{background:linear-gradient(90deg,transparent,var(--amber),transparent);}
+.pm-icon{font-size:1.5rem;margin-bottom:0.75rem;}
+.pm-val{font-family:var(--font-m);font-size:1.4rem;font-weight:700;line-height:1;margin-bottom:4px;}
+.pm-val.cyan{color:var(--cyan);}
+.pm-val.green{color:var(--green);}
+.pm-val.amber{color:var(--amber);}
+.pm-val.gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.pm-label{font-family:var(--font-m);font-size:0.6rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;}
+
+/* SPECS */
+.specs-table{width:100%;border-collapse:collapse;margin-bottom:2rem;}
+.specs-table th{text-align:left;font-family:var(--font-m);font-size:0.58rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;padding:0.75rem 1rem;border-bottom:1px solid var(--border);}
+.specs-table td{padding:0.9rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;color:var(--text-dim);transition:color 0.2s;}
+.specs-table tr:hover td{color:var(--text);}
+.specs-table td:first-child{color:var(--text);font-weight:500;font-size:0.8rem;}
+
+/* SENSOR LIST */
+.sensor-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.sl-item{display:flex;align-items:center;gap:0.75rem;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:10px;padding:0.85rem 1rem;}
+.sl-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);flex-shrink:0;}
+.sl-name{font-size:0.82rem;color:var(--text-dim);}
+.sl-unit{font-family:var(--font-m);font-size:0.62rem;color:var(--text-muted);margin-left:auto;letter-spacing:1px;}
+
+/* FLOW */
+.flow-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;margin-bottom:3rem;}
+@media(max-width:900px){.flow-steps{grid-template-columns:1fr;gap:1rem;}}
+.flow-step{text-align:center;padding:1.5rem 1rem;position:relative;}
+.flow-step::after{content:'→';position:absolute;right:-8px;top:50%;transform:translateY(-50%);color:var(--text-muted);}
+@media(max-width:900px){.flow-step::after{display:none;}}
+.flow-step:last-child::after{display:none;}
+.fs-num{font-family:var(--font-d);font-size:2.5rem;color:rgba(0,229,255,0.12);line-height:1;margin-bottom:0.5rem;}
+.fs-icon{font-size:1.5rem;margin-bottom:0.5rem;}
+.fs-title{font-size:0.85rem;font-weight:700;margin-bottom:0.3rem;}
+.fs-desc{font-size:0.72rem;color:var(--text-dim);line-height:1.5;}
+
+/* CASE */
+.case-card{background:var(--dark-card);border:1px solid var(--border-strong);border-radius:20px;padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+@media(max-width:700px){.case-card{grid-template-columns:1fr;gap:1.5rem;}}
+.case-results{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.cr-item{background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;padding:1rem;}
+.cr-val{font-family:var(--font-m);font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.cr-lbl{font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--border);padding:1.5rem 0;}
+.faq-q{font-size:1rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--text);transition:color 0.2s;}
+.faq-q:hover{color:var(--gold);}
+.faq-q span{font-size:1.2rem;color:var(--gold);transition:transform 0.3s;}
+.faq-a{font-size:0.875rem;color:var(--text-dim);line-height:1.75;max-height:0;overflow:hidden;opacity:0;transform:translateY(-6px);transition:max-height 0.45s cubic-bezier(0.25,0.46,0.45,0.94),opacity 0.35s ease,transform 0.35s ease,padding 0.3s ease;}
+.faq-item.open .faq-a{max-height:600px;padding-top:1rem;opacity:1;transform:translateY(0);}
+.faq-item.open .faq-q span{transform:rotate(135deg);}.faq-item.open{background:rgba(228,177,94,0.04);border-color:rgba(228,177,94,0.28)!important;}
+
+/* CTA */
+.cta-banner{background:linear-gradient(135deg,rgba(0,229,255,0.06),rgba(228,177,94,0.04));border:1px solid rgba(0,229,255,0.25);border-radius:20px;padding:3rem;text-align:center;position:relative;overflow:hidden;}
+.cta-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,229,255,0.04) 0%,transparent 70%);}
+.cta-banner-inner{position:relative;}
+.cta-title{font-family:var(--font-d);font-size:clamp(2rem,4vw,3.5rem);letter-spacing:2px;margin-bottom:1rem;}
+.cta-sub{font-size:0.95rem;color:var(--text-dim);margin-bottom:2rem;line-height:1.7;max-width:500px;margin-left:auto;margin-right:auto;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.cta-contact{margin-top:1.5rem;font-family:var(--font-m);font-size:0.62rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;}
+
+.other-pages{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:1rem;}
+@media(max-width:700px){.other-pages{grid-template-columns:1fr;}}
+.op-card{background:var(--dark-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-decoration:none;transition:all 0.3s;display:block;}
+.op-card:hover{border-color:var(--border-strong);transform:translateY(-3px);}
+.op-icon{font-size:1.5rem;margin-bottom:0.5rem;}
+.op-title{font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:0.25rem;}
+.op-sub{font-size:0.72rem;color:var(--text-muted);}
+
+footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 2rem 2rem;text-align:center;}
+.f-logo{font-family:var(--font-d);font-size:1.6rem;letter-spacing:2px;background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.35rem;}
+.f-tag{font-family:var(--font-m);font-size:0.6rem;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:1.5rem;}
+.f-links{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;}
+.f-link{color:var(--text-muted);text-decoration:none;font-size:0.75rem;font-family:var(--font-m);letter-spacing:1px;transition:color 0.2s;}
+.f-link:hover{color:var(--gold);}
+.f-copy{font-size:0.65rem;color:var(--text-muted);font-family:var(--font-m);border-top:1px solid var(--border);padding-top:1.25rem;}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.reveal.v{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}.rd3{transition-delay:0.3s;}.rd4{transition-delay:0.4s;}.rd5{transition-delay:0.5s;}
+.de{display:block;}.en{display:none;}
+body.lang-en .de{display:none;}body.lang-en .en{display:block;}
+
+  *,*::before,*::after{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, auto;}
+  a,button,[role=button],.service-card,.monitor-card,.machine-card{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, pointer;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">FORBACH & PARTNERS</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="cnc-fraeszentren.html" class="nav-link">CNC</a>
+    <a href="spritzguss.html" class="nav-link">Spritzguss</a>
+    <a href="laserschneiden.html" class="nav-link active" class="nav-link active">Laser</a>
+    <a href="robotik.html" class="nav-link">Robotik</a>
+    <a href="index.html#roi" class="nav-link">ROI-Rechner</a>
+    <a href="blog.html" class="nav-link">Blog</a>
+  </div>
+  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">📞 +49 211 90989962</a><a href="mailto:info@forbachandpartners.com" class="nav-cta">Termin vereinbaren</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="breadcrumb"><a href="/">Startseite</a> / <span>Laserschneid- & Schweißanlagen</span></div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('de')" id="btnDe">DE</button>
+        <button class="lang-btn" onclick="setLang('en')" id="btnEn">EN</button>
+      </div>
+      <div class="eyebrow">
+        <span class="de">Predictive Maintenance · Faserlaser & Laserschweißen</span>
+        <span class="en">Predictive Maintenance · Fibre Laser & Laser Welding</span>
+      </div>
+      <h1>
+        <span class="de">STRAHL<br><span class="gold">QUALITÄT</span><br>IN <span class="cyan">ECHTZEIT</span><br>GESICHERT</span>
+        <span class="en">BEAM<br><span class="gold">QUALITY</span><br><span class="cyan">SECURED</span><br>IN REAL TIME</span>
+      </h1>
+      <p class="hero-sub">
+        <span class="de">Unsere KI überwacht Strahlqualität, Schutzglasdegradation und Düsenverschleiß <strong>kontinuierlich in Echtzeit</strong> — und verlängert Wartungsintervalle um durchschnittlich 40 % bei Faserlasern von 1 bis 20 kW.</span>
+        <span class="en">Our AI monitors beam quality, protective glass degradation and nozzle wear <strong>continuously in real time</strong> — extending maintenance intervals by an average of 40% on fibre lasers from 1 to 20 kW.</span>
+      </p>
+      <div class="hero-kpis">
+        <div>
+          <span class="kpi-val">+40 %</span>
+          <span class="kpi-lbl de">Längere Optik-Standzeit</span>
+          <span class="kpi-lbl en">Extended optics lifetime</span>
+        </div>
+        <div>
+          <span class="kpi-val">–68 %</span>
+          <span class="kpi-lbl de">Schlechtteilquote</span>
+          <span class="kpi-lbl en">Scrap rate reduction</span>
+        </div>
+        <div>
+          <span class="kpi-val">€ 94K</span>
+          <span class="kpi-lbl de">Ersparnis / Anlage / Jahr</span>
+          <span class="kpi-lbl en">Savings / system / year</span>
+        </div>
+      </div>
+      <div class="hero-btns">
+        <a href="mailto:info@forbachandpartners.com" class="btn-gold">
+          <span class="de">Kostenlose Demo anfragen</span>
+          <span class="en">Request a free demo</span>
+        </a>
+        <a href="#specs" class="btn-outline">
+          <span class="de">Technische Specs</span>
+          <span class="en">Technical specs</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- LASER LIVE PANEL -->
+    <div class="laser-visual">
+      <div class="cv-header">
+        <div class="cv-title">LSR-6000 · 6 kW Faserlaser · Live</div>
+        <div class="cv-live"><span class="live-dot"></span>LIVE · 0.8s</div>
+      </div>
+
+      <!-- Beam quality M² ring -->
+      <div class="beam-row">
+        <div class="beam-gauge">
+          <svg width="88" height="88" viewBox="0 0 88 88">
+            <circle class="bg-bg" cx="44" cy="44" r="34"/>
+            <circle class="bg-fg" id="beamRing" cx="44" cy="44" r="34"
+              stroke="#00e5ff" stroke-dasharray="214"
+              stroke-dashoffset="43"
+              style="filter:drop-shadow(0 0 6px #00e5ff)"/>
+          </svg>
+          <div class="bg-text">
+            <span class="bg-val" id="beamM2">1.12</span>
+            <span class="bg-unit">M² Wert</span>
+          </div>
+        </div>
+        <div class="beam-info">
+          <div class="bi-row">
+            <span class="bi-label">Strahlqualität</span>
+            <span class="bi-val" style="color:var(--cyan)" id="beamQual">80 %</span>
+          </div>
+          <div class="bi-bar"><div class="bi-fill fill-cyan" id="beamBar" style="width:80%"></div></div>
+          <div class="bi-row">
+            <span class="bi-label">Laserleistung</span>
+            <span class="bi-val" style="color:var(--green)" id="laserPwr">5.840 W</span>
+          </div>
+          <div class="bi-bar"><div class="bi-fill fill-ok" style="width:97%"></div></div>
+          <div class="bi-row">
+            <span class="bi-label">Fokusdurchmesser</span>
+            <span class="bi-val" style="color:var(--text)" id="focusDia">0,21 mm</span>
+          </div>
+          <div class="bi-bar"><div class="bi-fill fill-cyan" style="width:70%"></div></div>
+        </div>
+      </div>
+
+      <!-- Optics degradation -->
+      <div style="font-family:var(--font-m);font-size:0.55rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">
+        <span class="de">Optik-Zustand</span><span class="en">Optics condition</span>
+      </div>
+      <div class="optic-grid">
+        <div class="optic-tile">
+          <div class="ot-label de">Schutzglas</div>
+          <div class="ot-label en">Protect. glass</div>
+          <div class="ot-val" id="opt1" style="color:var(--amber)">14 %</div>
+          <div class="ot-bar"><div class="ot-fill fill-warn" style="width:14%"></div></div>
+        </div>
+        <div class="optic-tile">
+          <div class="ot-label de">Fokuslinse</div>
+          <div class="ot-label en">Focus lens</div>
+          <div class="ot-val" id="opt2" style="color:var(--green)">4 %</div>
+          <div class="ot-bar"><div class="ot-fill fill-ok" style="width:4%"></div></div>
+        </div>
+        <div class="optic-tile">
+          <div class="ot-label de">Kollimation</div>
+          <div class="ot-label en">Collimation</div>
+          <div class="ot-val" id="opt3" style="color:var(--green)">3 %</div>
+          <div class="ot-bar"><div class="ot-fill fill-ok" style="width:3%"></div></div>
+        </div>
+        <div class="optic-tile">
+          <div class="ot-label de">Schneiddüse</div>
+          <div class="ot-label en">Cutting nozzle</div>
+          <div class="ot-val" id="opt4" style="color:var(--green)">28 %</div>
+          <div class="ot-bar"><div class="ot-fill fill-ok" style="width:28%"></div></div>
+        </div>
+        <div class="optic-tile">
+          <div class="ot-label de">Strahlformer</div>
+          <div class="ot-label en">Beam shaper</div>
+          <div class="ot-val" id="opt5" style="color:var(--green)">6 %</div>
+          <div class="ot-bar"><div class="ot-fill fill-ok" style="width:6%"></div></div>
+        </div>
+        <div class="optic-tile">
+          <div class="ot-label de">Faserkopplung</div>
+          <div class="ot-label en">Fibre coupling</div>
+          <div class="ot-val" id="opt6" style="color:var(--green)">2 %</div>
+          <div class="ot-bar"><div class="ot-fill fill-ok" style="width:2%"></div></div>
+        </div>
+      </div>
+
+      <!-- Process params -->
+      <div class="cut-row">
+        <div class="cut-tile">
+          <div class="ct-label de">Schneidgeschw.</div>
+          <div class="ct-label en">Cutting speed</div>
+          <div class="ct-val" id="cutSpeed" style="color:var(--text)">8.400 mm/min</div>
+        </div>
+        <div class="cut-tile">
+          <div class="ct-label de">Schneidgasdruck</div>
+          <div class="ct-label en">Assist gas pressure</div>
+          <div class="ct-val" id="gasPress" style="color:var(--green)">12,4 bar</div>
+        </div>
+      </div>
+
+      <!-- Focus shift warning -->
+      <div class="focus-warn">
+        <span class="fw-icon">🔦</span>
+        <div style="flex:1;">
+          <div class="fw-label de">Thermischer Fokus-Shift</div>
+          <div class="fw-label en">Thermal focus shift</div>
+          <div class="fw-val" id="focusShift">+0,18 mm — Empfehlung: Kalibrierung in 8 Tagen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY PARAMETERS -->
+<div style="border-top:1px solid var(--border);padding:3rem 2rem;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="param-matrix">
+      <div class="pm-card c">
+        <div class="pm-icon">🔵</div>
+        <div class="pm-val cyan" id="pm1">M² 1.12</div>
+        <div class="pm-label de">Strahlqualitätszahl</div>
+        <div class="pm-label en">Beam quality factor</div>
+      </div>
+      <div class="pm-card g">
+        <div class="pm-icon">⚡</div>
+        <div class="pm-val green">97,3 %</div>
+        <div class="pm-label de">Laserdioden-Effizienz</div>
+        <div class="pm-label en">Laser diode efficiency</div>
+      </div>
+      <div class="pm-card a">
+        <div class="pm-icon">🌡️</div>
+        <div class="pm-val amber" id="pm3">+0.18 mm</div>
+        <div class="pm-label de">Fokus-Shift thermisch</div>
+        <div class="pm-label en">Thermal focus shift</div>
+      </div>
+      <div class="pm-card c">
+        <div class="pm-icon">🔮</div>
+        <div class="pm-val gold">14 Tage</div>
+        <div class="pm-label de">Schutzglas-Prognose</div>
+        <div class="pm-label en">Protective glass forecast</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="section-full">
+  <div class="section-full-inner">
+    <div class="section-label de">Unsere Laser-Funktionen</div>
+    <div class="section-label en">Our Laser Features</div>
+    <h2>
+      <span class="de">WAS UNSER SYSTEM<br><span class="gold">FÜR LASER LEISTET</span></span>
+      <span class="en">WHAT OUR SYSTEM<br><span class="gold">DOES FOR LASER SYSTEMS</span></span>
+    </h2>
+    <p class="section-sub de">Entwickelt für die Präzisionsanforderungen moderner Faserlaser — von Blech bis Titan, von 1 mm bis 40 mm Materialstärke.</p>
+    <p class="section-sub en">Built for the precision demands of modern fibre lasers — from sheet metal to titanium, from 1 mm to 40 mm material thickness.</p>
+
+    <div class="feat-matrix">
+      <div class="feat-card reveal">
+        <div class="fc-icon">🔵</div>
+        <div class="fc-en">Beam quality monitoring (M²)</div>
+        <div class="fc-title de">Strahlqualitäts-Monitoring (M²)</div>
+        <div class="fc-title en">Beam Quality Monitoring (M²)</div>
+        <div class="fc-desc de">Der M²-Wert (Beugungsmaßzahl) wird kontinuierlich über kaustische Messungen berechnet. Verschlechterung über M² > 1,25 löst eine Optik-Warnung aus — bevor Schnittqualität leidet.</div>
+        <div class="fc-desc en">The M² value (beam quality factor) is continuously calculated via caustic measurements. Deterioration above M² > 1.25 triggers an optics warning — before cut quality suffers.</div>
+        <div class="fc-tags">
+          <span class="fc-tag">Kaustik-Messung</span>
+          <span class="fc-tag">M²-Tracking</span>
+          <span class="fc-tag">Divergenz-Analyse</span>
+          <span class="fc-tag">Fokuslagekontrolle</span>
+        </div>
+      </div>
+
+      <div class="feat-card reveal rd1">
+        <div class="fc-icon">🔮</div>
+        <div class="fc-en">Protective glass degradation AI</div>
+        <div class="fc-title de">Schutzglas-Degradations-KI</div>
+        <div class="fc-title en">Protective Glass Degradation AI</div>
+        <div class="fc-desc de">Rückwärtsstreulicht, Temperaturanstieg und Transmissionsabfall des Schutzglases werden kombiniert ausgewertet. Austauschzeitpunkt wird mit ±2 Tagen Genauigkeit vorhergesagt.</div>
+        <div class="fc-desc en">Backscatter light, temperature rise and transmission drop of the protective glass are combined for evaluation. Replacement timing is predicted with ±2 days accuracy.</div>
+        <div class="fc-tags">
+          <span class="fc-tag">Rückstreulicht</span>
+          <span class="fc-tag">Transmissions-KI</span>
+          <span class="fc-tag">Thermokamera</span>
+          <span class="fc-tag">±2 Tage Prognose</span>
+        </div>
+      </div>
+
+      <div class="feat-card reveal rd2">
+        <div class="fc-icon">💨</div>
+        <div class="fc-en">Assist gas & nozzle diagnostics</div>
+        <div class="fc-title de">Schneidgas & Düsen-Diagnostik</div>
+        <div class="fc-title en">Assist Gas & Nozzle Diagnostics</div>
+        <div class="fc-desc de">Schneidgasdruck, Gasdurchfluss und Düsenzustand werden analysiert. Verschmutzte oder beschädigte Düsen werden durch Drucksignatur-Analyse in < 3 Sekunden erkannt.</div>
+        <div class="fc-desc en">Cutting gas pressure, flow rate and nozzle condition are analysed. Contaminated or damaged nozzles are detected through pressure signature analysis in < 3 seconds.</div>
+        <div class="fc-tags">
+          <span class="fc-tag">N₂ / O₂ / Druckluft</span>
+          <span class="fc-tag">Düsenzentrizität</span>
+          <span class="fc-tag">Drucksignatur-KI</span>
+        </div>
+      </div>
+
+      <div class="feat-card reveal rd3">
+        <div class="fc-icon">🌡️</div>
+        <div class="fc-en">Thermal focus shift compensation</div>
+        <div class="fc-title de">Thermischer Fokus-Shift Kompensation</div>
+        <div class="fc-title en">Thermal Focus Shift Compensation</div>
+        <div class="fc-desc de">Erwärmungsbedingte Fokuslageverschiebung (thermischer Fokus-Shift) wird in Echtzeit berechnet und automatisch kompensiert. Typische Verbesserung der Schnittkantenqualität: Ra –35 %.</div>
+        <div class="fc-desc en">Thermally-induced focal position shift is calculated in real time and automatically compensated. Typical improvement in cut edge quality: Ra –35%.</div>
+        <div class="fc-tags">
+          <span class="fc-tag">Fokus-Tracking</span>
+          <span class="fc-tag">Auto-Kompensation</span>
+          <span class="fc-tag">Ra-Verbesserung</span>
+        </div>
+      </div>
+
+      <div class="feat-card reveal rd4">
+        <div class="fc-icon">📊</div>
+        <div class="fc-en">Cut quality AI (kerf & dross)</div>
+        <div class="fc-title de">Schnittqualitäts-KI (Schnittspalt & Bartbildung)</div>
+        <div class="fc-title en">Cut Quality AI (kerf & dross)</div>
+        <div class="fc-desc de">Schnittspaltbreite, Bartbildung und Rauigkeit der Schnittkante werden durch kameragestützte KI in Echtzeit bewertet — vollautomatisch, ohne Messtaster oder Qualitätskontrolleur.</div>
+        <div class="fc-desc en">Kerf width, dross formation and cut edge roughness are assessed in real time by camera-based AI — fully automated, without measurement probes or quality inspectors.</div>
+        <div class="fc-tags">
+          <span class="fc-tag">Kamera-KI</span>
+          <span class="fc-tag">Bartbildungs-Erkennung</span>
+          <span class="fc-tag">100 % Inline-QS</span>
+        </div>
+      </div>
+
+      <div class="feat-card reveal rd5">
+        <div class="fc-icon">🔗</div>
+        <div class="fc-en">Retrofit for all major brands</div>
+        <div class="fc-title de">Retrofit für alle Hersteller</div>
+        <div class="fc-title en">Retrofit for All Major Brands</div>
+        <div class="fc-desc de">Trumpf, Bystronic, Mazak, Amada, Messer, ESAB, IPG — alle gängigen Fabrikate werden unterstützt. Keine Eingriffe in CNC oder Maschinensteuerung. Installation in 6 Stunden.</div>
+        <div class="fc-desc en">Trumpf, Bystronic, Mazak, Amada, Messer, ESAB, IPG — all major brands supported. No intervention in CNC or machine control. Installation within 6 hours.</div>
+        <div class="fc-tags">
+          <span class="fc-tag">Trumpf TruLaser</span>
+          <span class="fc-tag">Bystronic ByStar</span>
+          <span class="fc-tag">Mazak Optiplex</span>
+          <span class="fc-tag">6h Retrofit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLOW -->
+<div class="section">
+  <div class="section-label de">Wie es funktioniert</div>
+  <div class="section-label en">How it works</div>
+  <h2><span class="de">VOM PHOTON ZUR<br><span class="gold">WARTUNGSEMPFEHLUNG</span></span>
+      <span class="en">FROM PHOTON TO<br><span class="gold">MAINTENANCE ACTION</span></span></h2>
+  <p class="section-sub de">Optische Messung, Thermografie und KI — alles simultan, alles in Echtzeit, alles ohne Produktionsstopp.</p>
+  <p class="section-sub en">Optical measurement, thermography and AI — all simultaneous, all in real time, all without production stops.</p>
+
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="fs-num">01</div>
+      <div class="fs-icon">🔵</div>
+      <div class="fs-title de">Optik-Sensoren</div>
+      <div class="fs-title en">Optical Sensors</div>
+      <div class="fs-desc de">Photodioden, Thermokamera & Kaustikmessung erfassen Strahlprofil mit 100 kHz</div>
+      <div class="fs-desc en">Photodiodes, thermal camera & caustic measurement capture beam profile at 100 kHz</div>
+    </div>
+    <div class="flow-step">
+      <div class="fs-num">02</div>
+      <div class="fs-icon">🌡️</div>
+      <div class="fs-title de">Thermografie</div>
+      <div class="fs-title en">Thermography</div>
+      <div class="fs-desc de">Infrarot-Kamera erkennt Hotspots auf Schutzglas & Linsen in Echtzeit</div>
+      <div class="fs-desc en">Infrared camera detects hotspots on protective glass & lenses in real time</div>
+    </div>
+    <div class="flow-step">
+      <div class="fs-num">03</div>
+      <div class="fs-icon">📷</div>
+      <div class="fs-title de">Schnitt-KI</div>
+      <div class="fs-title en">Cut Quality AI</div>
+      <div class="fs-desc de">Inline-Kamera bewertet Schnittqualität bei 60 fps — Bart, Rauigkeit, Spalt</div>
+      <div class="fs-desc en">Inline camera evaluates cut quality at 60 fps — dross, roughness, kerf</div>
+    </div>
+    <div class="flow-step">
+      <div class="fs-num">04</div>
+      <div class="fs-icon">🧠</div>
+      <div class="fs-title de">KI-Fusion</div>
+      <div class="fs-title en">AI Fusion</div>
+      <div class="fs-desc de">Alle Signale werden fusioniert — Degradationsmodell prognostiziert Reststandzeit aller Optiken</div>
+      <div class="fs-desc en">All signals are fused — degradation model forecasts remaining lifetime of all optics</div>
+    </div>
+    <div class="flow-step">
+      <div class="fs-num">05</div>
+      <div class="fs-icon">🔔</div>
+      <div class="fs-title de">Präzisions-Alarm</div>
+      <div class="fs-title en">Precision Alert</div>
+      <div class="fs-desc de">Wartungsauftrag mit Optikliste, Lieferant & idealem Tauschzeitpunkt</div>
+      <div class="fs-desc en">Maintenance order with optics list, supplier & optimal replacement timing</div>
+    </div>
+  </div>
+</div>
+
+<!-- SPECS -->
+
+    </div>
+  </div>
+</div>
+
+<!-- CASE STUDY -->
+<div class="section">
+  <div class="section-label de">Praxisbeispiel</div>
+  <div class="section-label en">Case Study</div>
+  <h2><span class="de">OPTIKKOSTEN HALBIERT.<br><span class="gold">SCHNITTQUALITÄT GESICHERT.</span></span>
+      <span class="en">OPTICS COSTS HALVED.<br><span class="gold">CUT QUALITY SECURED.</span></span></h2>
+  <p class="section-sub de">Lohnschneiderei · 3 Trumpf TruLaser 5030 · 6 kW · Norddeutschland · Stahl / Aluminium / Edelstahl</p>
+  <p class="section-sub en">Contract cutting · 3 Trumpf TruLaser 5030 · 6 kW · Northern Germany · steel / aluminium / stainless</p>
+
+  <div class="case-card reveal">
+    <div>
+      <div style="font-family:var(--font-m);font-size:0.6rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;">
+        <span class="de">Ausgangssituation</span><span class="en">Starting situation</span>
+      </div>
+      <p style="font-size:0.9rem;color:var(--text-dim);line-height:1.75;margin-bottom:1rem;" class="de">
+        Vor unserem System wurden Schutzgläser nach Kalenderintervall getauscht — alle 80 Betriebsstunden, unabhängig vom tatsächlichen Zustand. Das führte zu <strong style="color:var(--text)">vorzeitigem Tausch funktionsfähiger Optiken</strong> (Kosten 380 €/Schutzglas) und gleichzeitig zu <strong style="color:var(--red)">3–4 ungeplanten Schnittqualitätsmängeln pro Monat</strong> durch zu lange genutztes Glas.
+      </p>
+      <p style="font-size:0.9rem;color:var(--text-dim);line-height:1.75;margin-bottom:1rem;" class="en">
+        Before our system, protective glasses were replaced on calendar intervals — every 80 operating hours, regardless of actual condition. This led to <strong style="color:var(--text)">premature replacement of functional optics</strong> (cost €380/glass) and simultaneously <strong style="color:var(--red)">3–4 unplanned cut quality failures per month</strong> from glass used too long.
+      </p>
+      <p style="font-size:0.9rem;color:var(--text-dim);line-height:1.75;" class="de">
+        Nach 12 Monaten: Schutzglas-Standzeit im Durchschnitt +47 %. Null ungeplante Qualitätsausfälle durch Optikdegradation. Optikkosten um 44 % gesunken.
+      </p>
+      <p style="font-size:0.9rem;color:var(--text-dim);line-height:1.75;" class="en">
+        After 12 months: Protective glass lifetime up +47% on average. Zero unplanned quality failures from optics degradation. Optics costs down 44%.
+      </p>
+    </div>
+    <div>
+      <div class="case-results">
+        <div class="cr-item"><div class="cr-val">+47 %</div><div class="cr-lbl de">Optik-Standzeit</div><div class="cr-lbl en">Optics lifetime</div></div>
+        <div class="cr-item"><div class="cr-val">€ 94K</div><div class="cr-lbl de">Ersparnis / Jahr</div><div class="cr-lbl en">Savings / year</div></div>
+        <div class="cr-item"><div class="cr-val">0</div><div class="cr-lbl de">Qualitätsausfälle</div><div class="cr-lbl en">Quality failures</div></div>
+        <div class="cr-item"><div class="cr-val">5,2 Mon.</div><div class="cr-lbl de">Amortisation</div><div class="cr-lbl en">Payback period</div></div>
+      </div>
+      <div style="margin-top:1.25rem;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;padding:1.25rem;">
+        <div style="font-size:0.85rem;color:var(--text-dim);line-height:1.7;font-style:italic;" class="de">
+          „Früher haben wir Schutzgläser getauscht weil der Kalender es sagte. Jetzt tauschen wir sie wenn das System es sagt — und das ist fast immer später als vorher. Und trotzdem: kein einziger Qualitätsmangel mehr."
+        </div>
+        <div style="font-size:0.85rem;color:var(--text-dim);line-height:1.7;font-style:italic;" class="en">
+          "Before, we replaced protective glasses because the calendar said so. Now we replace them when the system says so — and that's almost always later than before. And yet: not a single quality defect since."
+        </div>
+        <div style="margin-top:0.75rem;font-family:var(--font-m);font-size:0.6rem;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase;">
+          — <span class="de">Betriebsleiter · Lohnschneiderei Nord GmbH (Name geändert)</span>
+            <span class="en">Operations Manager · Lohnschneiderei Nord GmbH (name changed)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section-full">
+  <div class="section-full-inner" style="max-width:780px;">
+    <div class="section-label de">Häufige Fragen</div>
+    <div class="section-label en">Frequently Asked Questions</div>
+    <h2><span class="de">IHRE FRAGEN —<br><span class="gold">KLARE ANTWORTEN</span></span>
+        <span class="en">YOUR QUESTIONS —<br><span class="gold">CLEAR ANSWERS</span></span></h2>
+
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q"><span class="de">Funktioniert das System auch bei CO₂-Lasern und Scheibenlasern?</span><span class="en">Does the system work with CO₂ lasers and disc lasers?</span><span>+</span></div>
+      <div class="faq-a de">Ja — neben Faserlasern unterstützen wir CO₂-Laser (10,6 µm Wellenlänge), Diodenlaser und Scheibenlaser (Trumpf TruDisk). Die Sensor-Module werden wellenlängenspezifisch konfiguriert. Für CO₂-Laser werden ZnSe-Optiken gesondert überwacht.</div>
+      <div class="faq-a en">Yes — alongside fibre lasers, we support CO₂ lasers (10.6 µm wavelength), diode lasers and disc lasers (Trumpf TruDisk). Sensor modules are configured wavelength-specifically. For CO₂ lasers, ZnSe optics are monitored separately.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q"><span class="de">Wie wird die Schnittqualitätskamera in den Prozess integriert?</span><span class="en">How is the cut quality camera integrated into the process?</span><span>+</span></div>
+      <div class="faq-a de">Die Kamera wird inline am Schneidkopf oder am Auslauf der Maschine montiert. Die KI bewertet Schnittspaltbreite, Bartbildung und Kantenrauigkeit vollautomatisch bei 60 fps — ohne Verlangsamung des Prozesses. Auswerteergebnisse werden in Echtzeit im Dashboard angezeigt.</div>
+      <div class="faq-a en">The camera is mounted inline at the cutting head or at the machine exit. The AI automatically evaluates kerf width, dross formation and edge roughness at 60 fps — without slowing the process. Results are displayed in real time on the dashboard.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q"><span class="de">Wie genau ist die Schutzglas-Lebensdauer-Prognose?</span><span class="en">How accurate is the protective glass lifetime prediction?</span><span>+</span></div>
+      <div class="faq-a de">In unseren laufenden Installationen liegt die Prognosegenauigkeit bei ±2 Tagen (94,1 % Konfidenz). Das System berücksichtigt Materialtyp, Schneidparameter, Umgebungstemperatur und historische Degradationskurven der jeweiligen Anlage. Mit mehr Betriebsdaten verbessert sich die Genauigkeit kontinuierlich.</div>
+      <div class="faq-a en">In our running installations, forecast accuracy is ±2 days (94.1% confidence). The system takes into account material type, cutting parameters, ambient temperature and historical degradation curves of the specific machine. Accuracy improves continuously with more operating data.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q"><span class="de">Kann das System auch Laserschweißanlagen überwachen?</span><span class="en">Can the system monitor laser welding systems too?</span><span>+</span></div>
+      <div class="faq-a de">Ja — Laserschweißen ist ein vollständig unterstützter Anwendungsfall. Einschweißtiefe, Nahtbreite und Spritzerbildung werden durch Prozesslicht-Analyse überwacht. Für Scannerschweißen (Remote-Welding) und Faserlaser-Schweißen stehen spezialisierte Sensormodule zur Verfügung.</div>
+      <div class="faq-a en">Yes — laser welding is a fully supported use case. Weld penetration, seam width and spatter formation are monitored through process light analysis. Specialised sensor modules are available for scanner welding (remote welding) and fibre laser welding.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q"><span class="de">Verändert das System die Laserparameter automatisch?</span><span class="en">Does the system automatically change laser parameters?</span><span>+</span></div>
+      <div class="faq-a de">Die automatische Fokus-Shift-Kompensation erfolgt direkt — ohne Bedienereingriff. Alle anderen Parameteranpassungen (Leistung, Geschwindigkeit, Gasdruck) werden als Empfehlung angezeigt und müssen vom Bediener bestätigt werden. Eine vollautomatische Regelschleife ist auf Anfrage konfigurierbar.</div>
+      <div class="faq-a en">Automatic focus shift compensation happens directly — without operator intervention. All other parameter adjustments (power, speed, gas pressure) are displayed as recommendations and must be confirmed by the operator. A fully automatic control loop is configurable on request.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="section">
+  <div class="cta-banner reveal">
+    <div class="cta-banner-inner">
+      <div class="cta-title de">OPTIKKOSTEN<br><span style="background:linear-gradient(135deg,#00e5ff,#80f4ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">HALBIEREN?</span></div>
+      <div class="cta-title en">HALVE YOUR<br><span style="background:linear-gradient(135deg,#00e5ff,#80f4ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">OPTICS COSTS?</span></div>
+      <p class="cta-sub de">In 20 Minuten zeigen wir Ihnen — konkret für Ihre Laseranlage — wie unser System Schutzglas-Standzeiten verlängert und Qualitätsausfälle eliminiert.</p>
+      <p class="cta-sub en">In 20 minutes we show you — specifically for your laser system — how our system extends protective glass lifetimes and eliminates quality failures.</p>
+      <div class="cta-btns">
+        <a href="mailto:info@forbachandpartners.com" class="btn-gold">
+          <span class="de">Termin vereinbaren →</span>
+          <span class="en">Book a call →</span>
+        </a>
+        <a href="index.html#roi" class="btn-outline">
+          <span class="de">ROI berechnen</span>
+          <span class="en">Calculate ROI</span>
+        </a>
+      </div>
+      <p class="cta-contact">info@forbachandpartners.com · Forbach and Partners Ltd · Paphos, Cyprus</p>
+    </div>
+  </div>
+
+  <div style="margin-top:4rem;">
+    <div class="section-label de">Weitere Bereiche</div>
+    <div class="section-label en">Other areas</div>
+    <h2 style="font-size:1.8rem;margin-bottom:1.5rem;"><span class="de">WEITERE <span class="gold">MASCHINENTYPEN</span></span><span class="en">MORE <span class="gold">MACHINE TYPES</span></span></h2>
+    <div class="other-pages">
+      <a class="op-card" href="cnc-fraeszentren.html"><div class="op-icon">⚙️</div><div class="op-title">CNC-Fräszentren</div><div class="op-sub">3–5 Achs · Werkzeugverschleiß · Spindel-Health</div></a>
+      <a class="op-card" href="spritzguss.html"><div class="op-icon">🔥</div><div class="op-title">Spritzguss & Kunststoff</div><div class="op-sub">50–2000 t · Hydraulik · Schmelzetemperatur</div></a>
+      <a class="op-card" href="robotik.html"><div class="op-icon">🤖</div><div class="op-title">Robotik & Schweißroboter</div><div class="op-sub">6-Achs · Gelenküberwachung · Drehmoment</div></a>
+      <a class="op-card" href="verpackung.html"><div class="op-icon">📦</div><div class="op-title">Verpackungs- & Förderanlagen</div><div class="op-sub">Hochgeschwindigkeit · Lager · Takt</div></a>
+      <a class="op-card" href="hydraulik.html"><div class="op-icon">🔧</div><div class="op-title">Hydraulik & Pneumatik</div><div class="op-sub">Druckanalyse · Ölalterung · Leckage</div></a>
+      <a class="op-card" href="index.html#roi"><div class="op-icon">📊</div><div class="op-title">ROI-Rechner</div><div class="op-sub">Berechnen Sie Ihre persönliche Ersparnis</div></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">FORBACH & PARTNERS</div>
+  <div class="f-tag">Predictive Intelligence · Maschinenbau · Industry 4.0</div>
+  <div class="f-links">
+    <a class="f-link" href="/">Home</a>
+    <a class="f-link" href="cnc-fraeszentren.html">CNC</a>
+    <a class="f-link" href="spritzguss.html">Spritzguss</a>
+    <a class="f-link" href="laserschneiden.html" class="nav-link active">Laser</a>
+    <a class="f-link" href="robotik.html">Robotik</a>
+    
+    <a class="f-link" href="/datenschutz">Datenschutz</a>
+    <a class="f-link" href="/impressum">Impressum</a>
+  </div>
+  <div class="f-copy">© 2026 Forbach and Partners Ltd · Reg. Cyprus · All rights reserved</div>
+</footer>
+
+<script>
+function setLang(l){
+  document.body.classList.toggle('lang-en',l==='en');
+  document.getElementById('btnDe').classList.toggle('active',l==='de');
+  document.getElementById('btnEn').classList.toggle('active',l==='en');
+}
+function toggleFAQ(item){item.classList.toggle('open');}
+
+// Live laser fluctuation
+function flicker(){
+  // M² value — stays around 1.10–1.18 (good range)
+  const m2 = +(1.10 + Math.random()*0.08).toFixed(2);
+  const m2El = document.getElementById('beamM2');
+  if(m2El) m2El.textContent = m2;
+  const pm1 = document.getElementById('pm1');
+  if(pm1) pm1.textContent = 'M² ' + m2;
+
+  // Beam quality %
+  const bq = Math.round(100 - (m2-1)*200);
+  const bqEl = document.getElementById('beamQual');
+  const bbEl = document.getElementById('beamBar');
+  if(bqEl) bqEl.textContent = bq + ' %';
+  if(bbEl) bbEl.style.width = bq + '%';
+
+  // Beam ring
+  const ring = document.getElementById('beamRing');
+  if(ring){
+    const circ = 2*Math.PI*34;
+    const pct = bq/100;
+    ring.setAttribute('stroke-dasharray', circ);
+    ring.setAttribute('stroke-dashoffset', circ*(1-pct));
+  }
+
+  // Power
+  const pwr = 5800 + Math.round(Math.random()*100);
+  const pwrEl = document.getElementById('laserPwr');
+  if(pwrEl) pwrEl.textContent = pwr.toLocaleString('de-DE') + ' W';
+
+  // Focus shift
+  const fs = +(0.16 + Math.random()*0.04).toFixed(2);
+  const fsEl = document.getElementById('focusShift');
+  const pm3 = document.getElementById('pm3');
+  const msg = '+' + fs + ' mm — Empfehlung: Kalibrierung in 8 Tagen';
+  if(fsEl) fsEl.textContent = msg;
+  if(pm3) pm3.textContent = '+' + fs + ' mm';
+
+  // Cutting speed & gas
+  const cs = 8200 + Math.round(Math.random()*400);
+  const csEl = document.getElementById('cutSpeed');
+  if(csEl) csEl.textContent = cs.toLocaleString('de-DE') + ' mm/min';
+
+  const gp = +(12.1 + Math.random()*0.6).toFixed(1);
+  const gpEl = document.getElementById('gasPress');
+  if(gpEl) gpEl.textContent = gp + ' bar';
+
+  // Optics — slight drift on schutzglas
+  const og1 = document.getElementById('opt1');
+  if(og1){
+    const v = Math.min(25, 14 + Math.round(Math.random()*0.2));
+    og1.textContent = v + ' %';
+  }
+}
+
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('v');});
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+setInterval(flicker, 1800);
+flicker();
+</script>
+</body>
+</html>

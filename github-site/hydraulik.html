@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hydraulik & Pneumatik — Predictive Maintenance | Forbach & Partners</title>
+<meta name="description" content="KI-gestützte Zustandsüberwachung für Hydraulik- und Pneumatiksysteme. Druckverlauf-Analyse, Ölalterung und Leckage-Erkennung für 0–400 bar Anlagen.">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#e4b15e;--gold-light:#f8dfa5;--gold-dark:#c49040;
+  --black:#000;--dark-2:#111;--dark-card:#141414;
+  --border:rgba(228,177,94,0.15);--border-strong:rgba(228,177,94,0.38);
+  --text:#fff;--text-dim:#a0a0a0;--text-muted:#555;
+  --green:#00ff88;--red:#ff3860;--amber:#ffb800;
+  --ember:#ff7c2a;--ember-dim:rgba(255,124,42,0.12);
+  --font-d:'Oswald',sans-serif;--font-b:'Raleway',sans-serif;--font-m:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--text);font-family:var(--font-b);line-height:1.6;overflow-x:hidden;}
+
+nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:100;background:rgba(0,0,0,0.88);backdrop-filter:blur(20px);border:1px solid var(--border-strong);border-radius:14px;padding:0 2rem;height:58px;display:flex;align-items:center;justify-content:space-between;gap:2rem;width:min(1200px,calc(100vw - 2rem));}
+.nav-logo{font-family:var(--font-d);font-size:1.2rem;letter-spacing:2px;background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;white-space:nowrap;}
+.nav-links{display:flex;gap:0.25rem;}
+.nav-link{color:var(--text-dim);text-decoration:none;font-size:0.8rem;padding:0.4rem 0.75rem;border-radius:6px;transition:all 0.2s;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,0.06);}
+.nav-link.active{color:var(--ember);}
+.nav-cta{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);color:#000;padding:0.4rem 1.1rem;border-radius:6px;font-weight:700;font-size:0.78rem;text-decoration:none;white-space:nowrap;transition:all 0.2s;}
+.nav-cta:hover{box-shadow:0 4px 20px rgba(248,223,165,0.3);transform:translateY(-1px);}
+
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 2rem 80px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 55% at 65% 35%,rgba(255,124,42,0.07) 0%,transparent 55%),
+  radial-gradient(ellipse 40% 40% at 5% 80%,rgba(255,124,42,0.04) 0%,transparent 50%),
+  linear-gradient(180deg,#000 0%,#080300 100%);}
+.hero-bg::before{content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,124,42,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,124,42,0.025) 1px,transparent 1px);
+  background-size:55px 55px;mask-image:radial-gradient(ellipse at 60% 40%,black 20%,transparent 70%);}
+/* pressure wave */
+.hero-bg::after{content:'';position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid rgba(255,124,42,0.15);left:60%;top:35%;transform:translate(-50%,-50%);animation:presswave 3s ease-out infinite;}
+@keyframes presswave{0%{width:50px;height:50px;opacity:0.6;}100%{width:400px;height:400px;opacity:0;}}
+
+.hero-inner{position:relative;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:5rem;align-items:center;width:100%;}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:3rem;}}
+
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-m);font-size:0.6rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem;}
+.breadcrumb a{color:var(--text-muted);text-decoration:none;}.breadcrumb a:hover{color:var(--gold);}.breadcrumb span{color:var(--ember);}
+.eyebrow{display:flex;align-items:center;gap:0.75rem;font-family:var(--font-m);font-size:0.65rem;color:var(--ember);letter-spacing:4px;text-transform:uppercase;margin-bottom:1.25rem;}
+.eyebrow::before{content:'';width:28px;height:1px;background:var(--ember);}
+h1{font-family:var(--font-d);font-size:clamp(3rem,6vw,6.5rem);line-height:0.92;letter-spacing:2px;margin-bottom:1.5rem;}
+h1 .gold{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1 .ember{background:linear-gradient(135deg,#ff7c2a,#ffb280,#ff7c2a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:1.05rem;color:var(--text-dim);line-height:1.75;margin-bottom:2rem;max-width:500px;}
+.hero-sub strong{color:var(--text);}
+.lang-toggle{display:inline-flex;gap:0;border:1px solid var(--border-strong);border-radius:7px;overflow:hidden;margin-bottom:1.5rem;}
+.lang-btn{padding:0.3rem 0.85rem;font-family:var(--font-m);font-size:0.62rem;letter-spacing:1.5px;text-transform:uppercase;background:transparent;border:none;color:var(--text-muted);cursor:pointer;transition:all 0.2s;}
+.lang-btn.active{background:rgba(255,124,42,0.12);color:var(--ember);}
+.hero-kpis{display:flex;gap:2rem;margin-bottom:2rem;flex-wrap:wrap;}
+.kpi-val{font-family:var(--font-m);font-size:1.6rem;font-weight:600;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:block;}
+.kpi-lbl{font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;}
+.hero-btns{display:flex;gap:0.75rem;flex-wrap:wrap;}
+.btn-gold{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);color:#000;padding:0.85rem 1.75rem;border-radius:8px;font-weight:700;font-size:0.875rem;text-decoration:none;border:none;cursor:pointer;transition:all 0.3s;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(248,223,165,0.35);}
+.btn-outline{background:transparent;color:var(--ember);padding:0.85rem 1.75rem;border-radius:8px;font-weight:600;font-size:0.875rem;text-decoration:none;border:1px solid rgba(255,124,42,0.35);cursor:pointer;transition:all 0.3s;}
+.btn-outline:hover{background:rgba(255,124,42,0.06);}
+
+/* HYDRAULIK LIVE PANEL */
+.hyd-visual{background:var(--dark-card);border:1px solid rgba(255,124,42,0.3);border-radius:18px;padding:1.5rem;position:relative;overflow:hidden;}
+.hyd-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--ember),transparent);}
+.cv-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;}
+.cv-title{font-family:var(--font-m);font-size:0.6rem;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;}
+.cv-live{display:flex;align-items:center;gap:6px;font-family:var(--font-m);font-size:0.58rem;color:var(--ember);letter-spacing:2px;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--ember);box-shadow:0 0 8px var(--ember);animation:blink 1.2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+/* Pressure gauge — large */
+.press-gauge-wrap{display:flex;align-items:center;gap:1.25rem;margin-bottom:1.25rem;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1rem;}
+.pg-gauge{position:relative;width:90px;height:90px;flex-shrink:0;}
+.pg-gauge svg{transform:rotate(-90deg);}
+.pg-bg{fill:none;stroke:rgba(255,255,255,0.05);stroke-width:7;}
+.pg-fg{fill:none;stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset 0.8s ease;}
+.pg-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.pg-val{font-family:var(--font-m);font-size:1.2rem;font-weight:700;color:var(--green);}
+.pg-unit{font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;}
+.pg-info{flex:1;}
+.pi-row{display:flex;justify-content:space-between;margin-bottom:5px;}
+.pi-label{font-family:var(--font-m);font-size:0.55rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;}
+.pi-val{font-family:var(--font-m);font-size:0.68rem;font-weight:600;}
+.pi-bar{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;margin-bottom:7px;overflow:hidden;}
+.pi-fill{height:100%;border-radius:2px;}
+.fill-ok{background:linear-gradient(90deg,#00ff88,#4ade80);box-shadow:0 0 5px #00ff8844;}
+.fill-warn{background:linear-gradient(90deg,#ffb800,#ffd33d);box-shadow:0 0 5px #ffb80044;}
+.fill-crit{background:linear-gradient(90deg,#ff3860,#ff7b9c);box-shadow:0 0 8px #ff386044;}
+.fill-ember{background:linear-gradient(90deg,#ff7c2a,#ffb280);box-shadow:0 0 6px #ff7c2a55;}
+
+/* Circuit cards */
+.circuit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:1rem;}
+.cc-card{background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:10px;position:relative;}
+.cc-card.warn{border-color:rgba(255,184,0,0.3);background:rgba(255,184,0,0.04);}
+.cc-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+.cc-name{font-family:var(--font-m);font-size:0.58rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;}
+.cc-status{font-family:var(--font-m);font-size:0.55rem;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border-radius:3px;}
+.cc-status.ok{background:rgba(0,255,136,0.1);color:var(--green);}
+.cc-status.warn{background:rgba(255,184,0,0.12);color:var(--amber);}
+.cc-press{font-family:var(--font-m);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:4px;}
+.cc-bar{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;}
+.cc-fill{height:100%;border-radius:2px;}
+
+/* Oil analysis */
+.oil-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:1rem;}
+.oil-tile{background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.04);border-radius:8px;padding:9px;text-align:center;}
+.ot-label{font-family:var(--font-m);font-size:0.48rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+.ot-val{font-family:var(--font-m);font-size:0.85rem;font-weight:700;}
+.ot-bar{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:4px;overflow:hidden;}
+.ot-fill{height:100%;border-radius:2px;}
+
+/* Leak indicator */
+.leak-row{display:flex;align-items:center;gap:0.75rem;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.2);border-radius:8px;padding:10px 12px;}
+.lk-icon{font-size:1rem;}
+.lk-label{font-family:var(--font-m);font-size:0.55rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;}
+.lk-val{font-size:0.8rem;font-weight:700;color:var(--green);}
+
+/* SECTIONS */
+.section{padding:5rem 2rem;max-width:1200px;margin:0 auto;}
+.section-full{padding:5rem 2rem;border-top:1px solid var(--border);}
+.section-full-inner{max-width:1200px;margin:0 auto;}
+.section-label{display:flex;align-items:center;gap:0.75rem;font-family:var(--font-m);font-size:0.62rem;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:0.85rem;}
+.section-label::before{content:'';width:22px;height:1px;background:var(--gold);}
+h2{font-family:var(--font-d);font-size:clamp(2.2rem,4vw,4rem);letter-spacing:1px;line-height:0.95;margin-bottom:0.85rem;}
+h2 .gold{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.section-sub{font-size:0.95rem;color:var(--text-dim);max-width:580px;line-height:1.75;margin-bottom:3rem;}
+.feat-matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:900px){.feat-matrix{grid-template-columns:1fr;}}
+.feat-card{background:var(--dark-card);border:1px solid var(--border);border-radius:16px;padding:2rem;position:relative;overflow:hidden;transition:all 0.3s;}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--ember),transparent);opacity:0;transition:opacity 0.3s;}
+.feat-card:hover::before{opacity:1;}
+.feat-card:hover{border-color:rgba(255,124,42,0.3);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.7);}
+.fc-icon{font-size:1.8rem;margin-bottom:1rem;}
+.fc-en{font-family:var(--font-m);font-size:0.55rem;color:rgba(255,124,42,0.4);letter-spacing:1px;margin-bottom:0.5rem;font-style:italic;}
+.fc-title{font-size:1.05rem;font-weight:700;margin-bottom:0.6rem;}
+.fc-desc{font-size:0.82rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.1rem;}
+.fc-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.fc-tag{font-family:var(--font-m);font-size:0.55rem;color:var(--text-muted);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;padding:3px 7px;letter-spacing:0.8px;text-transform:uppercase;}
+.specs-table{width:100%;border-collapse:collapse;}
+.specs-table th{text-align:left;font-family:var(--font-m);font-size:0.58rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;padding:0.75rem 1rem;border-bottom:1px solid var(--border);}
+.specs-table td{padding:0.9rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;color:var(--text-dim);}
+.specs-table tr:hover td{color:var(--text);}
+.specs-table td:first-child{color:var(--text);font-weight:500;font-size:0.8rem;}
+.sensor-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.sl-item{display:flex;align-items:center;gap:0.75rem;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:10px;padding:0.85rem 1rem;}
+.sl-dot{width:8px;height:8px;border-radius:50%;background:var(--ember);box-shadow:0 0 6px var(--ember);flex-shrink:0;}
+.sl-name{font-size:0.82rem;color:var(--text-dim);}
+.sl-unit{font-family:var(--font-m);font-size:0.62rem;color:var(--text-muted);margin-left:auto;letter-spacing:1px;}
+.case-card{background:var(--dark-card);border:1px solid var(--border-strong);border-radius:20px;padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+@media(max-width:700px){.case-card{grid-template-columns:1fr;}}
+.case-results{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.cr-item{background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;padding:1rem;}
+.cr-val{font-family:var(--font-m);font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.cr-lbl{font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+.faq-item{border-bottom:1px solid var(--border);padding:1.5rem 0;}
+.faq-q{font-size:1rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:color 0.2s;}
+.faq-q:hover{color:var(--gold);}
+.faq-q span{font-size:1.2rem;color:var(--gold);transition:transform 0.3s;}
+.faq-a{font-size:0.875rem;color:var(--text-dim);line-height:1.75;max-height:0;overflow:hidden;opacity:0;transform:translateY(-6px);transition:max-height 0.45s cubic-bezier(0.25,0.46,0.45,0.94),opacity 0.35s ease,transform 0.35s ease,padding 0.3s ease;}
+.faq-item.open .faq-a{max-height:600px;padding-top:1rem;opacity:1;transform:translateY(0);}
+.faq-item.open .faq-q span{transform:rotate(135deg);}.faq-item.open{background:rgba(228,177,94,0.04);border-color:rgba(228,177,94,0.28)!important;}
+.cta-banner{background:linear-gradient(135deg,rgba(255,124,42,0.07),rgba(228,177,94,0.04));border:1px solid rgba(255,124,42,0.25);border-radius:20px;padding:3rem;text-align:center;position:relative;overflow:hidden;}
+.cta-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(255,124,42,0.05) 0%,transparent 70%);}
+.cta-banner-inner{position:relative;}
+.cta-title{font-family:var(--font-d);font-size:clamp(2rem,4vw,3.5rem);letter-spacing:2px;margin-bottom:1rem;}
+.cta-sub{font-size:0.95rem;color:var(--text-dim);margin-bottom:2rem;line-height:1.7;max-width:500px;margin-left:auto;margin-right:auto;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.cta-contact{margin-top:1.5rem;font-family:var(--font-m);font-size:0.62rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;}
+.other-pages{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:1rem;}
+@media(max-width:700px){.other-pages{grid-template-columns:1fr;}}
+.op-card{background:var(--dark-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-decoration:none;transition:all 0.3s;display:block;}
+.op-card:hover{border-color:var(--border-strong);transform:translateY(-3px);}
+.op-icon{font-size:1.5rem;margin-bottom:0.5rem;}
+.op-title{font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:0.25rem;}
+.op-sub{font-size:0.72rem;color:var(--text-muted);}
+footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 2rem 2rem;text-align:center;}
+.f-logo{font-family:var(--font-d);font-size:1.6rem;letter-spacing:2px;background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.35rem;}
+.f-tag{font-family:var(--font-m);font-size:0.6rem;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:1.5rem;}
+.f-links{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;}
+.f-link{color:var(--text-muted);text-decoration:none;font-size:0.75rem;font-family:var(--font-m);letter-spacing:1px;transition:color 0.2s;}
+.f-link:hover{color:var(--gold);}
+.f-copy{font-size:0.65rem;color:var(--text-muted);font-family:var(--font-m);border-top:1px solid var(--border);padding-top:1.25rem;}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.reveal.v{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}.rd3{transition-delay:0.3s;}.rd4{transition-delay:0.4s;}.rd5{transition-delay:0.5s;}
+.de{display:block;}.en{display:none;}
+body.lang-en .de{display:none;}body.lang-en .en{display:block;}
+
+  *,*::before,*::after{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, auto;}
+  a,button,[role=button],.service-card,.monitor-card,.machine-card{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, pointer;}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">FORBACH & PARTNERS</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="cnc-fraeszentren.html" class="nav-link">CNC</a>
+    <a href="spritzguss.html" class="nav-link">Spritzguss</a>
+    <a href="laserschneiden.html" class="nav-link">Laser</a>
+    <a href="robotik.html" class="nav-link">Robotik</a>
+    <a href="hydraulik.html" class="nav-link active" class="nav-link active">Hydraulik</a>
+  
+    <a href="blog.html" class="nav-link">Blog</a>
+  </div>
+  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">📞 +49 211 90989962</a><a href="mailto:info@forbachandpartners.com" class="nav-cta">Termin vereinbaren</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="breadcrumb"><a href="/">Startseite</a> / <span>Hydraulik & Pneumatik</span></div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('de')" id="btnDe">DE</button>
+        <button class="lang-btn" onclick="setLang('en')" id="btnEn">EN</button>
+      </div>
+      <div class="eyebrow"><span class="de">Predictive Maintenance · Hydraulik & Pneumatik</span><span class="en">Predictive Maintenance · Hydraulics & Pneumatics</span></div>
+      <h1><span class="de">DRUCK.<br><span class="gold">UNTER KONTROLLE.</span><br><span class="ember">LECKAGE UNMÖGLICH.</span></span>
+          <span class="en">PRESSURE.<br><span class="gold">UNDER CONTROL.</span><br><span class="ember">LEAKAGE IMPOSSIBLE.</span></span></h1>
+      <p class="hero-sub">
+        <span class="de">Unsere KI erkennt Leckagen, Pumpenverschleiß und Ölalterung durch hochfrequente Drucksignatur-Analyse — <strong>bevor ein Tropfen Öl austritt und bevor der Druck zusammenbricht</strong>. Für 0 bis 400 bar Hydraulikanlagen.</span>
+        <span class="en">Our AI detects leaks, pump wear and oil degradation through high-frequency pressure signature analysis — <strong>before a drop of oil escapes and before pressure collapses</strong>. For 0 to 400 bar hydraulic systems.</span>
+      </p>
+      <div class="hero-kpis">
+        <div><span class="kpi-val">–88 %</span><span class="kpi-lbl de">Ungeplante Hydraulikausfälle</span><span class="kpi-lbl en">Unplanned hydraulic failures</span></div>
+        <div><span class="kpi-val">0 ml</span><span class="kpi-lbl de">Unerkannte Leckagen</span><span class="kpi-lbl en">Undetected leaks</span></div>
+        <div><span class="kpi-val">+35 %</span><span class="kpi-lbl de">Längere Ölstandzeit</span><span class="kpi-lbl en">Extended oil service life</span></div>
+      </div>
+      <div class="hero-btns">
+        <a href="mailto:info@forbachandpartners.com" class="btn-gold"><span class="de">Kostenlose Demo anfragen</span><span class="en">Request a free demo</span></a>
+        <a href="#specs" class="btn-outline"><span class="de">Technische Specs</span><span class="en">Technical specs</span></a>
+      </div>
+    </div>
+
+    <!-- HYDRAULIK LIVE PANEL -->
+    <div class="hyd-visual">
+      <div class="cv-header">
+        <div class="cv-title">HYD-210 · Zentralaggregat · Live</div>
+        <div class="cv-live"><span class="live-dot"></span>LIVE · 0.8s</div>
+      </div>
+      <!-- Main pressure gauge -->
+      <div class="press-gauge-wrap">
+        <div class="pg-gauge">
+          <svg width="90" height="90" viewBox="0 0 90 90">
+            <circle class="pg-bg" cx="45" cy="45" r="36"/>
+            <circle class="pg-fg" id="pressRing" cx="45" cy="45" r="36" stroke="#00ff88" stroke-dasharray="226" stroke-dashoffset="68" style="filter:drop-shadow(0 0 6px #00ff88)"/>
+          </svg>
+          <div class="pg-text"><span class="pg-val" id="pressVal">148</span><span class="pg-unit">bar</span></div>
+        </div>
+        <div class="pg-info">
+          <div class="pi-row"><span class="pi-label de">Systemdruck</span><span class="pi-label en">System pressure</span><span class="pi-val" style="color:var(--green)" id="sysPress">148 bar · NORMAL</span></div>
+          <div class="pi-bar"><div class="pi-fill fill-ok" id="pressBar" style="width:74%"></div></div>
+          <div class="pi-row"><span class="pi-label de">Öltemperatur</span><span class="pi-label en">Oil temperature</span><span class="pi-val" style="color:var(--green)" id="oilTemp">52 °C</span></div>
+          <div class="pi-bar"><div class="pi-fill fill-ok" style="width:52%"></div></div>
+          <div class="pi-row"><span class="pi-label de">Pumpenwirkungsgrad</span><span class="pi-label en">Pump efficiency</span><span class="pi-val" style="color:var(--green)" id="pumpEff">94,2 %</span></div>
+          <div class="pi-bar"><div class="pi-fill fill-ok" style="width:94%"></div></div>
+        </div>
+      </div>
+
+      <!-- Circuit cards -->
+      <div style="font-family:var(--font-m);font-size:0.55rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;"><span class="de">Hydraulikkreise</span><span class="en">Hydraulic circuits</span></div>
+      <div class="circuit-grid">
+        <div class="cc-card">
+          <div class="cc-top"><span class="cc-name">Kreis A</span><span class="cc-status ok">OK</span></div>
+          <div class="cc-press" id="c1">148 bar</div>
+          <div class="cc-bar"><div class="cc-fill fill-ok" style="width:74%"></div></div>
+        </div>
+        <div class="cc-card warn">
+          <div class="cc-top"><span class="cc-name">Kreis B</span><span class="cc-status warn">PRÜFEN</span></div>
+          <div class="cc-press" id="c2" style="color:var(--amber)">141 bar</div>
+          <div class="cc-bar"><div class="cc-fill fill-warn" style="width:70%"></div></div>
+        </div>
+        <div class="cc-card">
+          <div class="cc-top"><span class="cc-name">Kreis C</span><span class="cc-status ok">OK</span></div>
+          <div class="cc-press" id="c3">150 bar</div>
+          <div class="cc-bar"><div class="cc-fill fill-ok" style="width:75%"></div></div>
+        </div>
+        <div class="cc-card">
+          <div class="cc-top"><span class="cc-name">Rücklauf</span><span class="cc-status ok">OK</span></div>
+          <div class="cc-press" id="c4">4,2 bar</div>
+          <div class="cc-bar"><div class="cc-fill fill-ok" style="width:21%"></div></div>
+        </div>
+      </div>
+
+      <!-- Oil analysis -->
+      <div style="font-family:var(--font-m);font-size:0.55rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;"><span class="de">Ölzustandsanalyse</span><span class="en">Oil condition analysis</span></div>
+      <div class="oil-grid">
+        <div class="oil-tile"><div class="ot-label de">Ölgüte</div><div class="ot-label en">Oil quality</div><div class="ot-val" id="oilQ" style="color:var(--green)">88 %</div><div class="ot-bar"><div class="ot-fill fill-ok" style="width:88%"></div></div></div>
+        <div class="oil-tile"><div class="ot-label de">Partikelklasse</div><div class="ot-label en">Particle class</div><div class="ot-val" id="partCls" style="color:var(--green)">16/14/11</div><div class="ot-bar"><div class="ot-fill fill-ok" style="width:75%"></div></div></div>
+        <div class="oil-tile"><div class="ot-label de">Viskosität</div><div class="ot-label en">Viscosity</div><div class="ot-val" id="visc" style="color:var(--green)">46,2 cSt</div><div class="ot-bar"><div class="ot-fill fill-ok" style="width:92%"></div></div></div>
+      </div>
+
+      <!-- Leak status -->
+      <div class="leak-row">
+        <span class="lk-icon">🛡️</span>
+        <div style="flex:1;">
+          <div class="lk-label de">Leckage-Status · Alle Kreise</div>
+          <div class="lk-label en">Leak status · All circuits</div>
+          <div class="lk-val">KEINE LECKAGE DETEKTIERT · &lt; 0,1 ml/min Gesamtverlust</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-full">
+  <div class="section-full-inner">
+    <div class="section-label de">Unsere Hydraulik-Funktionen</div>
+    <div class="section-label en">Our Hydraulics Features</div>
+    <h2><span class="de">WAS UNSER SYSTEM<br><span class="gold">FÜR HYDRAULIK LEISTET</span></span>
+        <span class="en">WHAT OUR SYSTEM<br><span class="gold">DOES FOR HYDRAULICS</span></span></h2>
+    <p class="section-sub de">Entwickelt für industrielle Hydraulik- und Pneumatikanlagen — von zentralen Hydraulikaggregaten bis zu verteilten Servohydrauliksystemen.</p>
+    <p class="section-sub en">Built for industrial hydraulic and pneumatic systems — from central hydraulic power units to distributed servo-hydraulic systems.</p>
+    <div class="feat-matrix">
+      <div class="feat-card reveal">
+        <div class="fc-icon">💧</div><div class="fc-en">Pressure signature leak detection</div>
+        <div class="fc-title de">Drucksignatur-Leckagedetektion</div><div class="fc-title en">Pressure Signature Leak Detection</div>
+        <div class="fc-desc de">Mikroleckagen ab 0,05 ml/min werden durch hochauflösende Drucksignaturanalyse erkannt — auch bei laufender Anlage, ohne Produktionsstopp. Leckagerate, betroffener Kreis und Schadensort werden automatisch lokalisiert.</div>
+        <div class="fc-desc en">Micro-leaks from 0.05 ml/min are detected through high-resolution pressure signature analysis — also during operation, without production stops. Leak rate, affected circuit and damage location are automatically localised.</div>
+        <div class="fc-tags"><span class="fc-tag">Ab 0,05 ml/min</span><span class="fc-tag">Laufender Betrieb</span><span class="fc-tag">Kreisortung</span><span class="fc-tag">0–400 bar</span></div>
+      </div>
+      <div class="feat-card reveal rd1">
+        <div class="fc-icon">⚙️</div><div class="fc-en">Pump wear & efficiency monitoring</div>
+        <div class="fc-title de">Pumpenverschleiß & Wirkungsgradüberwachung</div><div class="fc-title en">Pump Wear & Efficiency Monitoring</div>
+        <div class="fc-desc de">Volumetrischer Wirkungsgrad, Druckpulsation und Geräuschemission der Hydraulikpumpe werden kontinuierlich analysiert. Kolbenbrüche und Zahnradpumpen-Verschleiß werden 200–400 Betriebsstunden vor dem Ausfall erkannt.</div>
+        <div class="fc-desc en">Volumetric efficiency, pressure pulsation and noise emission of the hydraulic pump are continuously analysed. Piston breaks and gear pump wear are detected 200–400 operating hours before failure.</div>
+        <div class="fc-tags"><span class="fc-tag">Volumetr. Wirkungsgrad</span><span class="fc-tag">Druckpulsation FFT</span><span class="fc-tag">200–400h Vorlauf</span><span class="fc-tag">Axial- & Radialkolbenpumpen</span></div>
+      </div>
+      <div class="feat-card reveal rd2">
+        <div class="fc-icon">🌡️</div><div class="fc-en">Oil condition & contamination AI</div>
+        <div class="fc-title de">Ölzustands- & Verschmutzungs-KI</div><div class="fc-title en">Oil Condition & Contamination AI</div>
+        <div class="fc-desc de">Viskosität, Oxidationszustand, Partikelklasse (ISO 4406) und Wasseranteil werden durch Inline-Sensoren und KI-Auswertung kontinuierlich überwacht. Ölwechselintervall wird bedarfsgerecht optimiert — typisch +35 % Standzeit.</div>
+        <div class="fc-desc en">Viscosity, oxidation state, particle class (ISO 4406) and water content are continuously monitored through inline sensors and AI evaluation. Oil change interval is optimised on demand — typically +35% service life.</div>
+        <div class="fc-tags"><span class="fc-tag">ISO 4406 Partikelklasse</span><span class="fc-tag">Viskositäts-KI</span><span class="fc-tag">Wasseranteil</span><span class="fc-tag">Bedarfsbasierter Ölwechsel</span></div>
+      </div>
+      <div class="feat-card reveal rd3">
+        <div class="fc-icon">🔧</div><div class="fc-en">Valve & cylinder diagnostics</div>
+        <div class="fc-title de">Ventil- & Zylinderdiagnostik</div><div class="fc-title en">Valve & Cylinder Diagnostics</div>
+        <div class="fc-desc de">Schaltzeiten, Hystereseeffekte und interne Leckage von Proportionalventilen und Servoventilen werden überwacht. Dichtungsverschleiß an Hydraulikzylindern wird durch Druckhaltetest-Analyse erkannt.</div>
+        <div class="fc-desc en">Switching times, hysteresis effects and internal leakage of proportional valves and servo valves are monitored. Seal wear on hydraulic cylinders is detected through pressure hold test analysis.</div>
+        <div class="fc-tags"><span class="fc-tag">Proportionalventile</span><span class="fc-tag">Servoventile</span><span class="fc-tag">Druckhaltetest</span><span class="fc-tag">Dichtungs-KI</span></div>
+      </div>
+      <div class="feat-card reveal rd4">
+        <div class="fc-icon">💨</div><div class="fc-en">Pneumatic compressed air intelligence</div>
+        <div class="fc-title de">Druckluft-Intelligenz (Pneumatik)</div><div class="fc-title en">Compressed Air Intelligence (Pneumatics)</div>
+        <div class="fc-desc de">Druckluftverluste, Leckagen im Leitungsnetz und Kompressor-Effizienz werden vollständig überwacht. Typische Drucklufteinsparung durch Leckagebeseitigung: 15–25 % der Kompressorleistung.</div>
+        <div class="fc-desc en">Compressed air losses, leaks in the distribution network and compressor efficiency are fully monitored. Typical compressed air savings from leak elimination: 15–25% of compressor output.</div>
+        <div class="fc-tags"><span class="fc-tag">Leckage-Ortung</span><span class="fc-tag">Kompressor-OEE</span><span class="fc-tag">Energieeinsparung</span><span class="fc-tag">ISO 8573</span></div>
+      </div>
+      <div class="feat-card reveal rd5">
+        <div class="fc-icon">🔗</div><div class="fc-en">All hydraulic brands & systems</div>
+        <div class="fc-title de">Alle Hersteller & Systeme</div><div class="fc-title en">All Manufacturers & Systems</div>
+        <div class="fc-desc de">Bosch Rexroth, Parker Hannifin, Eaton Vickers, Danfoss, Hydac, Moog, Bucher — alle gängigen Hydraulikhersteller werden unterstützt. Retrofit ohne Eingriff in bestehende Steuerungstechnik · Installation in 6 Stunden.</div>
+        <div class="fc-desc en">Bosch Rexroth, Parker Hannifin, Eaton Vickers, Danfoss, Hydac, Moog, Bucher — all major hydraulic manufacturers supported. Retrofit without intervention in existing controls · Installation in 6 hours.</div>
+        <div class="fc-tags"><span class="fc-tag">Bosch Rexroth</span><span class="fc-tag">Parker Hannifin</span><span class="fc-tag">Eaton · Hydac · Moog</span><span class="fc-tag">6h Retrofit</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label de">Praxisbeispiel</div><div class="section-label en">Case Study</div>
+  <h2><span class="de">LECKAGE ERKANNT.<br><span class="gold">UMWELTSCHADEN VERHINDERT.</span></span>
+      <span class="en">LEAK DETECTED.<br><span class="gold">ENVIRONMENTAL DAMAGE PREVENTED.</span></span></h2>
+  <p class="section-sub de">Pressenhersteller · Zentralhydraulik 320 bar · 12 Kreise · Süddeutschland</p>
+  <p class="section-sub en">Press manufacturer · Central hydraulics 320 bar · 12 circuits · Southern Germany</p>
+  <div class="case-card reveal">
+    <div>
+      <p style="font-size:0.9rem;color:var(--text-dim);line-height:1.75;margin-bottom:1rem;" class="de">
+        Eine interne Zylinderleckage von 0,8 ml/min blieb über 3 Monate unentdeckt. Ergebnis: <strong style="color:var(--text)">42 Liter Hydrauliköl</strong> in der Fertigungshalle, ein erzwungener Produktionsstopp von <strong style="color:var(--red)">16 Stunden</strong> und eine Umweltbehörden-Meldung. Gesamtschaden: <strong style="color:var(--red)">€ 94.000</strong>.
+      </p>
+      <p style="font-size:0.9rem;color:var(--text-dim);line-height:1.75;" class="de">
+        Nach Einbau unseres Systems: Jede Leckage ab 0,05 ml/min wird erkannt — im laufenden Betrieb, ohne Messstopp. In 18 Monaten: 3 Mikroleckagen rechtzeitig beseitigt, 0 ungeplante Stops, 0 Umweltvorfälle.
+      </p>
+      <p style="font-size:0.9rem;color:var(--text-dim);line-height:1.75;margin-bottom:1rem;" class="en">
+        An internal cylinder leak of 0.8 ml/min went undetected for 3 months. Result: <strong style="color:var(--text)">42 litres of hydraulic oil</strong> in the production hall, a forced production stop of <strong style="color:var(--red)">16 hours</strong> and an environmental authority notification. Total damage: <strong style="color:var(--red)">€94,000</strong>.
+      </p>
+      <p style="font-size:0.9rem;color:var(--text-dim);line-height:1.75;" class="en">After installation of our system: Every leak from 0.05 ml/min is detected — during operation, without measurement stops. In 18 months: 3 micro-leaks eliminated in time, 0 unplanned stops, 0 environmental incidents.</p>
+    </div>
+    <div>
+      <div class="case-results">
+        <div class="cr-item"><div class="cr-val">0</div><div class="cr-lbl de">Unentdeckte Leckagen</div><div class="cr-lbl en">Undetected leaks</div></div>
+        <div class="cr-item"><div class="cr-val">€ 112K</div><div class="cr-lbl de">Ersparnis / Jahr</div><div class="cr-lbl en">Savings / year</div></div>
+        <div class="cr-item"><div class="cr-val">+35 %</div><div class="cr-lbl de">Ölstandzeit</div><div class="cr-lbl en">Oil service life</div></div>
+        <div class="cr-item"><div class="cr-val">3,2 Mon.</div><div class="cr-lbl de">Amortisation</div><div class="cr-lbl en">Payback period</div></div>
+      </div>
+      <div style="margin-top:1.25rem;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;padding:1.25rem;">
+        <div style="font-size:0.85rem;color:var(--text-dim);line-height:1.7;font-style:italic;" class="de">„Das System erkannte eine 0,3 ml/min Leckage an Kreis 7 — drei Wochen bevor wir sie gesehen hätten. Wir haben die Dichtung im planmäßigen Stillstand getauscht. Null Ausfallzeit, null Umweltproblem."</div>
+        <div style="font-size:0.85rem;color:var(--text-dim);line-height:1.7;font-style:italic;" class="en">"The system detected a 0.3 ml/min leak on circuit 7 — three weeks before we would have noticed it. We replaced the seal in the scheduled shutdown. Zero downtime, zero environmental problem."</div>
+        <div style="margin-top:0.75rem;font-family:var(--font-m);font-size:0.6rem;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase;">— <span class="de">Instandhaltungsleiter · Pressenhersteller GmbH (Name geändert)</span><span class="en">Maintenance Manager · Press Manufacturer GmbH (name changed)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-full"><div class="section-full-inner" style="max-width:780px;">
+  <div class="section-label de">Häufige Fragen</div><div class="section-label en">FAQ</div>
+  <h2><span class="de">IHRE FRAGEN — <span class="gold">KLARE ANTWORTEN</span></span><span class="en">YOUR QUESTIONS — <span class="gold">CLEAR ANSWERS</span></span></h2>
+  <div class="faq-item" onclick="toggleFAQ(this)">
+    <div class="faq-q"><span class="de">Wie wird eine interne Leckage von einer externen Leckage unterschieden?</span><span class="en">How is an internal leak distinguished from an external leak?</span><span>+</span></div>
+    <div class="faq-a de">Interne Leckagen (z. B. verschlissene Zylinderdichtung) verursachen charakteristische Druckabfall-Signaturen im geschlossenen Kreislauf ohne Volumenänderung im Behälter. Externe Leckagen führen zu Behälterpegel-Abfall und Druckabfall. Unsere KI klassifiziert den Leckagetyp automatisch und lokalisiert den betroffenen Kreis.</div>
+    <div class="faq-a en">Internal leaks (e.g. worn cylinder seals) cause characteristic pressure drop signatures in the closed circuit without volume changes in the reservoir. External leaks lead to reservoir level drops and pressure loss. Our AI automatically classifies the leak type and localises the affected circuit.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFAQ(this)">
+    <div class="faq-q"><span class="de">Kann das System auch ATEX-Bereiche (explosionsgefährdete Zonen) überwachen?</span><span class="en">Can the system monitor ATEX zones (potentially explosive atmospheres)?</span><span>+</span></div>
+    <div class="faq-a de">Ja — wir bieten ATEX Zone 1 und Zone 2 zertifizierte Sensorvarianten. Alle elektrischen Verbindungen in der Gefahrenzone werden mit eigensicherer Speisung (Ex ia) ausgeführt. Die Edge-Box wird außerhalb der Ex-Zone montiert.</div>
+    <div class="faq-a en">Yes — we offer ATEX Zone 1 and Zone 2 certified sensor variants. All electrical connections in the hazardous zone are implemented with intrinsically safe power supply (Ex ia). The edge box is mounted outside the Ex zone.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFAQ(this)">
+    <div class="faq-q"><span class="de">Wie oft muss das Hydrauliköl trotzdem noch analysiert werden?</span><span class="en">How often does hydraulic oil still need to be analysed?</span><span>+</span></div>
+    <div class="faq-a de">Mit unserem System empfehlen wir eine jährliche Laboranalyse zur Referenzierung — statt der üblichen vierteljährlichen Analyse. Die Inline-KI übernimmt die kontinuierliche Überwachung. Typische Reduktion der Laborkostenkosten: 70 %. Gleichzeitig werden Ölwechsel nur noch durchgeführt wenn es tatsächlich notwendig ist.</div>
+    <div class="faq-a en">With our system, we recommend an annual laboratory analysis for reference — instead of the usual quarterly analysis. The inline AI takes over continuous monitoring. Typical reduction in laboratory costs: 70%. At the same time, oil changes are only performed when actually necessary.</div>
+  </div>
+</div></div>
+
+<div class="section">
+  <div class="cta-banner reveal">
+    <div class="cta-banner-inner">
+      <div class="cta-title de">NIE WIEDER<br><span style="background:linear-gradient(135deg,#ff7c2a,#ffb280);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">UNENTDECKTE LECKAGE?</span></div>
+      <div class="cta-title en">NEVER AGAIN<br><span style="background:linear-gradient(135deg,#ff7c2a,#ffb280);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">UNDETECTED LEAKAGE?</span></div>
+      <p class="cta-sub de">In 20 Minuten zeigen wir Ihnen wie wir Leckagen ab 0,05 ml/min erkennen — im laufenden Betrieb, ohne Produktionsstopp.</p>
+      <p class="cta-sub en">In 20 minutes we show you how we detect leaks from 0.05 ml/min — during operation, without production stops.</p>
+      <div class="cta-btns">
+        <a href="mailto:info@forbachandpartners.com" class="btn-gold"><span class="de">Termin vereinbaren →</span><span class="en">Book a call →</span></a>
+        <a href="index.html#roi" class="btn-outline"><span class="de">ROI berechnen</span><span class="en">Calculate ROI</span></a>
+      </div>
+      <p class="cta-contact">info@forbachandpartners.com · Forbach and Partners Ltd · Paphos, Cyprus</p>
+    </div>
+  </div>
+  <div style="margin-top:4rem;">
+    <div class="section-label de">Weitere Bereiche</div><div class="section-label en">Other areas</div>
+    <h2 style="font-size:1.8rem;margin-bottom:1.5rem;"><span class="de">WEITERE <span class="gold">MASCHINENTYPEN</span></span><span class="en">MORE <span class="gold">MACHINE TYPES</span></span></h2>
+    <div class="other-pages">
+      <a class="op-card" href="cnc-fraeszentren.html"><div class="op-icon">⚙️</div><div class="op-title">CNC-Fräszentren</div><div class="op-sub">3–5 Achs · Werkzeugverschleiß · Spindel</div></a>
+      <a class="op-card" href="spritzguss.html"><div class="op-icon">🔥</div><div class="op-title">Spritzguss & Kunststoff</div><div class="op-sub">50–2000 t · Hydraulik · Schmelze</div></a>
+      <a class="op-card" href="laserschneiden.html"><div class="op-icon">⚡</div><div class="op-title">Laser & Schweißen</div><div class="op-sub">Faserlaser · Strahlqualität · Optik</div></a>
+      <a class="op-card" href="robotik.html"><div class="op-icon">🤖</div><div class="op-title">Robotik & Schweißroboter</div><div class="op-sub">6-Achs · Gelenke · TCP-Drift</div></a>
+      <a class="op-card" href="verpackung.html"><div class="op-icon">📦</div><div class="op-title">Verpackungs- & Förderanlagen</div><div class="op-sub">Hochgeschwindigkeit · Lager · OEE</div></a>
+      <a class="op-card" href="index.html#roi"><div class="op-icon">📊</div><div class="op-title">ROI-Rechner</div><div class="op-sub">Ihre persönliche Ersparnis berechnen</div></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">FORBACH & PARTNERS</div>
+  <div class="f-tag">Predictive Intelligence · Maschinenbau · Industry 4.0</div>
+  <div class="f-links">
+    <a class="f-link" href="/">Home</a><a class="f-link" href="cnc-fraeszentren.html">CNC</a>
+    <a class="f-link" href="spritzguss.html">Spritzguss</a><a class="f-link" href="laserschneiden.html">Laser</a>
+    <a class="f-link" href="robotik.html">Robotik</a><a class="f-link" href="verpackung.html">Verpackung</a>
+    <a class="f-link" href="hydraulik.html" class="nav-link active">Hydraulik</a><a class="f-link" href="/impressum">Impressum</a>
+  </div>
+  <div class="f-copy">© 2026 Forbach and Partners Ltd · Reg. Cyprus · All rights reserved</div>
+</footer>
+<script>
+function setLang(l){document.body.classList.toggle('lang-en',l==='en');document.getElementById('btnDe').classList.toggle('active',l==='de');document.getElementById('btnEn').classList.toggle('active',l==='en');}
+function toggleFAQ(item){item.classList.toggle('open');}
+function flicker(){
+  const p=145+Math.round(Math.random()*8);
+  const pEl=document.getElementById('pressVal'),pRing=document.getElementById('pressRing'),pBar=document.getElementById('pressBar');
+  if(pEl) pEl.textContent=p;
+  if(pRing){const c=2*Math.PI*36;pRing.setAttribute('stroke-dashoffset',c*(1-p/200));}
+  const sp=document.getElementById('sysPress');if(sp) sp.textContent=p+' bar · NORMAL';
+  const ot=document.getElementById('oilTemp');if(ot) ot.textContent=(50+Math.round(Math.random()*4))+' °C';
+  const pe=document.getElementById('pumpEff');if(pe) pe.textContent=(93.8+Math.random()*0.6).toFixed(1)+' %';
+  [['c1',148],['c2',141],['c3',150]].forEach(([id,base])=>{
+    const el=document.getElementById(id);if(el) el.textContent=Math.round(base+(Math.random()-0.5)*3)+' bar';
+  });
+  const oq=document.getElementById('oilQ');if(oq) oq.textContent=Math.round(87+Math.random()*2)+' %';
+  const vs=document.getElementById('visc');if(vs) vs.textContent=(45.8+Math.random()*0.6).toFixed(1)+' cSt';
+}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v');});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+setInterval(flicker,1800);flicker();
+</script>
+</body>
+</html>

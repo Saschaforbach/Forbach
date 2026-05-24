@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forbach & Partners | CNC Predictive Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Raleway:wght@200;300;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #c49040; --dark-bg: #050505; --glass: rgba(18, 18, 18, 0.9); --border: rgba(196, 144, 64, 0.2); }
+        body { background-color: var(--dark-bg); color: #fff; font-family: 'Raleway', sans-serif; margin: 0; scroll-behavior: smooth; }
+        nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; padding: 30px 8%; box-sizing: border-box; z-index: 1000; backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.03); align-items: center; }
+        .logo { font-family: 'Oswald'; letter-spacing: 3px; font-size: 1.1rem; text-transform: uppercase; }
+        .nav-links a { color: #fff; text-decoration: none; margin-left: 30px; font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, #111 0%, #050505 100%); }
+        .hero span { color: var(--gold); letter-spacing: 6px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 20px; }
+        .hero h1 { font-family: 'Oswald'; font-size: clamp(3rem, 10vw, 6rem); text-transform: uppercase; margin: 0; line-height: 0.9; }
+        .glass-card { background: var(--glass); border: 1px solid var(--border); padding: 60px; max-width: 1000px; margin: -150px auto 100px; position: relative; z-index: 10; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        .section-title { font-family: 'Oswald'; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px; text-align: center; }
+        .roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .input-group { margin-bottom: 30px; }
+        .input-group label { display: block; font-size: 0.7rem; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+        .input-group input { background: none; border: none; border-bottom: 1px solid #333; color: #fff; font-size: 1.8rem; width: 100%; outline: none; padding: 10px 0; transition: border-color 0.3s; }
+        .input-group input:focus { border-color: var(--gold); }
+        .result-box { text-align: center; padding: 40px; border-left: 1px solid rgba(255,255,255,0.05); }
+        .result-label { font-size: 0.8rem; text-transform: uppercase; color: #777; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .result-val { font-family: 'Oswald'; font-size: 4.5rem; color: var(--gold); margin: 20px 0; }
+        .cta-btn { background: var(--gold); color: #000; padding: 20px 45px; font-weight: 700; text-transform: uppercase; text-decoration: none; display: inline-block; transition: transform 0.3s, box-shadow 0.3s; letter-spacing: 1px; border: none; cursor: pointer; }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(196,144,64,0.3); }
+        footer { padding: 100px 8% 50px; background: #080808; border-top: 1px solid #111; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+        .address-title { font-family: 'Oswald'; color: #fff; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; }
+        .address-text { color: #aaa; line-height: 1.8; font-size: 0.9rem; }
+        .footer-bottom { margin-top: 80px; padding-top: 30px; border-top: 1px solid #111; text-align: center; font-size: 0.7rem; color: #444; letter-spacing: 1px; text-transform: uppercase; }
+        @media (max-width: 768px) { .roi-grid, .footer-grid { grid-template-columns: 1fr; } .result-box { border-left: none; border-top: 1px solid #222; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">FORBACH <span style="color:var(--gold)">&</span> PARTNERS</div>
+    <div class="nav-links">
+        <a href="#roi">ROI Rechner</a>
+        <a href="blog.html">CNC Blog</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <span>CNC Predictive Intelligence</span>
+    <h1>HIGHER PRECISION.<br>ZERO DOWNTIME.</h1>
+</section>
+
+<section id="roi" class="glass-card">
+    <h2 class="section-title">Wirtschaftlichkeits-Rechner</h2>
+    <div class="roi-grid">
+        <div class="inputs">
+            <div class="input-group">
+                <label>Maschinen-Stundensatz (€)</label>
+                <input type="number" id="rate" value="180">
+            </div>
+            <div class="input-group">
+                <label>Ungeplanter Stillstand / Monat (Std)</label>
+                <input type="number" id="hours" value="12">
+            </div>
+        </div>
+        <div class="result-box">
+            <span class="result-label">Jährliches Einsparpotenzial</span>
+            <div class="result-val" id="total">€ 25.920</div>
+            <a href="tel:+4921190989962" class="cta-btn">Jetzt anrufen</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="address-title">FORBACH & PARTNERS LTD</div>
+            <div class="address-text">
+                Königsallee 27<br>
+                40212 Düsseldorf<br>
+                Deutschland
+            </div>
+        </div>
+        <div style="text-align:right;">
+            <div style="margin-bottom:20px;">
+                <a href="tel:+4921190989962" style="color:var(--gold); text-decoration:none; font-size:1.5rem; font-family:'Oswald';">+49 211 90989962</a>
+            </div>
+            <a href="mailto:info@forbachandpartners.com" style="color:#777; text-decoration:none; font-size:0.9rem;">info@forbachandpartners.com</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2026 FORBACH & PARTNERS LTD · CNC SPECIALISTS · <a href="impressum.html" style="color:#444; text-decoration:none;">Impressum</a>
+    </div>
+</footer>
+
+<script>
+    const rateInput = document.getElementById('rate');
+    const hoursInput = document.getElementById('hours');
+    const totalOutput = document.getElementById('total');
+
+    function calculate() {
+        const r = parseFloat(rateInput.value) || 0;
+        const h = parseFloat(hoursInput.value) || 0;
+        const total = r * h * 12;
+        totalOutput.innerText = '€ ' + total.toLocaleString('de-DE');
+    }
+
+    rateInput.addEventListener('input', calculate);
+    hoursInput.addEventListener('input', calculate);
+</script>
+
+</body>
+</html>

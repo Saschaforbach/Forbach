@@ -1136,6 +1136,219 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:1000;bac
   <div class="machines-monitor" id="fullDashboard"></div>
 </div>
 
+<!-- ══════════════════════════════════════════
+     MASCHINENVERLAUF (aufklappbar)
+══════════════════════════════════════════ -->
+<div class="section" id="verlauf-section">
+  <div class="verlauf-toggle" id="verlaufToggle" onclick="toggleVerlauf()">
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;">Maschinenverlauf</div>
+      <h3 style="font-family:var(--font-display);font-size:1.5rem;letter-spacing:1px;">7-TAGE-VERLAUFSBERICHT <span class="gold" style="background:linear-gradient(135deg,#e4b15e,#f8dfa5);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">ALLE ANLAGEN</span></h3>
+    </div>
+    <div style="display:flex;align-items:center;gap:1.5rem;">
+      <div id="verlaufSummary" style="display:flex;gap:1rem;font-family:var(--font-mono);font-size:0.65rem;">
+        <span style="color:var(--green)">● 5 NORMAL</span>
+        <span style="color:var(--amber)">● 2 ACHTUNG</span>
+        <span style="color:var(--red)">● 1 KRITISCH</span>
+      </div>
+      <div class="verlauf-chevron" id="verlaufChevron">▼</div>
+    </div>
+  </div>
+  <div class="verlauf-body" id="verlaufBody">
+    <div class="verlauf-inner" id="verlaufInner"></div>
+  </div>
+</div>
+
+<style>
+.verlauf-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--dark-card);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  padding: 1.25rem 1.75rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  user-select: none;
+}
+.verlauf-toggle:hover { background: rgba(228,177,94,0.04); border-color: var(--gold); }
+.verlauf-chevron {
+  font-size: 0.9rem;
+  color: var(--gold);
+  transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.verlauf-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.verlauf-body.open { max-height: 4000px; }
+.verlauf-chevron.open { transform: rotate(180deg); }
+.verlauf-inner {
+  padding-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 900px) { .verlauf-inner { grid-template-columns: 1fr; } }
+
+.vcard {
+  background: var(--dark-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s;
+}
+.vcard:hover { border-color: var(--border-strong); }
+.vcard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.vcard-id { font-family: var(--font-mono); font-size: 0.58rem; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; }
+.vcard-name { font-size: 0.9rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vcard-badge { font-family: var(--font-mono); font-size: 0.58rem; padding: 3px 9px; border-radius: 4px; letter-spacing: 1px; white-space: nowrap; }
+.vcard-badge.ok   { background: rgba(0,255,136,0.1);  color: var(--green); }
+.vcard-badge.warn { background: rgba(255,184,0,0.12); color: var(--amber); }
+.vcard-badge.crit { background: rgba(255,56,96,0.15); color: var(--red); }
+
+.vcard-charts { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; }
+.vchart { }
+.vchart-label { font-family: var(--font-mono); font-size: 0.52rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; display: flex; justify-content: space-between; }
+.vchart-label span { color: var(--text); font-weight: 600; }
+.vchart svg { width: 100%; height: 52px; display: block; }
+.vchart-days { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.44rem; color: var(--text-muted); margin-top: 3px; letter-spacing: 0.5px; }
+
+.vcard-trend {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+.trend-arrow { font-size: 0.85rem; font-weight: 700; }
+.trend-up   { color: var(--red); }
+.trend-down { color: var(--green); }
+.trend-flat { color: var(--amber); }
+</style>
+
+<script>
+// ─────────────────────────────────────────────
+// VERLAUF TOGGLE
+// ─────────────────────────────────────────────
+function toggleVerlauf() {
+  const body = document.getElementById('verlaufBody');
+  const chev = document.getElementById('verlaufChevron');
+  const open = body.classList.toggle('open');
+  chev.classList.toggle('open', open);
+  if (open && !document.getElementById('verlaufInner').children.length) {
+    renderVerlauf();
+  }
+}
+
+// ─────────────────────────────────────────────
+// GENERATE 7-DAY TREND DATA
+// ─────────────────────────────────────────────
+function genTrend(base, noise, drift, points) {
+  const d = [];
+  let v = base;
+  for (let i = 0; i < points; i++) {
+    v += (Math.random() - 0.5) * noise + drift / points;
+    v = Math.max(base * 0.6, Math.min(base * 1.6, v));
+    d.push(+v.toFixed(2));
+  }
+  return d;
+}
+
+function makeSpark(data, color, w, h) {
+  const min = Math.min(...data), max = Math.max(...data);
+  const range = max - min || 1;
+  const pts = data.map((v,i) => {
+    const x = (i / (data.length - 1)) * w;
+    const y = h - 4 - ((v - min) / range) * (h - 8);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+  const area = `${0},${h} ` + pts + ` ${w},${h}`;
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <defs><linearGradient id="sg${Math.random().toString(36).slice(2,6)}" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="${color}" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
+    </linearGradient></defs>
+    <polygon points="${area}" fill="url(#sg${Math.random().toString(36).slice(2,6)})" opacity="0.5"/>
+    <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="${pts.split(' ').pop().split(',')[0]}" cy="${pts.split(' ').pop().split(',')[1]}" r="2.5" fill="${color}"/>
+  </svg>`;
+}
+
+function renderVerlauf() {
+  const container = document.getElementById('verlaufInner');
+  const days = ['Mo','Di','Mi','Do','Fr','Sa','So'];
+  const POINTS = 28; // 4 per day × 7 days
+
+  container.innerHTML = machines.map(m => {
+    const col = m.status==='ok' ? '#00ff88' : m.status==='warn' ? '#ffb800' : '#ff3860';
+    const drift = m.status==='crit' ? 3 : m.status==='warn' ? 1.2 : -0.5;
+    const riskDrift = m.status==='crit' ? 12 : m.status==='warn' ? 5 : -2;
+
+    const tempData = genTrend(m.temp.val, m.temp.val * 0.06, drift * (m.temp.val * 0.02), POINTS);
+    const vibData  = genTrend(m.vib.val,  m.vib.val  * 0.15, drift * 0.04, POINTS);
+    const riskData = genTrend(m.risk,     m.risk * 0.08,      riskDrift, POINTS);
+
+    // Clamp risk
+    riskData.forEach((_,i) => { riskData[i] = Math.min(99, Math.max(1, riskData[i])); });
+
+    const lastTemp = tempData[tempData.length-1].toFixed(1);
+    const lastVib  = vibData[vibData.length-1].toFixed(2);
+    const lastRisk = Math.round(riskData[riskData.length-1]);
+
+    const trendDir = riskDrift > 3 ? '↑ STEIGEND' : riskDrift > 0 ? '↗ LEICHT STEIGEND' : '↓ SINKEND';
+    const trendCls = riskDrift > 3 ? 'trend-up' : riskDrift > 0 ? 'trend-flat' : 'trend-down';
+
+    const tW = 200, tH = 52;
+    return `
+    <div class="vcard">
+      <div class="vcard-header">
+        <div>
+          <div class="vcard-id">${m.id}</div>
+          <div class="vcard-name">${m.icon} ${m.name}</div>
+        </div>
+        <span class="vcard-badge ${m.status}">${m.status==='ok'?'NORMAL':m.status==='warn'?'ACHTUNG':'KRITISCH'}</span>
+      </div>
+      <div class="vcard-charts">
+        <div class="vchart">
+          <div class="vchart-label">Temperatur <span>${lastTemp}${m.temp.unit}</span></div>
+          ${makeSpark(tempData, col, tW, tH)}
+          <div class="vchart-days">${days.map(d=>`<span>${d}</span>`).join('')}</div>
+        </div>
+        <div class="vchart">
+          <div class="vchart-label">Vibration <span>${lastVib}mm/s</span></div>
+          ${makeSpark(vibData, col, tW, tH)}
+          <div class="vchart-days">${days.map(d=>`<span>${d}</span>`).join('')}</div>
+        </div>
+        <div class="vchart">
+          <div class="vchart-label">Risiko-Score <span>${lastRisk}%</span></div>
+          ${makeSpark(riskData, col, tW, tH)}
+          <div class="vchart-days">${days.map(d=>`<span>${d}</span>`).join('')}</div>
+        </div>
+      </div>
+      <div class="vcard-trend">
+        <span class="trend-arrow ${trendCls}">${riskDrift > 3 ? '↑' : riskDrift > 0 ? '↗' : '↓'}</span>
+        <span>TREND: <strong style="color:${col}">${trendDir}</strong></span>
+        <span style="margin-left:auto;">7-Tage-Ø Risiko: <strong>${Math.round(riskData.reduce((a,b)=>a+b,0)/riskData.length)}%</strong></span>
+        <span>Laufzeit: <strong>${m.runtime.val}${m.runtime.unit}</strong></span>
+        <span>Wartung: <strong>${m.maint}</strong></span>
+      </div>
+    </div>`;
+  }).join('');
+}
+</script>
 
 <!-- ══════════════════════════════════════════
      SERVICES / BEREICHE

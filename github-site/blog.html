@@ -380,7 +380,7 @@ footer { background: var(--dark-2, #111); border-top: 1px solid var(--border);
   a,button,[role=button],.service-card,.monitor-card,.machine-card{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, pointer;}
 </style>
 </head>
-<body>
+<body style="overflow-x:hidden;">
 
 <!-- ══ NAV ══ -->
 <nav>
@@ -435,15 +435,15 @@ footer { background: var(--dark-2, #111); border-top: 1px solid var(--border);
   <div class="f-logo">FORBACH &amp; PARTNERS</div>
   <div class="f-tag">Predictive Intelligence · Maschinenbau · Industry 4.0</div>
   <div class="f-links">
-    <a class="f-link" href="/">Home</a>
+    <a class="f-link" href="index.html">Home</a>
     <a class="f-link" href="ueber-uns.html">Über uns</a>
     <a class="f-link" href="cnc-fraeszentren.html">CNC</a>
     <a class="f-link" href="spritzguss.html">Spritzguss</a>
     <a class="f-link" href="laserschneiden.html">Laser</a>
     <a class="f-link" href="robotik.html">Robotik</a>
     <a class="f-link" href="blog.html" class="nav-link active">Blog</a>
-    <a class="f-link" href="/impressum">Impressum</a>
-    <a class="f-link" href="/datenschutz">Datenschutz</a>
+    <a class="f-link" href="impressum.html">Impressum</a>
+    <a class="f-link" href="datenschutz.html">Datenschutz</a>
   </div>
   <div class="f-copy">© 2026 Forbach and Partners Ltd · Reg. Cyprus · Alle Rechte vorbehalten</div>
 </footer>
@@ -605,5 +605,6 @@ document.addEventListener('DOMContentLoaded', () => {
   filterPosts();
 });
 </script>
+<script src="common.js"></script>
 </body>
 </html>

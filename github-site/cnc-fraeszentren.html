@@ -30,8 +30,8 @@
   --font-m: 'JetBrains Mono', monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--text);font-family:var(--font-b);line-height:1.6;overflow-x:hidden;}
+html,body{scroll-behavior:smooth;overflow-x:hidden;max-width:100vw;}
+body{overflow-x:hidden;max-width:100%;background:var(--black);color:var(--text);font-family:var(--font-b);line-height:1.6;overflow-x:hidden;}
 
 /* ── NAV ── */
 nav{
@@ -378,10 +378,10 @@ h2 .gold{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-back
   color:var(--text);transition:color 0.2s;
 }
 .faq-q:hover{color:var(--gold);}
-.faq-q span{font-size:1.2rem;color:var(--gold);transition:transform 0.3s;}
+.faq-q span{font-size:0.9rem;color:var(--gold);transition:transform 0.3s;display:inline-block;}
 .faq-a{font-size:0.875rem;color:var(--text-dim);line-height:1.75;max-height:0;overflow:hidden;opacity:0;transform:translateY(-6px);transition:max-height 0.45s cubic-bezier(0.25,0.46,0.45,0.94),opacity 0.35s ease,transform 0.35s ease,padding 0.3s ease;}
 .faq-item.open .faq-a{max-height:600px;padding-top:1rem;opacity:1;transform:translateY(0);}
-.faq-item.open .faq-q span{transform:rotate(135deg);}.faq-item.open{background:rgba(228,177,94,0.04);border-color:rgba(228,177,94,0.28)!important;}
+.faq-item.open .faq-q span{transform:translateY(-2px);}.faq-item.open{background:rgba(228,177,94,0.04);border-color:rgba(228,177,94,0.28)!important;}
 
 /* ── CTA BANNER ── */
 .cta-banner{
@@ -453,8 +453,9 @@ body.lang-en .de{display:none;}body.lang-en .en{display:block;}
     <a href="robotik.html" class="nav-link">Robotik</a>
     <a href="index.html#roi" class="nav-link">ROI-Rechner</a>
     <a href="blog.html" class="nav-link">Blog</a>
+    <a href="kontakt.html" class="nav-link">Kontakt</a>
   </div>
-  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">📞 +49 211 90989962</a><a href="mailto:info@forbachandpartners.com" class="nav-cta">Termin vereinbaren</a>
+  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">📞 Jetzt anrufen</a><a href="mailto:info@forbachandpartners.com" class="nav-cta">Termin vereinbaren</a>
 </nav>
 
 <!-- ── HERO ── -->
@@ -506,13 +507,13 @@ body.lang-en .de{display:none;}body.lang-en .en{display:block;}
       </div>
 
       <div class="hero-btns">
-        <a href="mailto:info@forbachandpartners.com" class="btn-gold">
-          <span class="de">Kostenlose Demo anfragen</span>
-          <span class="en">Request a free demo</span>
+        <a href="#" onclick="openTerminModal(); return false;" class="btn-gold">
+          <span class="de">Termin vereinbaren</span>
+          <span class="en">Book a Meeting</span>
         </a>
-        <a href="#specs" class="btn-outline">
-          <span class="de">Technische Specs</span>
-          <span class="en">Technical specs</span>
+        <a href="index.html#roi" class="btn-outline">
+          <span class="de">ROI berechnen</span>
+          <span class="en">Calculate ROI</span>
         </a>
       </div>
     </div>
@@ -839,27 +840,27 @@ body.lang-en .de{display:none;}body.lang-en .en{display:block;}
         <span class="en">YOUR QUESTIONS —<br><span class="gold">CLEAR ANSWERS</span></span></h2>
 
     <div class="faq-item" onclick="toggleFAQ(this)">
-      <div class="faq-q"><span class="de">Kann das System auch ältere CNC-Maschinen (Baujahr < 2010) überwachen?</span><span class="en">Can the system monitor older CNC machines (built before 2010)?</span><span>+</span></div>
+      <div class="faq-q"><span class="de">Kann das System auch ältere CNC-Maschinen (Baujahr < 2010) überwachen?</span><span class="en">Can the system monitor older CNC machines (built before 2010)?</span><span>▼</span></div>
       <div class="faq-a de">Ja — unser Retrofit-Ansatz funktioniert unabhängig vom Maschinenhersteller und Baujahr. Wir montieren eigene Sensorik direkt an der Maschine. Keine SPS- oder NC-Eingriffe erforderlich. Ältere Heidenhain- und Siemens-Steuerungen werden vollständig unterstützt.</div>
       <div class="faq-a en">Yes — our retrofit approach works independently of machine manufacturer and build year. We mount our own sensors directly on the machine. No PLC or NC intervention required. Older Heidenhain and Siemens controls are fully supported.</div>
     </div>
     <div class="faq-item" onclick="toggleFAQ(this)">
-      <div class="faq-q"><span class="de">Wie lange dauert die Installation und was passiert mit der Produktion?</span><span class="en">How long does installation take and what happens to production?</span><span>+</span></div>
+      <div class="faq-q"><span class="de">Wie lange dauert die Installation und was passiert mit der Produktion?</span><span class="en">How long does installation take and what happens to production?</span><span>▼</span></div>
       <div class="faq-a de">Die physische Installation der Sensorbox dauert 4 Stunden pro Maschine — üblicherweise in einer regulären Wartungspause oder am Wochenende. Die Produktion läuft unverändert weiter. Nach 2–4 Wochen hat das KI-Modell genug Daten gesammelt, um präzise Prognosen zu liefern.</div>
       <div class="faq-a en">The physical installation of the sensor box takes 4 hours per machine — typically during a regular maintenance break or at the weekend. Production continues unchanged. After 2–4 weeks, the AI model has collected enough data to deliver accurate predictions.</div>
     </div>
     <div class="faq-item" onclick="toggleFAQ(this)">
-      <div class="faq-q"><span class="de">Welche Daten verlassen das Werk und wie sind sie geschützt?</span><span class="en">Which data leaves the plant and how is it protected?</span><span>+</span></div>
+      <div class="faq-q"><span class="de">Welche Daten verlassen das Werk und wie sind sie geschützt?</span><span class="en">Which data leaves the plant and how is it protected?</span><span>▼</span></div>
       <div class="faq-a de">Nur anonymisierte Sensor-Zeitreihen werden übertragen — keine NC-Programme, keine Konstruktionsdaten, keine Produktgeometrien. Die Übertragung erfolgt Ende-zu-Ende-verschlüsselt (AES-256). Unsere Server befinden sich in der EU (ISO 27001 zertifiziert). Ein vollständiger On-Premise-Betrieb ist auf Anfrage möglich.</div>
       <div class="faq-a en">Only anonymised sensor time series are transmitted — no NC programs, no design data, no product geometries. Transmission is end-to-end encrypted (AES-256). Our servers are located in the EU (ISO 27001 certified). A fully on-premise deployment is available on request.</div>
     </div>
     <div class="faq-item" onclick="toggleFAQ(this)">
-      <div class="faq-q"><span class="de">Was kostet das System für 5 CNC-Maschinen?</span><span class="en">What does the system cost for 5 CNC machines?</span><span>+</span></div>
+      <div class="faq-q"><span class="de">Was kostet das System für 5 CNC-Maschinen?</span><span class="en">What does the system cost for 5 CNC machines?</span><span>▼</span></div>
       <div class="faq-a de">Die einmalige Implementierungsgebühr beträgt 25.000 € netto (Setup, Konfiguration, Integration). Die monatliche Lizenz liegt bei 1.000 € netto pro Maschine. Bei 5 Maschinen: 5.000 €/Monat. Basierend auf typischen Stillstandskosten von 2.500–4.000 €/h amortisiert sich das System in 3–6 Monaten.</div>
       <div class="faq-a en">The one-time implementation fee is €25,000 net (setup, configuration, integration). The monthly licence is €1,000 net per machine. For 5 machines: €5,000/month. Based on typical downtime costs of €2,500–4,000/h, the system pays for itself in 3–6 months.</div>
     </div>
     <div class="faq-item" onclick="toggleFAQ(this)">
-      <div class="faq-q"><span class="de">Wie genau ist die 72-Stunden-Prognose in der Praxis?</span><span class="en">How accurate is the 72-hour prediction in practice?</span><span>+</span></div>
+      <div class="faq-q"><span class="de">Wie genau ist die 72-Stunden-Prognose in der Praxis?</span><span class="en">How accurate is the 72-hour prediction in practice?</span><span>▼</span></div>
       <div class="faq-a de">In unseren aktuell betreuten Anlagen liegt die Trefferquote bei 95,2 % (false positives < 3 %). Das KI-Modell wird wöchentlich neu trainiert und verbessert sich kontinuierlich mit den Daten Ihrer spezifischen Maschinen und Fertigungsprozesse.</div>
       <div class="faq-a en">Across our currently monitored installations, the accuracy rate is 95.2% (false positives < 3%). The AI model is retrained weekly and continuously improves with data from your specific machines and manufacturing processes.</div>
     </div>
@@ -912,14 +913,14 @@ body.lang-en .de{display:none;}body.lang-en .en{display:block;}
   <div class="f-logo">FORBACH & PARTNERS</div>
   <div class="f-tag">Predictive Intelligence · Maschinenbau · Industry 4.0</div>
   <div class="f-links">
-    <a class="f-link" href="/">Home</a>
+    <a class="f-link" href="index.html">Home</a>
     <a class="f-link" href="cnc-fraeszentren.html" class="nav-link active">CNC</a>
     <a class="f-link" href="spritzguss.html">Spritzguss</a>
     <a class="f-link" href="laserschneiden.html">Laser</a>
     <a class="f-link" href="robotik.html">Robotik</a>
     
-    <a class="f-link" href="/datenschutz">Datenschutz</a>
-    <a class="f-link" href="/impressum">Impressum</a>
+    <a class="f-link" href="datenschutz.html">Datenschutz</a>
+    <a class="f-link" href="impressum.html">Impressum</a>
   </div>
   <div class="f-copy">© 2026 Forbach and Partners Ltd · Reg. Cyprus · All rights reserved</div>
 </footer>
@@ -990,5 +991,6 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 setInterval(flicker, 1800);
 flicker();
 </script>
+<script src="common.js"></script>
 </body>
 </html>

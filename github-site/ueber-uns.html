@@ -16,7 +16,7 @@
   --font-d:'Oswald',sans-serif;--font-b:'Raleway',sans-serif;--font-m:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+html,body{scroll-behavior:smooth;overflow-x:hidden;max-width:100vw;}
 body{background:var(--black);color:var(--text);font-family:var(--font-b);line-height:1.6;overflow-x:hidden;}
 
 nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:100;background:rgba(0,0,0,0.88);backdrop-filter:blur(20px);border:1px solid var(--border-strong);border-radius:14px;padding:0 2rem;height:58px;display:flex;align-items:center;justify-content:space-between;gap:2rem;width:min(1200px,calc(100vw - 2rem));}
@@ -194,7 +194,7 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
 
 </style>
 </head>
-<body>
+<body style="overflow-x:hidden;">
 
 <nav>
   <a href="index.html" class="nav-logo">FORBACH & PARTNERS</a>
@@ -207,7 +207,11 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
     <a href="index.html#roi" class="nav-link">ROI-Rechner</a>
     <a href="blog.html" class="nav-link">Blog</a>
   </div>
-  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">📞 +49 211 90989962</a><a href="mailto:info@forbachandpartners.com" class="nav-cta">Termin vereinbaren</a>
+  <div class="lang-toggle-nav">
+      <button class="lang-btn-nav btn-de active" onclick="setLang('de')">DE</button>
+      <button class="lang-btn-nav btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">📞 Jetzt anrufen</a><a href="mailto:info@forbachandpartners.com" class="nav-cta">Termin vereinbaren</a>
 </nav>
 
 <!-- HERO -->
@@ -378,172 +382,82 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
 <!-- ══════════════════════════════════════════
      SPEZIALISTENTEAM
 ══════════════════════════════════════════ -->
-<div class="team-section">
-  <div class="section-label">Das Spezialistenteam</div>
-  <h2>EXPERTEN DIE<br><span class="gold">MASCHINEN VERSTEHEN</span></h2>
-  <p class="section-sub">Jedes Teammitglied bringt jahrelange Industrieerfahrung mit — vom Shopfloor bis zur KI-Entwicklung. Zusammen decken wir jeden Maschinentyp und jede Projektphase ab.</p>
+<section style="padding:100px 0;background:var(--dark-2);">
+  <div style="max-width:1100px;margin:0 auto;padding:0 2rem;">
 
-  <div class="team-grid">
-
-    <!-- Marcus — KI-Entwicklung -->
-    <div class="team-card reveal">
-      <div class="team-portrait">
-        <div class="team-years">9 J. im Team</div>
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bg1" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#0d1520"/><stop offset="100%" stop-color="#050810"/></radialGradient>
-            <radialGradient id="sk1" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#c8845a"/><stop offset="100%" stop-color="#7a4828"/></radialGradient>
-          </defs>
-          <rect width="300" height="300" fill="url(#bg1)"/>
-          <path d="M0 300 L0 210 Q40 190 70 178 L88 230 L105 205 L150 220 L195 205 L212 230 L230 178 Q260 190 300 210 L300 300 Z" fill="#0a1828"/>
-          <path d="M105 205 L88 175 L118 190 L150 220 Z" fill="#142038"/>
-          <path d="M195 205 L212 175 L182 190 L150 220 Z" fill="#142038"/>
-          <path d="M118 190 L150 202 L182 190 L178 178 L150 186 L122 178 Z" fill="#dde"/>
-          <ellipse cx="150" cy="178" rx="22" ry="22" fill="url(#sk1)"/>
-          <ellipse cx="150" cy="128" rx="64" ry="76" fill="url(#sk1)"/>
-          <path d="M90 115 Q92 72 118 60 Q133 53 150 52 Q167 53 182 60 Q208 72 210 115 Q205 95 192 83 Q172 70 150 68 Q128 70 108 83 Q95 95 90 115 Z" fill="#0f0808"/>
-          <rect x="106" y="118" width="34" height="20" rx="5" fill="none" stroke="#c4a060" stroke-width="2"/>
-          <rect x="160" y="118" width="34" height="20" rx="5" fill="none" stroke="#c4a060" stroke-width="2"/>
-          <line x1="140" y1="128" x2="160" y2="128" stroke="#c4a060" stroke-width="2"/>
-          <ellipse cx="123" cy="128" rx="7" ry="5" fill="#1a0f06"/>
-          <ellipse cx="177" cy="128" rx="7" ry="5" fill="#1a0f06"/>
-          <ellipse cx="125" cy="126" rx="2" ry="2" fill="#fff" opacity="0.6"/>
-          <ellipse cx="179" cy="126" rx="2" ry="2" fill="#fff" opacity="0.6"/>
-          <path d="M138 152 Q150 158 162 152" fill="none" stroke="url(#sk1)" stroke-width="2.5"/>
-        </svg>
-      </div>
-      <div class="team-info">
-        <div class="team-name">Marcus K.</div>
-        <div class="team-role">Leitender KI-Entwickler</div>
-        <div class="team-exp">Spezialist für maschinelles Lernen und Zeitreihenanalyse. Entwickelt die Anomalie-Erkennungsmodelle und betreut die Modell-Kalibrierung für jeden neuen Maschinentyp.</div>
-        <div class="team-skills">
-          <span class="ts-tag">Python / TensorFlow</span>
-          <span class="ts-tag">Isolation Forest</span>
-          <span class="ts-tag">LSTM-Autoencoder</span>
-        </div>
-      </div>
+    <div class="reveal" style="text-align:center;margin-bottom:60px;">
+      <div class="section-label" style="justify-content:center;margin-bottom:1rem;">Das Spezialistenteam</div>
+      <h2>EXPERTEN DIE<br><span class="gold">MASCHINEN VERSTEHEN</span></h2>
+      <p class="section-sub" style="margin-top:1rem;">Kombinierte Expertise aus Maschinenbau, Elektrotechnik und angewandter KI-Entwicklung — jeder Spezialist direkt erreichbar, kein Callcenter.</p>
     </div>
 
-    <!-- Thomas — Maschinenbau -->
-    <div class="team-card reveal rd1">
-      <div class="team-portrait">
-        <div class="team-years">14 J. Industrie</div>
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bg2" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#120e08"/><stop offset="100%" stop-color="#060402"/></radialGradient>
-            <radialGradient id="sk2" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#b87848"/><stop offset="100%" stop-color="#6a3818"/></radialGradient>
-          </defs>
-          <rect width="300" height="300" fill="url(#bg2)"/>
-          <path d="M0 300 L0 210 Q35 192 65 180 L82 232 L100 206 L150 222 L200 206 L218 232 L235 180 Q265 192 300 210 L300 300 Z" fill="#1a1008"/>
-          <path d="M100 206 L82 176 L114 192 L150 222 Z" fill="#2a1808"/>
-          <path d="M200 206 L218 176 L186 192 L150 222 Z" fill="#2a1808"/>
-          <path d="M114 192 L150 204 L186 192 L182 180 L150 188 L118 180 Z" fill="#e8e4d8"/>
-          <ellipse cx="150" cy="178" rx="23" ry="23" fill="url(#sk2)"/>
-          <ellipse cx="150" cy="126" rx="66" ry="78" fill="url(#sk2)"/>
-          <path d="M88 112 Q90 65 118 54 Q134 47 150 46 Q166 47 182 54 Q210 65 212 112 Q206 90 190 79 Q170 67 150 65 Q130 67 110 79 Q94 90 88 112 Z" fill="#3a2008"/>
-          <ellipse cx="150" cy="95" rx="12" ry="6" fill="#2a1408" opacity="0.5"/>
-          <ellipse cx="124" cy="128" rx="8" ry="6" fill="#2a1008"/>
-          <ellipse cx="176" cy="128" rx="8" ry="6" fill="#2a1008"/>
-          <ellipse cx="126" cy="126" rx="2.5" ry="2.5" fill="#fff" opacity="0.5"/>
-          <ellipse cx="178" cy="126" rx="2.5" ry="2.5" fill="#fff" opacity="0.5"/>
-          <path d="M134 152 Q150 160 166 152" fill="none" stroke="#b87848" stroke-width="2"/>
-        </svg>
-      </div>
-      <div class="team-info">
-        <div class="team-name">Thomas R.</div>
-        <div class="team-role">Maschinenbau-Ingenieur</div>
-        <div class="team-exp">14 Jahre Erfahrung in der CNC-Fertigung und Hydraulik-Systemtechnik. Verantwortlich für Sensor-Positionierung, Kalibrierung und technische Integration bei Kunden vor Ort.</div>
-        <div class="team-skills">
-          <span class="ts-tag">CNC & 5-Achs</span>
-          <span class="ts-tag">Hydraulik</span>
-          <span class="ts-tag">OPC-UA / MQTT</span>
-        </div>
-      </div>
-    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;">
 
-    <!-- Elena — Kundenbetreuung -->
-    <div class="team-card reveal rd2">
-      <div class="team-portrait">
-        <div class="team-years">6 J. im Team</div>
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bg3" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#120818"/><stop offset="100%" stop-color="#050308"/></radialGradient>
-            <radialGradient id="sk3" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#d4956a"/><stop offset="100%" stop-color="#8a5030"/></radialGradient>
-          </defs>
-          <rect width="300" height="300" fill="url(#bg3)"/>
-          <path d="M0 300 L0 215 Q38 195 68 182 L85 234 L102 208 L150 224 L198 208 L215 234 L232 182 Q262 195 300 215 L300 300 Z" fill="#1a0e20"/>
-          <path d="M102 208 L85 178 L115 194 L150 224 Z" fill="#281438"/>
-          <path d="M198 208 L215 178 L185 194 L150 224 Z" fill="#281438"/>
-          <path d="M115 194 L150 206 L185 194 L181 180 L150 188 L119 180 Z" fill="#fff8f0"/>
-          <ellipse cx="150" cy="180" rx="22" ry="22" fill="url(#sk3)"/>
-          <ellipse cx="150" cy="124" rx="60" ry="74" fill="url(#sk3)"/>
-          <path d="M90 108 Q92 58 122 48 Q136 42 150 41 Q164 42 178 48 Q208 58 210 108 Q200 82 180 70 Q165 61 150 60 Q135 61 120 70 Q100 82 90 108 Z" fill="#2a1020"/>
-          <path d="M92 105 Q100 85 90 108 Q88 85 108 68 Q116 60 92 105 Z" fill="#3a1828" opacity="0.7"/>
-          <path d="M208 105 Q200 85 210 108 Q212 85 192 68 Q184 60 208 105 Z" fill="#3a1828" opacity="0.7"/>
-          <path d="M90 108 Q95 90 110 80 Q130 68 150 66 Q170 68 190 80 Q205 90 210 108" fill="#2a1020" stroke="#2a1020" stroke-width="12"/>
-          <ellipse cx="124" cy="126" rx="7" ry="5.5" fill="#1a0808"/>
-          <ellipse cx="176" cy="126" rx="7" ry="5.5" fill="#1a0808"/>
-          <ellipse cx="126" cy="124" rx="2" ry="2" fill="#fff" opacity="0.6"/>
-          <ellipse cx="178" cy="124" rx="2" ry="2" fill="#fff" opacity="0.6"/>
-          <path d="M134 150 Q142 157 150 158 Q158 157 166 150" fill="none" stroke="#d4956a" stroke-width="2"/>
-          <ellipse cx="134" cy="148" rx="4" ry="2.5" fill="#c87858" opacity="0.5"/>
-          <ellipse cx="166" cy="148" rx="4" ry="2.5" fill="#c87858" opacity="0.5"/>
-        </svg>
-      </div>
-      <div class="team-info">
-        <div class="team-name">Elena M.</div>
-        <div class="team-role">Kundenbetreuung DACH</div>
-        <div class="team-exp">Industriekauffrau mit Weiterbildung in Industrie 4.0. Begleitet Kunden vom Erstgespräch bis zum laufenden Betrieb — erster Ansprechpartner für alle organisatorischen und kaufmännischen Fragen.</div>
-        <div class="team-skills">
-          <span class="ts-tag">Projektkoordination</span>
-          <span class="ts-tag">DE / EN</span>
-          <span class="ts-tag">Onboarding</span>
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=S+Forbach&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="S. Forbach">
+          <div class="av-badge">Gründer</div>
         </div>
+        <div class="av-info"><h3>S. Forbach</h3><p class="av-role">Unternehmensstrategie & KI</p></div>
       </div>
-    </div>
 
-    <!-- Stefan — Systemintegration -->
-    <div class="team-card reveal rd3">
-      <div class="team-portrait">
-        <div class="team-years">11 J. Erfahrung</div>
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bg4" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#081218"/><stop offset="100%" stop-color="#020608"/></radialGradient>
-            <radialGradient id="sk4" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#c09070"/><stop offset="100%" stop-color="#7a5030"/></radialGradient>
-          </defs>
-          <rect width="300" height="300" fill="url(#bg4)"/>
-          <path d="M0 300 L0 212 Q36 194 66 181 L83 233 L101 207 L150 223 L199 207 L217 233 L234 181 Q264 194 300 212 L300 300 Z" fill="#081820"/>
-          <path d="M101 207 L83 177 L113 193 L150 223 Z" fill="#102030"/>
-          <path d="M199 207 L217 177 L187 193 L150 223 Z" fill="#102030"/>
-          <path d="M113 193 L150 205 L187 193 L183 179 L150 187 L117 179 Z" fill="#e4e8ec"/>
-          <ellipse cx="150" cy="179" rx="22" ry="22" fill="url(#sk4)"/>
-          <ellipse cx="150" cy="126" rx="63" ry="76" fill="url(#sk4)"/>
-          <path d="M88 112 Q90 60 120 50 Q136 44 150 43 Q164 44 180 50 Q210 60 212 112 Q205 88 188 76 Q168 63 150 62 Q132 63 112 76 Q95 88 88 112 Z" fill="#181010"/>
-          <path d="M88 112 Q90 75 105 65 Q88 112 92 128 Z" fill="#202020" opacity="0.4"/>
-          <path d="M212 112 Q210 75 195 65 Q212 112 208 128 Z" fill="#202020" opacity="0.4"/>
-          <ellipse cx="123" cy="128" rx="8" ry="6" fill="#180c06"/>
-          <ellipse cx="177" cy="128" rx="8" ry="6" fill="#180c06"/>
-          <ellipse cx="125" cy="126" rx="2.5" ry="2.5" fill="#fff" opacity="0.55"/>
-          <ellipse cx="179" cy="126" rx="2.5" ry="2.5" fill="#fff" opacity="0.55"/>
-          <path d="M136 152 Q150 159 164 152" fill="none" stroke="#c09070" stroke-width="2.2"/>
-          <line x1="125" y1="110" x2="130" y2="115" stroke="#a07858" stroke-width="1.5" opacity="0.6"/>
-          <line x1="175" y1="110" x2="170" y2="115" stroke="#a07858" stroke-width="1.5" opacity="0.6"/>
-        </svg>
-      </div>
-      <div class="team-info">
-        <div class="team-name">Stefan W.</div>
-        <div class="team-role">Systemintegration & IoT</div>
-        <div class="team-exp">Elektroingenieur mit 11 Jahren Erfahrung in industrieller Automatisierung. Verantwortlich für die technische Anbindung der Sensorik — von OPC-UA-Konfiguration bis MQTT-Gateway-Setup.</div>
-        <div class="team-skills">
-          <span class="ts-tag">OPC-UA</span>
-          <span class="ts-tag">MQTT / Edge</span>
-          <span class="ts-tag">SPS / Siemens</span>
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=H+Weber&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="H. Weber">
         </div>
+        <div class="av-info"><h3>H. Weber</h3><p class="av-role">Sondermaschinenbau</p></div>
       </div>
-    </div>
 
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=A+Makris&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="A. Makris">
+        </div>
+        <div class="av-info"><h3>A. Makris</h3><p class="av-role">Leitung KI-Entwicklung</p></div>
+      </div>
+
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=M+Steiner&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="M. Steiner">
+        </div>
+        <div class="av-info"><h3>M. Steiner</h3><p class="av-role">CNC-Systemtechnik</p></div>
+      </div>
+
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=S+Kraemer&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="S. Kraemer">
+        </div>
+        <div class="av-info"><h3>S. Kraemer</h3><p class="av-role">Technischer Service</p></div>
+      </div>
+
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=T+Becker&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="T. Becker">
+        </div>
+        <div class="av-info"><h3>T. Becker</h3><p class="av-role">Automatisierungstechnik</p></div>
+      </div>
+
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=L+Vogt&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="L. Vogt">
+        </div>
+        <div class="av-info"><h3>L. Vogt</h3><p class="av-role">Kundenbetreuung DACH</p></div>
+      </div>
+
+    </div>
   </div>
-</div>
+</section>
+
+<style>
+.av-card{background:var(--dark-card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all 0.4s ease;text-align:center;}
+.av-img-box{position:relative;background:#111;height:220px;overflow:hidden;}
+.av-img-box img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) brightness(0.75);transition:all 0.5s ease;}
+.av-badge{position:absolute;top:10px;right:10px;background:var(--gold);color:#000;font-family:var(--font-m);font-size:0.55rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
+.av-card:hover{border-color:var(--gold);transform:translateY(-5px);box-shadow:0 12px 40px rgba(228,177,94,0.12);}
+.av-card:hover .av-img-box img{filter:grayscale(0%) brightness(1);}
+.av-info{padding:18px;}
+.av-info h3{color:var(--gold);font-family:var(--font-d);font-size:1.05rem;margin-bottom:5px;letter-spacing:1px;}
+.av-role{color:var(--text-dim);font-size:0.72rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;}
+</style>
 
 <!-- VALUES -->
 <div class="values-section">
@@ -629,7 +543,7 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
       </div>
     </form>
     <div style="text-align:center;margin-top:1.5rem;font-family:var(--font-m);font-size:0.58rem;color:var(--text-muted);letter-spacing:2px;">
-      📞 +49 211 90989962 · ✉ INFO@FORBACHANDPARTNERS.COM · PAPHOS, ZYPERN
+      📞 Jetzt anrufen · ✉ INFO@FORBACHANDPARTNERS.COM · PAPHOS, ZYPERN
     </div>
   </div>
 </div>
@@ -645,6 +559,7 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
     <a class="f-link" href="laserschneiden.html">Laser</a>
     <a class="f-link" href="robotik.html">Robotik</a>
     <a class="f-link" href="blog.html">Blog</a>
+    <a class="f-link" href="kontakt.html">Kontakt</a>
   </div>
   <div class="f-copy">© 2026 Forbach and Partners Ltd · Reg. Cyprus · All rights reserved</div>
 </footer>
@@ -688,5 +603,6 @@ document.getElementById('contactForm').addEventListener('submit', async function
   }
 });
 </script>
+<script src="common.js"></script>
 </body>
 </html>

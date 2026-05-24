@@ -52,6 +52,174 @@
 const POSTS = [
 
   // ─────────────────────────────────────────────
+  // POST 11 — CNC Spindel Geräusche
+  // ─────────────────────────────────────────────
+  {
+    id: 11,
+    featured: false,
+    date: "2026-05-20",
+    dateFormatted: "20. Mai 2026",
+    readTime: "5 Min.",
+    category: "CNC",
+    author: "Sascha Forbach",
+    title: "CNC-Spindel macht komische Geräusche — was steckt wirklich dahinter?",
+    excerpt: "Pfeifen, Rattern, Schlagen: Jedes Geräusch an der CNC-Spindel ist ein Frühwarnsignal. Wir erklären, welches Geräusch welchen Schaden ankündigt — und ab wann es teuer wird.",
+    tags: ["CNC", "Spindel", "Lagerdiagnose", "Vibrationsanalyse", "Predictive Maintenance"],
+    content: `
+      <p class="detail-lead">Eine CNC-Spindel, die beginnt zu pfeifen oder zu schlagen, hat im Durchschnitt noch 72 Betriebsstunden bis zum Totalausfall — wenn man nichts unternimmt.</p>
+      <h2>Die häufigsten Geräusche und ihre Ursachen</h2>
+      <p>Jede Art von Spindelgeräusch ist ein anderes Signal:</p>
+      <ul>
+        <li><strong>Hochfrequentes Pfeifen (5–15 kHz):</strong> Wälzlagerschaden im Frontlager. Meist durch unzureichende Schmierung oder thermische Überlastung verursacht. Restlaufzeit: 40–120 Stunden.</li>
+        <li><strong>Tiefes Rattern bei hoher Drehzahl:</strong> Unwucht durch beschädigtes Werkzeug oder verschlissenes Spannfutter. Löst Sekundärschäden an der Spindel aus.</li>
+        <li><strong>Metallisches Schlagen (rhythmisch):</strong> Einlaufspur im Innenlager — oft verursacht durch falsches Einfahren nach Stillstand. Sofortiger Stillstand empfohlen.</li>
+        <li><strong>Dumpfes Brummen bei niedrigen Drehzahlen:</strong> Schmierfilmabriss oder Lagerspiel. Häufig der erste Hinweis auf thermische Probleme im Lagerbereich.</li>
+      </ul>
+      <h2>Warum "hören" allein nicht ausreicht</h2>
+      <p>Das menschliche Ohr kann Geräusche erst ab ca. 65 dB wahrnehmen — zu einem Zeitpunkt, an dem der Schaden bereits 30–40 % Lagersubstanz zerstört hat. Unsere Beschleunigungssensoren erfassen Frequenzspektren ab 10 Hz bis 20 kHz mit einer Abtastrate von 10.000 Hz. Das erlaubt die Erkennung von Lagerdefekten, bevor der Schaden für das menschliche Ohr wahrnehmbar ist.</p>
+      <div class="highlight-box">
+        <strong>Praxisfall:</strong> Lohnfertiger in Süddeutschland — SGM-5-Achsfräse, Spindel 18.000 U/min. Unsere KI erkannte eine charakteristische BPFO-Frequenz (Ball Pass Frequency Outer Race) 68 Stunden vor dem eigentlichen Lagerversagen. Ergebnis: geplanter Lagertausch in der Nachtschicht, kein Produktionsstopp.
+      </div>
+      <h2>Was Sie jetzt tun können</h2>
+      <p>Hören Sie verdächtige Geräusche? Messen Sie sofort die Vibrationsfrequenz. Liegt die Schwinggeschwindigkeit über 2,8 mm/s (nach ISO 10816 Klasse C für Werkzeugmaschinen), ist ein ungeplanter Ausfall in den nächsten 5–10 Schichten wahrscheinlich. Mit permanenter Sensorüberwachung bekommen Sie diese Warnung 48–72 Stunden früher — mit voller Planbarkeit.</p>
+    `
+  },
+
+  // ─────────────────────────────────────────────
+  // POST 12 — Hydraulikdruck fällt ab
+  // ─────────────────────────────────────────────
+  {
+    id: 12,
+    featured: false,
+    date: "2026-05-15",
+    dateFormatted: "15. Mai 2026",
+    readTime: "6 Min.",
+    category: "Hydraulik",
+    author: "Sascha Forbach",
+    title: "Hydraulikdruck fällt ab — 7 Ursachen und wie KI sie unterscheidet",
+    excerpt: "Druckabfall im Hydrauliksystem ist einer der häufigsten Ausfallgründe bei Spritzguss- und Stanzmaschinen. Hier sind die 7 wahren Ursachen — und warum nur eine davon sofort teuer wird.",
+    tags: ["Hydraulik", "Druckabfall", "Spritzguss", "Predictive Maintenance", "Instandhaltung"],
+    content: `
+      <p class="detail-lead">Nicht jeder Druckabfall ist gleich gefährlich. Aber alle beginnen gleich: mit einer kleinen Abweichung im Druckverlaufsgraphen — die niemand sieht, bis es zu spät ist.</p>
+      <h2>Die 7 Ursachen für sinkenden Hydraulikdruck</h2>
+      <ul>
+        <li><strong>1. Internes Leckage am Hydraulikzylinder:</strong> Die häufigste Ursache. Kolbendichtung verschlissen — Druck bricht unter Last zusammen. Erkennbar durch asymmetrischen Druckverlauf in der Haltedruckphase.</li>
+        <li><strong>2. Pumpenabnutzung (Zahnradpumpe):</strong> Volumetrischer Wirkungsgrad sinkt. Das System kompensiert durch höhere Pumpendrehzahl — Energieverbrauch steigt messbar. KI-Kennzeichen: Druck + Stromaufnahme korrelieren nicht mehr.</li>
+        <li><strong>3. Ölviskositätsverlust durch Überhitzung:</strong> Hydrauliköl über 65 °C verliert Schmierwirkung. Führt zu beschleunigtem Pumpen- und Ventilverschleiß. Erkennbar durch Temperaturtrend > 0,8 °C/Stunde.</li>
+        <li><strong>4. Verstopfter Rücklauffilter:</strong> Schleichend steigender Gegendruck. Drucksensor zeigt Normalwert — der Bypass öffnet jedoch bereits. Erkennbar nur durch differenzielle Druckmessung vor/nach Filter.</li>
+        <li><strong>5. Ventilspiel am Proportionalventil:</strong> Hysterese im Regelverhalten nimmt zu. Druckschwankungen ±3–5 bar bei stabilen Sollwerten. Häufig unterschätzt, bis Maßhaltigkeit leidet.</li>
+        <li><strong>6. Lufteintrag (Kavitation):</strong> Druckspitzen mit hoher Frequenz (> 500 Hz), begleitet von charakeristischem Knistern. Führt innerhalb von Stunden zu Pumpen-Fresser.</li>
+        <li><strong>7. Undichte externe Leitungsverbindung:</strong> Meistens sichtbar — aber erst nachdem 10–15 Liter Öl gelaufen sind und jemand auf dem Boden ausrutscht.</li>
+      </ul>
+      <div class="highlight-box">
+        <strong>Wichtig:</strong> Ursache 1–5 lassen sich 24–96 Stunden im Voraus durch KI erkennen. Ursache 6 (Kavitation) muss in Echtzeit erkannt werden — weil der Schaden in Minuten entsteht. Unser System unterscheidet automatisch zwischen allen 7 Mustern.
+      </div>
+      <h2>Was unterscheidet die KI-Diagnose vom Manometer?</h2>
+      <p>Ein Manometer zeigt den aktuellen Druck. Unsere KI analysiert den <em>Druckverlauf</em> über Zeit — Anstiegsrate, Haltephasen, Druckabfall unter verschiedenen Lastprofilen — und vergleicht das mit dem Baseline-Muster derselben Maschine aus den letzten 90 Tagen. Abweichungen von weniger als 2 bar, die ein Mensch nie bemerken würde, werden erkannt und klassifiziert.</p>
+    `
+  },
+
+  // ─────────────────────────────────────────────
+  // POST 13 — OEE verbessern
+  // ─────────────────────────────────────────────
+  {
+    id: 13,
+    featured: false,
+    date: "2026-05-10",
+    dateFormatted: "10. Mai 2026",
+    readTime: "7 Min.",
+    category: "ROI & Wirtschaftlichkeit",
+    author: "Sascha Forbach",
+    title: "OEE unter 75%? Hier sind die drei Hauptursachen — und wie Sie sie beheben",
+    excerpt: "Die Gesamtanlageneffektivität (OEE) ist der wichtigste KPI in der Fertigung. Unter 75% verlieren Sie täglich Geld. Wir zeigen, wo die verlorene Zeit wirklich steckt.",
+    tags: ["OEE", "Gesamtanlageneffektivität", "KPI", "Fertigungseffizienz", "Predictive Maintenance"],
+    content: `
+      <p class="detail-lead">Weltklasse-OEE liegt bei 85%. Die meisten mittelständischen Fertigungsbetriebe in Deutschland erreichen 55–68%. Die Differenz kostet — bei einer einzelnen CNC-Linie mit 8h Schicht — bis zu 180.000 Euro pro Jahr.</p>
+      <h2>Was OEE wirklich misst</h2>
+      <p>OEE = Verfügbarkeit × Leistung × Qualität. Klingt einfach. Aber die meisten Betriebe messen nur die großen, offensichtlichen Stillstände. Die eigentlichen OEE-Killer sind kleiner und häufiger:</p>
+      <ul>
+        <li><strong>Verfügbarkeit:</strong> Nicht nur geplante Wartung und große Ausfälle. Auch die 4-Minuten-Unterbrechungen 8× täglich, die in keiner Statistik auftauchen.</li>
+        <li><strong>Leistung:</strong> Maschinen, die 94% der Nenngeschwindigkeit laufen, weil "es sich so besser anfühlt". Das sind 6% Leistungsverlust — unsichtbar, aber konstant.</li>
+        <li><strong>Qualität:</strong> Ausschuss in der Anlaufphase nach Wartung. Häufig nicht als Qualitätsverlust gebucht, weil er "normal" ist.</li>
+      </ul>
+      <h2>Die drei echten OEE-Killer im Mittelstand</h2>
+      <p><strong>1. Ungeplante Micro-Stops (2–8 Minuten):</strong> Einzeln harmlos, summieren sich zu 45–90 Minuten pro Schicht. Ursache: intermittierende Sensorausfälle, Werkzeugvibration, Mini-Staus in Zuführeinrichtungen. KI erkennt das Muster bevor es eskaliert.</p>
+      <p><strong>2. Speed Loss durch Verschleiß:</strong> Eine Spindel mit beginnendem Lagerschaden läuft der Maschinenführer intuitiv langsamer — ohne es zu merken oder zu dokumentieren. 8% Geschwindigkeitsreduktion über 3 Monate = 8% OEE-Verlust allein durch diesen Faktor.</p>
+      <p><strong>3. Anlaufqualität nach Stillstand:</strong> Nach jedem Stopp von mehr als 20 Minuten produzieren thermisch empfindliche Maschinen 6–18 Ausschussteile. Permanente Temperaturüberwachung erlaubt es, den optimalen Anlaufzeitpunkt zu bestimmen.</p>
+      <div class="highlight-box">
+        <strong>Benchmark aus der Praxis:</strong> Unser Kunde, ein Zulieferer für die Automobilindustrie (12 Anlagen), steigerte die OEE innerhalb von 8 Monaten von 61% auf 79% — allein durch automatische Erkennung von Micro-Stops und proaktiven Werkzeugwechsel. Ergebnis: +380.000 € Mehrerlös pro Jahr bei gleichem Personal.
+      </div>
+    `
+  },
+
+  // ─────────────────────────────────────────────
+  // POST 14 — Wälzlagerschaden früh erkennen
+  // ─────────────────────────────────────────────
+  {
+    id: 14,
+    featured: false,
+    date: "2026-05-05",
+    dateFormatted: "5. Mai 2026",
+    readTime: "5 Min.",
+    category: "Technologie",
+    author: "Sascha Forbach",
+    title: "Wälzlagerschaden früh erkennen: Diese Vibrationsmuster verraten alles",
+    excerpt: "90% aller Wälzlagerschäden sind durch Vibrationsmessung 2–8 Wochen vor dem Ausfall erkennbar. Wir zeigen, welche Frequenzmuster auf welchen Schadenstyp hinweisen.",
+    tags: ["Wälzlager", "Lagerdiagnose", "Vibrationsanalyse", "FFT", "Condition Monitoring"],
+    content: `
+      <p class="detail-lead">Wälzlager sprechen eine klare Sprache — in Frequenzen. Wer diese Sprache lesen kann, spart pro Maschinenausfall durchschnittlich 18.000 bis 85.000 Euro.</p>
+      <h2>Die vier charakteristischen Schadensfrequenzen</h2>
+      <p>Jeder Wälzlagerschaden erzeugt eine mathematisch berechenbare Schadensfrequenz, die vom normalen Betriebsrauschen unterschieden werden kann:</p>
+      <ul>
+        <li><strong>BPFO (Ball Pass Frequency Outer Race):</strong> Schaden am Außenring. Erkennbar durch impulsartige Erhöhung bei f = 0,4 × n × z (n = Drehzahl, z = Anzahl Wälzkörper). Häufigste Schadensform: 45%.</li>
+        <li><strong>BPFI (Ball Pass Frequency Inner Race):</strong> Schaden am Innenring. Tritt oft bei höher belasteten Lagern auf, z.B. Spindelfrontlager. Frequenz moduliert mit der Drehfrequenz.</li>
+        <li><strong>BSF (Ball Spin Frequency):</strong> Schaden am Wälzkörper selbst. Charakteristisch: Seitenfrequenzen ±BSF um die Grundfrequenz.</li>
+        <li><strong>FTF (Fundamental Train Frequency):</strong> Käfigschaden. Niederfrequent, oft schwer zu detektieren. Kündigt sich durch Amplitudenmodulation anderer Frequenzen an.</li>
+      </ul>
+      <h2>Vier Stufen des Lagerverschleißes</h2>
+      <p><strong>Stufe 1 (Ultraschall-Stadium, 8 Wochen vor Ausfall):</strong> Erste Oberflächenveränderungen im Bereich 250–350 kHz. Für konventionelle Sensoren unsichtbar.</p>
+      <p><strong>Stufe 2 (Hochfrequenz-Schwingungen, 4–6 Wochen):</strong> Schadensfrequenzen erscheinen im Spektrum. Noch kein hörbares Geräusch. Hier greift unser KI-System ein.</p>
+      <p><strong>Stufe 3 (Seitenfrequenzen, 1–3 Wochen):</strong> Harmonische und Seitenfrequenzen vermehren sich. Gesamtvibration beginnt zu steigen. Menschliches Ohr beginnt, ungewöhnliche Geräusche zu hören.</p>
+      <p><strong>Stufe 4 (Kritische Phase, Stunden bis Tage):</strong> Gesamtschwingungspegel > 3× Baseline. Breites Rauschen überdeckt Diskretfrequenzen. Totalversagen unmittelbar.</p>
+      <div class="highlight-box">
+        <strong>Unser System erkennt Stufe 2 zuverlässig</strong> — das gibt Ihnen 4–6 Wochen Planungsvorlauf für einen geplanten Lagertausch in der nächsten Wartungspause. Statt €45.000 Notfallreparatur: €1.200 geplanter Lagerwechsel.
+      </div>
+    `
+  },
+
+  // ─────────────────────────────────────────────
+  // POST 15 — Spritzguss Einspritzdruck schwankt
+  // ─────────────────────────────────────────────
+  {
+    id: 15,
+    featured: false,
+    date: "2026-04-28",
+    dateFormatted: "28. April 2026",
+    readTime: "5 Min.",
+    category: "Spritzguss",
+    author: "Sascha Forbach",
+    title: "Einspritzdruck schwankt bei der Spritzgussmaschine — Ursachen und Lösung",
+    excerpt: "Schwankender Einspritzdruck ist der häufigste Grund für Qualitätsprobleme im Spritzguss. Wir zeigen, welche 5 Ursachen dahinterstecken und wie Sie sie voneinander unterscheiden.",
+    tags: ["Spritzguss", "Einspritzdruck", "Hydraulik", "Qualitätssicherung", "Predictive Maintenance"],
+    content: `
+      <p class="detail-lead">±8 bar Druckschwankung im Einspritzprozess klingt nach wenig. Bei Präzisionsteilen für die Automobil- oder Medizintechnik bedeutet das 3–12% Ausschuss — und manchmal eine Rückrufaktion.</p>
+      <h2>5 Ursachen für schwankenden Einspritzdruck</h2>
+      <ul>
+        <li><strong>1. Rückstromsperre verschlissen:</strong> Die häufigste Ursache. Wenn die Rückstromsperre nicht mehr sauber schließt, variiert das eingespritzte Volumen pro Schuss um 1–4%. Erkennbar durch ansteigende Standardabweichung im Einspritzdruck über Schuss-Verlauf.</li>
+        <li><strong>2. Hydraulikpumpe mit nachlassendem Volumenwirkungsgrad:</strong> Pumpenabnutzung führt zu Druckabfall unter dynamischer Last — genau dann, wenn die Maschine den vollen Einspritzdruck abruft. Muster: Druck normal bei niedriger Last, Abfall bei Einspritzung.</li>
+        <li><strong>3. Temperaturschwankungen in der Plastifiziereinheit:</strong> Viskositätsschwankungen der Schmelze durch ±5°C Zonendifferenz. Gleiche Pumpeinstellung — unterschiedlicher Widerstand — unterschiedlicher Druckaufbau.</li>
+        <li><strong>4. Schneckenverschleiß:</strong> Schnecke und Zylinder mit fortgeschrittenem Verschleiß zeigen inkonsistentes Plastifiziervolumen. Erkennbar durch langfristigen Trend sinkender Einspritzdrücke bei gleichem Prozessparameter-Set.</li>
+        <li><strong>5. Proportionalventil mit Hysterese:</strong> Elektro-hydraulisches Proportionalventil regelt den Einspritzdruck. Bei steigender Hysterese (typisch nach 15.000+ Betriebsstunden) reagiert das Ventil träger — die Regelung beginnt zu "jagen".</li>
+      </ul>
+      <h2>Warum das nicht per Sichtprüfung erkennbar ist</h2>
+      <p>Alle fünf Ursachen erzeugen auf dem Maschinendisplay denselben Effekt: Druckschwankungen. Ohne Trendanalyse über Hunderte von Schüssen ist eine Unterscheidung praktisch unmöglich. Unsere KI trennt die Muster durch Cross-Korrelation von Druck-, Temperatur-, Stromaufnahme- und Zeitdaten — und benennt die Ursache direkt.</p>
+      <div class="highlight-box">
+        <strong>Fallbeispiel:</strong> Spritzgussbetrieb, 800-t-Maschine, Automobilinnenteile. Ausschussquote stieg von 0,8% auf 4,1% über 3 Wochen. Diagnose nach 48h Sensor-Monitoring: Rückstromsperre verschlissen + Proportionalventil-Hysterese. Geplanter Tausch in Wochenendschicht. Ausschussquote: zurück auf 0,7%.
+      </div>
+    `
+  },
+
+  // ─────────────────────────────────────────────
   // POST 1 — FEATURED (Neuester / Hauptartikel)
   // ─────────────────────────────────────────────
   {

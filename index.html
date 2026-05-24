@@ -971,7 +971,7 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:1000;bac
 
 </style>
 </head>
-<body>
+<body style="overflow-x:hidden;">
 
 <nav id="mainNav">
   <a href="index.html" class="nav-logo">FORBACH &amp; PARTNERS</a>
@@ -984,7 +984,7 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:1000;bac
     <a href="blog.html" class="nav-link" data-de="Blog" data-en="Blog">Blog</a>
   </div>
   <div class="nav-right">
-    <a href="tel:004921190989962" class="nav-phone">📞 +49 211 90989962</a>
+    <a href="tel:004921190989962" class="nav-phone">📞 Jetzt anrufen</a>
     <button class="lang-toggle" onclick="toggleLang()" id="langBtn">EN</button>
     <a href="mailto:info@forbachandpartners.com" class="nav-cta" id="navCta" data-de="Termin anfragen" data-en="Book Meeting">Termin anfragen</a>
   </div>
@@ -999,19 +999,19 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:1000;bac
 
     <!-- LEFT -->
     <div>
-      <div class="hero-eyebrow">Predictive Intelligence · Maschinenbau</div>
+      <div class="hero-eyebrow">Predictive Intelligence · CNC-Fräszentren</div>
       <h1 class="hero-title">
-        MASCHINEN<br>
-        DIE <span class="gold">DENKEN</span><br>
+        SPINDELN<br>
+        DIE <span class="gold">WARNEN</span><br>
         BEVOR SIE<br>VERSAGEN
       </h1>
       <p class="hero-sub">
-        KI-gestützte Zustandsüberwachung für produzierende Unternehmen. Wir eliminieren ungeplante Stillstände — messbar, nachweisbar, sofort wirksam.
+        KI-gestützte Zustandsüberwachung für CNC-Fräszentren und Bearbeitungszentren. Achslager, Spindeln, Werkzeugwechsler — wir erkennen Ausfälle 48–72 h bevor sie passieren.
       </p>
       <div class="hero-stats">
         <div>
           <span class="hero-stat-val">487 h</span>
-          <span class="hero-stat-label">Ausfallzeit gespart</span>
+          <span class="hero-stat-label">Spindelausfall verhindert</span>
         </div>
         <div>
           <span class="hero-stat-val">€ 684K</span>
@@ -1036,12 +1036,12 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:1000;bac
 <!-- Trust Bar -->
 <div class="trust-bar">
   <div class="trust-item">
-    <span class="trust-val">12+</span>
-    <span class="trust-label">Maschinen-Typen</span>
+    <span class="trust-val">3–5-Achs</span>
+    <span class="trust-label">CNC-Zentren überwacht</span>
   </div>
   <div class="trust-item">
-    <span class="trust-val">47</span>
-    <span class="trust-label">Sensoren pro Anlage</span>
+    <span class="trust-val">12</span>
+    <span class="trust-label">Sensoren pro Spindel</span>
   </div>
   <div class="trust-item">
     <span class="trust-val">2,4 Mio.</span>
@@ -1053,20 +1053,20 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:1000;bac
   </div>
   <div class="trust-item">
     <span class="trust-val">14</span>
-    <span class="trust-label">Verhinderte Ausfälle</span>
+    <span class="trust-label">Spindelausfälle verhindert</span>
   </div>
 </div>
 
 <!-- Expertise badges -->
 <div class="expertise-strip">
-  <div class="exp-badge"><span class="exp-dot"></span>CNC-Fräszentren</div>
-  <div class="exp-badge"><span class="exp-dot"></span>Spritzguss 50–2000 t</div>
-  <div class="exp-badge"><span class="exp-dot"></span>Laserschneidanlagen</div>
-  <div class="exp-badge"><span class="exp-dot"></span>Schweißroboter 6-Achs</div>
-  <div class="exp-badge"><span class="exp-dot"></span>Verpackungslinien</div>
-  <div class="exp-badge"><span class="exp-dot"></span>Förder- & Logistiksysteme</div>
-  <div class="exp-badge"><span class="exp-dot"></span>Hydraulik-Aggregate</div>
-  <div class="exp-badge"><span class="exp-dot"></span>Druckluft & Pneumatik</div>
+  <div class="exp-badge"><span class="exp-dot"></span>Spindel-Überwachung</div>
+  <div class="exp-badge"><span class="exp-dot"></span>Achslager-Diagnose</div>
+  <div class="exp-badge"><span class="exp-dot"></span>Werkzeugwechsler-Monitoring</div>
+  <div class="exp-badge"><span class="exp-dot"></span>Vorschubachsen-Analyse</div>
+  <div class="exp-badge"><span class="exp-dot"></span>Kühlmittel-Überwachung</div>
+  <div class="exp-badge"><span class="exp-dot"></span>3- bis 5-Achs-Zentren</div>
+  <div class="exp-badge"><span class="exp-dot"></span>OPC-UA / MQTT Anbindung</div>
+  <div class="exp-badge"><span class="exp-dot"></span>DMG, Mazak, Heidenhain</div>
 </div>
 
 
@@ -1150,8 +1150,8 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:1000;bac
 ══════════════════════════════════════════ -->
 <div id="maschinen" class="section">
   <div class="section-label">Live Telemetrie · Echtzeit-Überwachung</div>
-  <h2 class="section-title">SO SEHEN<br><span class="gold">IHRE ANLAGEN</span><br>BEI UNS AUS</h2>
-  <p class="section-sub">Jede Maschine — jederzeit im Blick. Unsere KI erkennt Ausfallmuster 48–72 Stunden im Voraus.</p>
+  <h2 class="section-title">SO SEHEN<br><span class="gold">IHRE CNC-ANLAGEN</span><br>BEI UNS AUS</h2>
+  <p class="section-sub">Spindeln, Achslager, Kühlmittel — jederzeit im Blick. Unsere KI erkennt Ausfallmuster an CNC-Bearbeitungszentren 48–72 Stunden im Voraus.</p>
 
   <div class="machines-monitor" id="fullDashboard"></div>
 </div>
@@ -1161,17 +1161,20 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:1000;bac
 ══════════════════════════════════════════ -->
 <div class="section" id="verlauf-section">
   <div class="verlauf-toggle" id="verlaufToggle" onclick="toggleVerlauf()">
-    <div style="display:flex;align-items:center;gap:1rem;">
-      <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;">Maschinenverlauf</div>
-      <h3 style="font-family:var(--font-display);font-size:1.5rem;letter-spacing:1px;">7-TAGE-VERLAUFSBERICHT <span class="gold" style="background:linear-gradient(135deg,#e4b15e,#f8dfa5);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">ALLE ANLAGEN</span></h3>
+    <div style="display:flex;align-items:center;gap:1.25rem;">
+      <div style="width:42px;height:42px;background:rgba(228,177,94,0.15);border:1px solid rgba(228,177,94,0.4);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">📈</div>
+      <div>
+        <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:2px;">Maschinenhistorie · Zum Öffnen klicken</div>
+        <h3 style="font-family:var(--font-display);font-size:1.4rem;letter-spacing:1px;color:#fff;">7-TAGE-VERLAUFSBERICHT <span style="background:linear-gradient(135deg,#e4b15e,#f8dfa5);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">ALLE ANLAGEN</span></h3>
+      </div>
     </div>
     <div style="display:flex;align-items:center;gap:1.5rem;">
-      <div id="verlaufSummary" style="display:flex;gap:1rem;font-family:var(--font-mono);font-size:0.65rem;">
-        <span style="color:var(--green)">● 5 NORMAL</span>
-        <span style="color:var(--amber)">● 2 ACHTUNG</span>
-        <span style="color:var(--red)">● 1 KRITISCH</span>
+      <div id="verlaufSummary" style="display:flex;gap:0.75rem;font-family:var(--font-mono);font-size:0.62rem;">
+        <span style="color:var(--green);background:rgba(0,255,136,0.08);padding:3px 8px;border-radius:4px;">● 5 NORMAL</span>
+        <span style="color:var(--amber);background:rgba(255,184,0,0.08);padding:3px 8px;border-radius:4px;">● 2 ACHTUNG</span>
+        <span style="color:var(--red);background:rgba(255,56,96,0.08);padding:3px 8px;border-radius:4px;">● 1 KRITISCH</span>
       </div>
-      <div class="verlauf-chevron" id="verlaufChevron">▼</div>
+      <div class="verlauf-chevron" id="verlaufChevron" style="font-size:1.2rem;color:var(--gold);">▼</div>
     </div>
   </div>
   <div class="verlauf-body" id="verlaufBody">
@@ -1184,15 +1187,17 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:1000;bac
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--dark-card);
-  border: 1px solid var(--border-strong);
+  background: linear-gradient(135deg, rgba(228,177,94,0.08) 0%, rgba(20,14,5,1) 60%);
+  border: 1.5px solid rgba(228,177,94,0.5);
   border-radius: 14px;
-  padding: 1.25rem 1.75rem;
+  padding: 1.5rem 2rem;
   cursor: pointer;
   transition: all 0.25s;
   user-select: none;
+  box-shadow: 0 0 30px rgba(228,177,94,0.06);
+  margin-top: 0.5rem;
 }
-.verlauf-toggle:hover { background: rgba(228,177,94,0.04); border-color: var(--gold); }
+.verlauf-toggle:hover { background: rgba(228,177,94,0.1); border-color: var(--gold); box-shadow: 0 0 40px rgba(228,177,94,0.12); }
 .verlauf-chevron {
   font-size: 0.9rem;
   color: var(--gold);
@@ -1381,7 +1386,7 @@ function renderVerlauf() {
 
     <div class="services-grid">
 
-      <a class="service-card" href="/cnc-fraeszentren">
+      <a class="service-card" href="cnc-fraeszentren.html">
         <div class="sc-number">01</div>
         <div class="sc-icon">⚙️</div>
         <div class="sc-title">CNC-Fräszentren</div>
@@ -1394,7 +1399,7 @@ function renderVerlauf() {
         </div>
       </a>
 
-      <a class="service-card" href="/spritzguss">
+      <a class="service-card" href="spritzguss.html">
         <div class="sc-number">02</div>
         <div class="sc-icon">🔥</div>
         <div class="sc-title">Spritzguss & Kunststoff</div>
@@ -1418,7 +1423,7 @@ function renderVerlauf() {
         </div>
       </a>
 
-      <a class="service-card" href="/robotik">
+      <a class="service-card" href="robotik.html">
         <div class="sc-number">04</div>
         <div class="sc-icon">🤖</div>
         <div class="sc-title">Robotik & Automation</div>
@@ -1460,6 +1465,31 @@ function renderVerlauf() {
 
 
 <!-- ══════════════════════════════════════════
+     ONE-PAGER DOWNLOAD
+══════════════════════════════════════════ -->
+<div class="section" style="padding:5rem 2rem;">
+  <div style="max-width:800px;margin:0 auto;text-align:center;">
+    <div class="section-label" style="justify-content:center;margin-bottom:1rem;">Unterlagen</div>
+    <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);letter-spacing:2px;margin-bottom:1rem;line-height:1;">
+      ALLES AUF EINEN<br><span class="gold">BLICK</span>
+    </h2>
+    <p style="font-size:0.9rem;color:var(--text-dim);max-width:540px;margin:0 auto 2.5rem;line-height:1.7;">
+      Laden Sie unseren One-Pager herunter — kompakte Übersicht über Technologie, Anwendungsfälle und Preismodell. Ideal für Ihr nächstes Gespräch mit der Geschäftsführung.
+    </p>
+    <div style="display:inline-flex;flex-direction:column;align-items:center;gap:0.5rem;">
+      <a href="onepager-forbach-partners.pdf" download
+         style="display:inline-flex;align-items:center;gap:0.75rem;background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);color:#000;padding:0.9rem 2rem;border-radius:10px;font-weight:700;font-size:0.875rem;text-decoration:none;letter-spacing:0.5px;transition:all 0.2s;box-shadow:0 4px 24px rgba(228,177,94,0.25);"
+         onmouseover="this.style.boxShadow='0 6px 32px rgba(228,177,94,0.45)';this.style.transform='translateY(-2px)'"
+         onmouseout="this.style.boxShadow='0 4px 24px rgba(228,177,94,0.25)';this.style.transform=''">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        ONE-PAGER HERUNTERLADEN
+      </a>
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-muted);letter-spacing:2px;">PDF · KOSTENLOS · KEIN FORMULAR</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
      CTA
 ══════════════════════════════════════════ -->
 <div id="kontakt" class="cta-section">
@@ -1472,7 +1502,7 @@ function renderVerlauf() {
       <a href="tel:+4930123456" class="btn-outline">+49 30 · Direktlinie</a>
     </div>
     <div style="margin-top:2rem; font-family:var(--font-mono); font-size:0.65rem; color:var(--text-muted); letter-spacing:2px;">
-      FORBACH AND PARTNERS LTD · PAPHOS, ZYPERN · info@forbachandpartners.com
+      CNC-PREDICTIVE-MAINTENANCE · FORBACH AND PARTNERS LTD · info@forbachandpartners.com
     </div>
   </div>
 </div>
@@ -1543,7 +1573,7 @@ function renderVerlauf() {
       </div>
     </form>
     <div style="text-align:center;margin-top:1.5rem;font-family:var(--font-m,'JetBrains Mono',monospace);font-size:0.58rem;color:var(--text-muted,#555);letter-spacing:2px;">
-      📞 +49 211 90989962 · ✉ INFO@FORBACHANDPARTNERS.COM · PAPHOS, ZYPERN
+      📞 Jetzt anrufen · ✉ INFO@FORBACHANDPARTNERS.COM · PAPHOS, ZYPERN
     </div>
   </div>
 </div>
@@ -1576,14 +1606,14 @@ document.getElementById('contactForm').addEventListener('submit', async function
   <div class="footer-logo">FORBACH & PARTNERS</div>
   <div class="footer-tagline">Predictive Intelligence · Maschinenbau · Industrie 4.0</div>
   <div class="footer-links">
-    <a class="footer-link" href="/">Startseite</a>
-    <a class="footer-link" href="/cnc-fraeszentren">CNC-Fräsen</a>
-    <a class="footer-link" href="/spritzguss">Spritzguss</a>
-    <a class="footer-link" href="/robotik">Robotik</a>
+    <a class="footer-link" href="index.html">Startseite</a>
+    <a class="footer-link" href="cnc-fraeszentren.html">CNC-Fräsen</a>
+    <a class="footer-link" href="spritzguss.html">Spritzguss</a>
+    <a class="footer-link" href="robotik.html">Robotik</a>
     
-    <a class="footer-link" href="/kontakt">Kontakt</a>
-    <a class="footer-link" href="/datenschutz">Datenschutz</a>
-    <a class="footer-link" href="/impressum">Impressum</a>
+    <a class="footer-link" href="kontakt.html">Kontakt</a>
+    <a class="footer-link" href="datenschutz.html">Datenschutz</a>
+    <a class="footer-link" href="impressum.html">Impressum</a>
   </div>
   <div class="footer-copy">
     © 2026 Forbach and Partners Ltd · Reg. Zypern · Alle Rechte vorbehalten
@@ -2034,5 +2064,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 300);
 });
 </script>
+<script src="common.js"></script>
 </body>
 </html>

@@ -16,7 +16,7 @@
   --font-d:'Oswald',sans-serif;--font-b:'Raleway',sans-serif;--font-m:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+html,body{scroll-behavior:smooth;overflow-x:hidden;max-width:100vw;}
 body{background:var(--black);color:var(--text);font-family:var(--font-b);line-height:1.6;overflow-x:hidden;}
 
 nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:100;background:rgba(0,0,0,0.88);backdrop-filter:blur(20px);border:1px solid var(--border-strong);border-radius:14px;padding:0 2rem;height:58px;display:flex;align-items:center;justify-content:space-between;gap:2rem;width:min(1200px,calc(100vw - 2rem));}
@@ -194,7 +194,7 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
 
 </style>
 </head>
-<body>
+<body style="overflow-x:hidden;">
 
 <nav>
   <a href="index.html" class="nav-logo">FORBACH & PARTNERS</a>
@@ -207,7 +207,11 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
     <a href="index.html#roi" class="nav-link">ROI-Rechner</a>
     <a href="blog.html" class="nav-link">Blog</a>
   </div>
-  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">📞 +49 211 90989962</a><a href="mailto:info@forbachandpartners.com" class="nav-cta">Termin vereinbaren</a>
+  <div class="lang-toggle-nav">
+      <button class="lang-btn-nav btn-de active" onclick="setLang('de')">DE</button>
+      <button class="lang-btn-nav btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">📞 Jetzt anrufen</a><a href="mailto:info@forbachandpartners.com" class="nav-cta">Termin vereinbaren</a>
 </nav>
 
 <!-- HERO -->
@@ -218,10 +222,10 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
     <h1>EXPERTEN.<br><span class="gold">KEIN BLABLA.</span><br>NUR ERGEBNISSE.</h1>
     <p class="hero-sub">Wir sind ein Team aus Maschinenbau-Ingenieuren, KI-Spezialisten und Industriepraktikern — vereint durch eine Mission: Produktionsausfälle zu eliminieren, bevor sie entstehen.</p>
     <div class="stats-row">
-      <div class="stat-item"><span class="stat-val">85+</span><span class="stat-lbl">Jahre Erfahrung im Team</span></div>
-      <div class="stat-item"><span class="stat-val">14</span><span class="stat-lbl">Verhinderte Ausfälle</span></div>
-      <div class="stat-item"><span class="stat-val">8</span><span class="stat-lbl">Experten im Team</span></div>
+      <div class="stat-item"><span class="stat-val">12+</span><span class="stat-lbl">Jahre Branchenerfahrung</span></div>
+      <div class="stat-item"><span class="stat-val">4</span><span class="stat-lbl">Jahre KI-Entwicklung</span></div>
       <div class="stat-item"><span class="stat-val">6</span><span class="stat-lbl">Maschinentypen</span></div>
+      <div class="stat-item"><span class="stat-val">100%</span><span class="stat-lbl">Fokus auf Produktion</span></div>
     </div>
   </div>
 </section>
@@ -349,537 +353,111 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
 
     <!-- Info -->
     <div>
-      <div class="founder-tag">Gründer & CEO</div>
+            <div class="founder-tag">Gründer & CEO</div>
       <div class="founder-name">SASCHA<br>FORBACH</div>
       <div class="founder-role">Gründer & Geschäftsführer · Forbach and Partners Ltd</div>
       <p class="founder-bio">
-        Sascha Forbach hat <strong>18 Jahre Erfahrung im industriellen Maschinenbau</strong> — von der Shopfloor-Praxis in deutschen Mittelstandsbetrieben bis zur Entwicklung KI-gestützter Diagnosesysteme für Produktionsanlagen. Er kennt das Problem aus erster Hand: ungeplante Stillstände, die in den falschen Momenten kommen und Hunderttausende Euro kosten.
+        Sascha Forbach hat BWL studiert und ist seit über <strong>12 Jahren selbstständig</strong> — begonnen in der Unternehmensberatung mit Fokus auf produzierende Betriebe, heute Gründer eines Software- und KI-Unternehmens das eigene Lösungen entwickelt.
         <br><br>
-        Mit Forbach and Partners hat er eine Plattform aufgebaut, die <strong>das Wissen eines erfahrenen Maschinenführers mit der Präzision künstlicher Intelligenz verbindet</strong>. Sein Anspruch: Kein Geschäftsführer soll je wieder durch einen vermeidbaren Ausfall überrascht werden.
+        Vor 4 Jahren hat er Forbach and Partners konsequent auf <strong>eigene Software- und KI-Entwicklung</strong> ausgerichtet. Das Ergebnis: ein Predictive-Maintenance-System das aus der Praxis des Maschinenbaus heraus gebaut wurde — nicht aus dem Lehrbuch.
         <br><br>
-        Heute leitet er das Unternehmen von <strong>Paphos, Zypern</strong> aus und betreut persönlich die wichtigsten Kundenpartnerschaften in Deutschland und Österreich.
+        Er weiß was Produktionsleiter und Geschäftsführer wirklich brauchen: <strong>keine schönen Präsentationen, sondern messbare Ergebnisse</strong>. Zuverlässigkeit und Verantwortungsbewusstsein sind für ihn keine Marketingworte — sondern die Grundlage jeder Kundenbeziehung.
       </p>
       <div class="founder-expertise">
+        <span class="fe-tag">12 J. Selbstständig</span>
+        <span class="fe-tag">BWL & Unternehmensberatung</span>
+        <span class="fe-tag">4 J. KI & Software</span>
         <span class="fe-tag">Predictive Maintenance</span>
-        <span class="fe-tag">CNC & Zerspanung</span>
-        <span class="fe-tag">KI-Systemarchitektur</span>
-        <span class="fe-tag">Spritzguss & Kunststoff</span>
+        <span class="fe-tag">Maschinenbau-Praxis</span>
         <span class="fe-tag">Industrie 4.0</span>
-        <span class="fe-tag">ROI-Optimierung</span>
-        <span class="fe-tag">Unternehmensaufbau</span>
-        <span class="fe-tag">Zypern · Deutschland</span>
+        <span class="fe-tag">Paphos, Zypern · DACH</span>
+        <a href="https://www.linkedin.com/in/sascha-p-forbach-6aa52b396/" target="_blank" class="fe-tag" style="background:rgba(0,119,181,0.2);border-color:rgba(0,119,181,0.5);color:#0077b5;text-decoration:none;">in LinkedIn</a>
       </div>
       <div class="founder-quote">
-        „Ich habe selbst erlebt wie ein Getriebeausfall eine komplette Fertigungslinie für zwei Tage lahmgelegt hat. Genau deshalb habe ich Forbach and Partners gegründet — damit das nie wieder passiert. Weder bei uns, noch bei unseren Kunden."
+        „12 Jahre Unternehmensberatung haben mir eines gelehrt: Betriebe verlieren kein Geld weil ihre Maschinen schlecht sind — sie verlieren es weil niemand früh genug hinschaut. Das ändern wir."
       </div>
     </div>
   </div>
 </div>
+<!-- ══════════════════════════════════════════
+     SPEZIALISTENTEAM
+══════════════════════════════════════════ -->
+<section style="padding:100px 0;background:var(--dark-2);">
+  <div style="max-width:1100px;margin:0 auto;padding:0 2rem;">
 
-<!-- TEAM -->
-<div class="team-section">
-  <div class="section-label">Das Team</div>
-  <h2>EXPERTEN DIE<br><span class="gold">MASCHINEN VERSTEHEN</span></h2>
-  <p class="section-sub">Jedes Teammitglied kommt aus der Industrie — nicht aus dem Lehrbuch. Zusammen decken wir jeden Maschinentyp und jede Phase eines Projekts ab.</p>
-
-  <div class="team-grid">
-
-    <!-- 1: Leitender KI-Ingenieur -->
-    <div class="team-card reveal">
-      <div class="team-portrait">
-        <div class="team-years">12 J. Erfahrung</div>
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bg1" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#0d1520"/><stop offset="100%" stop-color="#050810"/></radialGradient>
-            <radialGradient id="sk1" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#c8845a"/><stop offset="100%" stop-color="#7a4828"/></radialGradient>
-          </defs>
-          <rect width="300" height="300" fill="url(#bg1)"/>
-          <!-- Body / suit dark blue -->
-          <path d="M0 300 L0 210 Q40 190 70 178 L88 230 L105 205 L150 220 L195 205 L212 230 L230 178 Q260 190 300 210 L300 300 Z" fill="#0a1828"/>
-          <path d="M105 205 L88 175 L118 190 L150 220 Z" fill="#142038"/>
-          <path d="M195 205 L212 175 L182 190 L150 220 Z" fill="#142038"/>
-          <!-- White shirt collar -->
-          <path d="M118 190 L150 202 L182 190 L178 178 L150 186 L122 178 Z" fill="#dde"/>
-          <!-- Neck -->
-          <ellipse cx="150" cy="178" rx="22" ry="22" fill="url(#sk1)"/>
-          <!-- Head -->
-          <ellipse cx="150" cy="128" rx="64" ry="76" fill="url(#sk1)"/>
-          <!-- Hair dark, short tech style -->
-          <path d="M90 115 Q92 72 118 60 Q133 53 150 52 Q167 53 182 60 Q208 72 210 115 Q205 95 192 83 Q172 70 150 68 Q128 70 108 83 Q95 95 90 115 Z" fill="#0f0808"/>
-          <!-- Glasses — tech look -->
-          <rect x="106" y="118" width="34" height="20" rx="5" fill="none" stroke="#c4a060" stroke-width="2"/>
-          <rect x="160" y="118" width="34" height="20" rx="5" fill="none" stroke="#c4a060" stroke-width="2"/>
-          <line x1="140" y1="128" x2="160" y2="128" stroke="#c4a060" stroke-width="2"/>
-          <line x1="90" y1="128" x2="106" y2="128" stroke="#c4a060" stroke-width="2"/>
-          <line x1="194" y1="128" x2="210" y2="128" stroke="#c4a060" stroke-width="2"/>
-          <!-- Eyes behind glasses -->
-          <ellipse cx="123" cy="128" rx="8" ry="6" fill="#1a0f06"/>
-          <ellipse cx="177" cy="128" rx="8" ry="6" fill="#1a0f06"/>
-          <ellipse cx="125" cy="126" rx="2" ry="2" fill="#fff" opacity="0.7"/>
-          <ellipse cx="179" cy="126" rx="2" ry="2" fill="#fff" opacity="0.7"/>
-          <!-- Eyebrows -->
-          <path d="M108 114 Q123 109 137 112" stroke="#1a0f08" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M163 112 Q177 109 192 114" stroke="#1a0f08" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <!-- Nose -->
-          <path d="M150 140 L145 158 Q150 163 155 158 Z" fill="#8a5030" opacity="0.4"/>
-          <!-- Mouth — slight smile -->
-          <path d="M132 172 Q150 180 168 172" stroke="#7a4020" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <!-- Ears -->
-          <ellipse cx="88" cy="132" rx="9" ry="14" fill="url(#sk1)"/>
-          <ellipse cx="212" cy="132" rx="9" ry="14" fill="url(#sk1)"/>
-          <!-- Light effect -->
-          <ellipse cx="150" cy="120" rx="62" ry="74" fill="none" stroke="#00b4ff" stroke-width="0.5" opacity="0.12"/>
-          <rect x="0" y="230" width="300" height="70" fill="url(#bg1)" opacity="0.6"/>
-        </svg>
-      </div>
-      <div class="team-info">
-        <div class="team-name">Dr. Markus Weiland</div>
-        <div class="team-role">Leitender KI-Ingenieur</div>
-        <div class="team-exp">Promovierter Maschinenlern-Experte mit Fokus auf Zeitreihenprognostik. Vorher Bosch Rexroth — Entwicklung von Anomalieerkennungs-Algorithmen für Servoantriebe.</div>
-        <div class="team-skills">
-          <span class="ts-tag">Deep Learning</span><span class="ts-tag">Zeitreihen-KI</span>
-          <span class="ts-tag">Python · PyTorch</span><span class="ts-tag">MCSA</span>
-        </div>
-      </div>
+    <div class="reveal" style="text-align:center;margin-bottom:60px;">
+      <div class="section-label" style="justify-content:center;margin-bottom:1rem;">Das Spezialistenteam</div>
+      <h2>EXPERTEN DIE<br><span class="gold">MASCHINEN VERSTEHEN</span></h2>
+      <p class="section-sub" style="margin-top:1rem;">Kombinierte Expertise aus Maschinenbau, Elektrotechnik und angewandter KI-Entwicklung — jeder Spezialist direkt erreichbar, kein Callcenter.</p>
     </div>
 
-    <!-- 2: Senior Maschinenbau Ingenieur -->
-    <div class="team-card reveal rd1">
-      <div class="team-portrait">
-        <div class="team-years">22 J. Erfahrung</div>
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bg2" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#120d08"/><stop offset="100%" stop-color="#080503"/></radialGradient>
-            <radialGradient id="sk2" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#d4905a"/><stop offset="100%" stop-color="#8a5630"/></radialGradient>
-          </defs>
-          <rect width="300" height="300" fill="url(#bg2)"/>
-          <path d="M0 300 L0 205 Q40 185 72 172 L90 228 L108 202 L150 218 L192 202 L210 228 L228 172 Q260 185 300 205 L300 300 Z" fill="#1c1008"/>
-          <path d="M108 202 L90 172 L120 188 L150 218 Z" fill="#2a1810"/>
-          <path d="M192 202 L210 172 L180 188 L150 218 Z" fill="#2a1810"/>
-          <path d="M120 188 L150 200 L180 188 L176 176 L150 184 L124 176 Z" fill="#e0e0d5"/>
-          <!-- Neck -->
-          <ellipse cx="150" cy="172" rx="22" ry="22" fill="url(#sk2)"/>
-          <!-- Head — broader, older, experienced -->
-          <ellipse cx="150" cy="124" rx="68" ry="74" fill="url(#sk2)"/>
-          <!-- Grey/salt & pepper hair -->
-          <path d="M85 115 Q88 70 116 58 Q132 50 150 50 Q168 50 184 58 Q212 70 215 115 Q208 90 190 78 Q170 65 150 63 Q130 65 110 78 Q92 90 85 115 Z" fill="#4a4040"/>
-          <!-- Subtle grey streaks -->
-          <path d="M88 112 Q95 85 115 72" stroke="#888" stroke-width="2" fill="none" opacity="0.5"/>
-          <path d="M212 112 Q205 85 185 72" stroke="#888" stroke-width="2" fill="none" opacity="0.5"/>
-          <!-- Eyebrows — thicker, greying -->
-          <path d="M106 113 Q122 106 140 110" stroke="#3a3030" stroke-width="4" fill="none" stroke-linecap="round"/>
-          <path d="M160 110 Q178 106 194 113" stroke="#3a3030" stroke-width="4" fill="none" stroke-linecap="round"/>
-          <!-- Eyes — experienced, slightly narrower -->
-          <ellipse cx="123" cy="126" rx="13" ry="9" fill="#fff" opacity="0.9"/>
-          <ellipse cx="177" cy="126" rx="13" ry="9" fill="#fff" opacity="0.9"/>
-          <ellipse cx="124" cy="126" rx="8" ry="7" fill="#2a1a10"/>
-          <ellipse cx="178" cy="126" rx="8" ry="7" fill="#2a1a10"/>
-          <ellipse cx="126" cy="124" rx="2" ry="2" fill="#fff" opacity="0.8"/>
-          <ellipse cx="180" cy="124" rx="2" ry="2" fill="#fff" opacity="0.8"/>
-          <!-- Crow's feet subtly -->
-          <path d="M136 122 Q142 118 148 122" stroke="#9a7050" stroke-width="1" fill="none" opacity="0.4"/>
-          <!-- Nose broader -->
-          <path d="M150 138 L144 160 Q150 167 156 160 Z" fill="#8a5030" opacity="0.35"/>
-          <ellipse cx="143" cy="160" rx="7" ry="5" fill="#7a4020" opacity="0.3"/>
-          <ellipse cx="157" cy="160" rx="7" ry="5" fill="#7a4020" opacity="0.3"/>
-          <!-- Mouth — confident straight -->
-          <path d="M130 174 Q150 180 170 174" stroke="#7a4020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <!-- Ears -->
-          <ellipse cx="84" cy="128" rx="9" ry="15" fill="url(#sk2)"/>
-          <ellipse cx="216" cy="128" rx="9" ry="15" fill="url(#sk2)"/>
-          <!-- Slight stubble -->
-          <path d="M120 168 Q150 182 180 168 Q182 180 178 188 Q165 200 150 202 Q135 200 122 188 Q118 180 120 168 Z" fill="#3a2a20" opacity="0.2"/>
-          <rect x="0" y="228" width="300" height="72" fill="url(#bg2)" opacity="0.65"/>
-        </svg>
-      </div>
-      <div class="team-info">
-        <div class="team-name">Thomas Brückner</div>
-        <div class="team-role">Senior Maschinenbau-Ingenieur</div>
-        <div class="team-exp">22 Jahre Instandhaltung und Konstruktion — davon 14 bei DMG Mori. Spezialist für CNC-Kinematik, Spindelsysteme und Präzisionsmesstechnik.</div>
-        <div class="team-skills">
-          <span class="ts-tag">CNC-Systeme</span><span class="ts-tag">Spindel-Diagnose</span>
-          <span class="ts-tag">DIN ISO 1101</span><span class="ts-tag">Messtechnik</span>
-        </div>
-      </div>
-    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;">
 
-    <!-- 3: Softwareentwicklerin -->
-    <div class="team-card reveal rd2">
-      <div class="team-portrait">
-        <div class="team-years">8 J. Erfahrung</div>
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bg3" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#0a0d18"/><stop offset="100%" stop-color="#030508"/></radialGradient>
-            <radialGradient id="sk3" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#e0a878"/><stop offset="100%" stop-color="#a06840"/></radialGradient>
-          </defs>
-          <rect width="300" height="300" fill="url(#bg3)"/>
-          <!-- Body — dark blazer, feminine cut -->
-          <path d="M0 300 L0 215 Q35 195 62 185 L78 240 L100 208 L150 226 L200 208 L222 240 L238 185 Q265 195 300 215 L300 300 Z" fill="#12162a"/>
-          <path d="M100 208 L78 178 L112 196 L150 226 Z" fill="#1a2040"/>
-          <path d="M200 208 L222 178 L188 196 L150 226 Z" fill="#1a2040"/>
-          <!-- Blouse / shirt detail -->
-          <path d="M112 196 L150 210 L188 196 L184 182 L150 190 L116 182 Z" fill="#c8d4e8"/>
-          <!-- Neck slender -->
-          <ellipse cx="150" cy="178" rx="18" ry="20" fill="url(#sk3)"/>
-          <!-- Head — oval, feminine -->
-          <ellipse cx="150" cy="120" rx="60" ry="72" fill="url(#sk3)"/>
-          <!-- Hair — dark, long, pulled back professional style -->
-          <path d="M92 108 Q94 65 120 52 Q134 44 150 43 Q166 44 180 52 Q206 65 208 108 Q202 82 184 68 Q166 56 150 54 Q134 56 116 68 Q98 82 92 108 Z" fill="#150d08"/>
-          <!-- Side hair -->
-          <path d="M92 108 Q88 140 90 170 Q100 175 95 150 Q92 130 95 112 Z" fill="#150d08"/>
-          <path d="M208 108 Q212 140 210 170 Q200 175 205 150 Q208 130 205 112 Z" fill="#150d08"/>
-          <!-- Bun hint at back -->
-          <ellipse cx="150" cy="48" rx="22" ry="15" fill="#150d08"/>
-          <!-- Eyebrows — arched, defined -->
-          <path d="M110 108 Q125 101 140 105" stroke="#150d08" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M160 105 Q175 101 190 108" stroke="#150d08" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <!-- Eyes — almond shaped -->
-          <ellipse cx="125" cy="122" rx="14" ry="9" fill="#fff" opacity="0.95"/>
-          <ellipse cx="175" cy="122" rx="14" ry="9" fill="#fff" opacity="0.95"/>
-          <ellipse cx="126" cy="122" rx="9" ry="8" fill="#1a0f06"/>
-          <ellipse cx="176" cy="122" rx="9" ry="8" fill="#1a0f06"/>
-          <ellipse cx="128" cy="120" rx="2.5" ry="2.5" fill="#fff" opacity="0.85"/>
-          <ellipse cx="178" cy="120" rx="2.5" ry="2.5" fill="#fff" opacity="0.85"/>
-          <!-- Lower lash line -->
-          <path d="M111 126 Q125 132 139 127" stroke="#c0a080" stroke-width="1" fill="none" opacity="0.4"/>
-          <path d="M161 127 Q175 132 189 126" stroke="#c0a080" stroke-width="1" fill="none" opacity="0.4"/>
-          <!-- Nose — delicate -->
-          <path d="M150 132 L147 152 Q150 158 153 152 Z" fill="#8a6040" opacity="0.35"/>
-          <ellipse cx="145" cy="153" rx="5" ry="4" fill="#7a5030" opacity="0.25"/>
-          <ellipse cx="155" cy="153" rx="5" ry="4" fill="#7a5030" opacity="0.25"/>
-          <!-- Lips — fuller -->
-          <path d="M135 168 Q150 176 165 168" stroke="#c06050" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M138 168 Q150 172 162 168" fill="#d07060" opacity="0.3"/>
-          <!-- Ears — small -->
-          <ellipse cx="91" cy="124" rx="8" ry="12" fill="url(#sk3)"/>
-          <ellipse cx="209" cy="124" rx="8" ry="12" fill="url(#sk3)"/>
-          <!-- Small earring hint -->
-          <circle cx="91" cy="132" r="3" fill="#e4b15e"/>
-          <circle cx="209" cy="132" r="3" fill="#e4b15e"/>
-          <!-- Subtle tech-blue glow -->
-          <ellipse cx="150" cy="112" rx="58" ry="70" fill="none" stroke="#6080ff" stroke-width="0.5" opacity="0.1"/>
-          <rect x="0" y="230" width="300" height="70" fill="url(#bg3)" opacity="0.65"/>
-        </svg>
-      </div>
-      <div class="team-info">
-        <div class="team-name">Lena Hartmann</div>
-        <div class="team-role">Senior Softwareentwicklerin</div>
-        <div class="team-exp">Fullstack-Entwicklerin mit Fokus auf industrielle IoT-Plattformen. Vorher Siemens Digital Industries — Edge-Computing für Produktionsanlagen.</div>
-        <div class="team-skills">
-          <span class="ts-tag">Next.js · TypeScript</span><span class="ts-tag">OPC-UA</span>
-          <span class="ts-tag">Edge Computing</span><span class="ts-tag">MQTT · REST</span>
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=S+Forbach&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="S. Forbach">
+          <div class="av-badge">Gründer</div>
         </div>
+        <div class="av-info"><h3>S. Forbach</h3><p class="av-role">Unternehmensstrategie & KI</p></div>
       </div>
-    </div>
 
-    <!-- 4: Hydraulik & Pneumatik Spezialist -->
-    <div class="team-card reveal rd3">
-      <div class="team-portrait">
-        <div class="team-years">19 J. Erfahrung</div>
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bg4" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#0d1008"/><stop offset="100%" stop-color="#050603"/></radialGradient>
-            <radialGradient id="sk4" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#c8886a"/><stop offset="100%" stop-color="#784838"/></radialGradient>
-          </defs>
-          <rect width="300" height="300" fill="url(#bg4)"/>
-          <path d="M0 300 L0 208 Q38 188 68 176 L86 232 L104 205 L150 222 L196 205 L214 232 L232 176 Q262 188 300 208 L300 300 Z" fill="#141808"/>
-          <path d="M104 205 L86 175 L116 192 L150 222 Z" fill="#1e2210"/>
-          <path d="M196 205 L214 175 L184 192 L150 222 Z" fill="#1e2210"/>
-          <path d="M116 192 L150 204 L184 192 L180 178 L150 186 L120 178 Z" fill="#e8e4d8"/>
-          <ellipse cx="150" cy="175" rx="21" ry="21" fill="url(#sk4)"/>
-          <ellipse cx="150" cy="122" rx="66" ry="76" fill="url(#sk4)"/>
-          <!-- Light brown hair, slight receding hairline — experienced look -->
-          <path d="M88 118 Q90 74 116 60 Q132 52 150 51 Q168 52 184 60 Q210 74 212 118 Q206 96 188 80 Q168 66 150 64 Q132 66 112 80 Q94 96 88 118 Z" fill="#6a4828"/>
-          <!-- Slight temple receding -->
-          <path d="M88 118 Q86 100 90 88" stroke="#6a4828" stroke-width="8" fill="none" stroke-linecap="round"/>
-          <path d="M212 118 Q214 100 210 88" stroke="#6a4828" stroke-width="8" fill="none" stroke-linecap="round"/>
-          <!-- Eyebrows -->
-          <path d="M107 112 Q122 106 138 110" stroke="#3a2818" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-          <path d="M162 110 Q178 106 193 112" stroke="#3a2818" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-          <!-- Eyes -->
-          <ellipse cx="123" cy="125" rx="13" ry="9" fill="#fff" opacity="0.9"/>
-          <ellipse cx="177" cy="125" rx="13" ry="9" fill="#fff" opacity="0.9"/>
-          <ellipse cx="124" cy="125" rx="8" ry="7" fill="#2a1810"/>
-          <ellipse cx="178" cy="125" rx="8" ry="7" fill="#2a1810"/>
-          <ellipse cx="126" cy="123" rx="2" ry="2" fill="#fff" opacity="0.75"/>
-          <ellipse cx="180" cy="123" rx="2" ry="2" fill="#fff" opacity="0.75"/>
-          <!-- Nose -->
-          <path d="M150 137 L145 160 Q150 166 155 160 Z" fill="#8a5038" opacity="0.4"/>
-          <ellipse cx="144" cy="160" rx="7" ry="5" fill="#7a4028" opacity="0.3"/>
-          <ellipse cx="156" cy="160" rx="7" ry="5" fill="#7a4028" opacity="0.3"/>
-          <!-- Mouth — firm but open friendly -->
-          <path d="M131 174 Q150 182 169 174" stroke="#783828" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <!-- Ears -->
-          <ellipse cx="86" cy="128" rx="9" ry="14" fill="url(#sk4)"/>
-          <ellipse cx="214" cy="128" rx="9" ry="14" fill="url(#sk4)"/>
-          <!-- Slight stubble / beard -->
-          <path d="M118 168 Q150 184 182 168 Q185 180 180 190 Q165 202 150 205 Q135 202 120 190 Q115 180 118 168 Z" fill="#3a2010" opacity="0.3"/>
-          <!-- Green industry glow -->
-          <ellipse cx="150" cy="115" rx="64" ry="74" fill="none" stroke="#00d4aa" stroke-width="0.5" opacity="0.1"/>
-          <rect x="0" y="230" width="300" height="70" fill="url(#bg4)" opacity="0.65"/>
-        </svg>
-      </div>
-      <div class="team-info">
-        <div class="team-name">Stefan Hoffmann</div>
-        <div class="team-role">Hydraulik & Pneumatik Spezialist</div>
-        <div class="team-exp">19 Jahre Hydrauliksysteme bei Bosch Rexroth und Parker Hannifin. Entwickler von Drucksignatur-Algorithmen für Pumpendiagnostik bis 400 bar.</div>
-        <div class="team-skills">
-          <span class="ts-tag">Hydraulik 0–400 bar</span><span class="ts-tag">Leckagedetektion</span>
-          <span class="ts-tag">Ölanalytik</span><span class="ts-tag">ISO 4406</span>
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=H+Weber&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="H. Weber">
         </div>
+        <div class="av-info"><h3>H. Weber</h3><p class="av-role">Sondermaschinenbau</p></div>
       </div>
-    </div>
 
-    <!-- 5: Data Scientist -->
-    <div class="team-card reveal rd4">
-      <div class="team-portrait">
-        <div class="team-years">6 J. Erfahrung</div>
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bg5" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#0a0d20"/><stop offset="100%" stop-color="#030508"/></radialGradient>
-            <radialGradient id="sk5" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#d4a060"/><stop offset="100%" stop-color="#8a6020"/></radialGradient>
-          </defs>
-          <rect width="300" height="300" fill="url(#bg5)"/>
-          <path d="M0 300 L0 212 Q36 192 64 180 L82 236 L100 208 L150 225 L200 208 L218 236 L236 180 Q264 192 300 212 L300 300 Z" fill="#0d1030"/>
-          <path d="M100 208 L82 178 L112 194 L150 225 Z" fill="#141840"/>
-          <path d="M200 208 L218 178 L188 194 L150 225 Z" fill="#141840"/>
-          <path d="M112 194 L150 206 L188 194 L184 180 L150 188 L116 180 Z" fill="#dde0f0"/>
-          <ellipse cx="150" cy="178" rx="20" ry="20" fill="url(#sk5)"/>
-          <ellipse cx="150" cy="120" rx="62" ry="74" fill="url(#sk5)"/>
-          <!-- Black hair, younger, slight side styling -->
-          <path d="M90 112 Q92 66 120 53 Q134 45 150 44 Q166 45 180 53 Q208 66 210 112 Q204 88 186 74 Q166 60 150 58 Q134 60 114 74 Q96 88 90 112 Z" fill="#080508"/>
-          <!-- slight swoop front -->
-          <path d="M90 112 Q88 95 95 80 Q108 95 118 88" fill="#080508"/>
-          <!-- Eyebrows -->
-          <path d="M108 110 Q124 103 140 107" stroke="#080508" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M160 107 Q176 103 192 110" stroke="#080508" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <!-- Eyes -->
-          <ellipse cx="124" cy="123" rx="13" ry="9" fill="#fff" opacity="0.95"/>
-          <ellipse cx="176" cy="123" rx="13" ry="9" fill="#fff" opacity="0.95"/>
-          <ellipse cx="125" cy="123" rx="8" ry="7" fill="#0a0808"/>
-          <ellipse cx="177" cy="123" rx="8" ry="7" fill="#0a0808"/>
-          <ellipse cx="127" cy="121" rx="2" ry="2" fill="#fff" opacity="0.85"/>
-          <ellipse cx="179" cy="121" rx="2" ry="2" fill="#fff" opacity="0.85"/>
-          <!-- Nose -->
-          <path d="M150 133 L146 154 Q150 160 154 154 Z" fill="#906020" opacity="0.4"/>
-          <ellipse cx="145" cy="155" rx="6" ry="4" fill="#805020" opacity="0.3"/>
-          <ellipse cx="155" cy="155" rx="6" ry="4" fill="#805020" opacity="0.3"/>
-          <!-- Mouth friendly smile -->
-          <path d="M133 168 Q150 178 167 168" stroke="#804020" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M135 168 Q150 173 165 168" fill="#a06030" opacity="0.25"/>
-          <!-- Ears -->
-          <ellipse cx="90" cy="124" rx="8" ry="13" fill="url(#sk5)"/>
-          <ellipse cx="210" cy="124" rx="8" ry="13" fill="url(#sk5)"/>
-          <!-- Purple AI glow -->
-          <ellipse cx="150" cy="112" rx="60" ry="72" fill="none" stroke="#a855f7" stroke-width="0.5" opacity="0.12"/>
-          <rect x="0" y="232" width="300" height="68" fill="url(#bg5)" opacity="0.65"/>
-        </svg>
-      </div>
-      <div class="team-info">
-        <div class="team-name">Jonas Park</div>
-        <div class="team-role">Data Scientist & ML Engineer</div>
-        <div class="team-exp">Spezialist für Anomalieerkennung in Industriedaten. MSc Datenwissenschaft TU München. Entwickelt und trainiert die Prognosemodelle für alle Maschinentypen.</div>
-        <div class="team-skills">
-          <span class="ts-tag">Sklearn · XGBoost</span><span class="ts-tag">Zeitreihen FFT</span>
-          <span class="ts-tag">Anomalieerkennung</span><span class="ts-tag">MLflow</span>
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=A+Makris&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="A. Makris">
         </div>
+        <div class="av-info"><h3>A. Makris</h3><p class="av-role">Leitung KI-Entwicklung</p></div>
       </div>
-    </div>
 
-    <!-- 6: Vertriebsmanagerin -->
-    <div class="team-card reveal rd5">
-      <div class="team-portrait">
-        <div class="team-years">14 J. Erfahrung</div>
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bg6" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#100c18"/><stop offset="100%" stop-color="#060408"/></radialGradient>
-            <radialGradient id="sk6" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#e0c090"/><stop offset="100%" stop-color="#b08040"/></radialGradient>
-          </defs>
-          <rect width="300" height="300" fill="url(#bg6)"/>
-          <path d="M0 300 L0 218 Q34 198 60 186 L76 242 L98 212 L150 230 L202 212 L224 242 L240 186 Q266 198 300 218 L300 300 Z" fill="#181025"/>
-          <path d="M98 212 L76 182 L110 198 L150 230 Z" fill="#221535"/>
-          <path d="M202 212 L224 182 L190 198 L150 230 Z" fill="#221535"/>
-          <path d="M110 198 L150 212 L190 198 L186 184 L150 192 L114 184 Z" fill="#e8e0f0"/>
-          <!-- Pearl necklace hint -->
-          <ellipse cx="150" cy="182" rx="20" ry="20" fill="url(#sk6)"/>
-          <path d="M132 200 Q150 208 168 200" stroke="#d4c080" stroke-width="1.5" fill="none" opacity="0.6"/>
-          <!-- Head -->
-          <ellipse cx="150" cy="120" rx="58" ry="72" fill="url(#sk6)"/>
-          <!-- Blonde/light brown professional hair — shoulder length, frames face -->
-          <path d="M94 112 Q96 66 122 52 Q136 44 150 43 Q164 44 178 52 Q204 66 206 112 Q200 84 180 68 Q162 56 150 54 Q138 56 120 68 Q100 84 94 112 Z" fill="#a07828"/>
-          <!-- Side hair flowing -->
-          <path d="M94 112 Q90 150 92 185 Q98 190 96 165 Q93 138 96 115 Z" fill="#a07828"/>
-          <path d="M206 112 Q210 150 208 185 Q202 190 204 165 Q207 138 204 115 Z" fill="#a07828"/>
-          <!-- Golden highlights -->
-          <path d="M98 108 Q100 80 116 66" stroke="#d4a040" stroke-width="2" fill="none" opacity="0.5"/>
-          <!-- Eyebrows — shaped, arched -->
-          <path d="M112 108 Q128 101 143 105" stroke="#6a4818" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <path d="M157 105 Q172 101 188 108" stroke="#6a4818" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <!-- Eyes — warm, engaging -->
-          <ellipse cx="127" cy="121" rx="13" ry="9" fill="#fff" opacity="0.95"/>
-          <ellipse cx="173" cy="121" rx="13" ry="9" fill="#fff" opacity="0.95"/>
-          <ellipse cx="128" cy="121" rx="9" ry="8" fill="#3a2808"/>
-          <ellipse cx="174" cy="121" rx="9" ry="8" fill="#3a2808"/>
-          <ellipse cx="130" cy="119" rx="2.5" ry="2.5" fill="#fff" opacity="0.85"/>
-          <ellipse cx="176" cy="119" rx="2.5" ry="2.5" fill="#fff" opacity="0.85"/>
-          <!-- Mascara lashes hint -->
-          <path d="M114 117 Q127 112 140 118" stroke="#1a0808" stroke-width="2" fill="none" opacity="0.6"/>
-          <path d="M160 118 Q173 112 186 117" stroke="#1a0808" stroke-width="2" fill="none" opacity="0.6"/>
-          <!-- Nose -->
-          <path d="M150 131 L147 151 Q150 157 153 151 Z" fill="#906030" opacity="0.35"/>
-          <ellipse cx="146" cy="152" rx="5" ry="4" fill="#805030" opacity="0.25"/>
-          <ellipse cx="154" cy="152" rx="5" ry="4" fill="#805030" opacity="0.25"/>
-          <!-- Lips — warmer tone, smile -->
-          <path d="M133 166 Q150 175 167 166" stroke="#c06858" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <path d="M136 166 Q150 171 164 166" fill="#d07868" opacity="0.35"/>
-          <!-- Ears with small earrings -->
-          <ellipse cx="93" cy="124" rx="8" ry="12" fill="url(#sk6)"/>
-          <ellipse cx="207" cy="124" rx="8" ry="12" fill="url(#sk6)"/>
-          <circle cx="93" cy="133" r="3" fill="#e4b15e" opacity="0.9"/>
-          <circle cx="207" cy="133" r="3" fill="#e4b15e" opacity="0.9"/>
-          <!-- Warm gold glow -->
-          <ellipse cx="150" cy="112" rx="56" ry="70" fill="none" stroke="#e4b15e" stroke-width="0.5" opacity="0.15"/>
-          <rect x="0" y="234" width="300" height="66" fill="url(#bg6)" opacity="0.65"/>
-        </svg>
-      </div>
-      <div class="team-info">
-        <div class="team-name">Sandra Meier</div>
-        <div class="team-role">Senior Vertriebsmanagerin</div>
-        <div class="team-exp">14 Jahre B2B-Vertrieb im Maschinenbau bei Schunk und Trumpf. Spezialistin für komplexe Verkaufsprozesse mit technischen Entscheidern im Mittelstand.</div>
-        <div class="team-skills">
-          <span class="ts-tag">B2B Maschinenbau</span><span class="ts-tag">Key Account</span>
-          <span class="ts-tag">ROI-Argumentation</span><span class="ts-tag">VDMA-Netzwerk</span>
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=M+Steiner&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="M. Steiner">
         </div>
+        <div class="av-info"><h3>M. Steiner</h3><p class="av-role">CNC-Systemtechnik</p></div>
       </div>
-    </div>
 
-    <!-- 7: Systemintegrator -->
-    <div class="team-card reveal rd6">
-      <div class="team-portrait">
-        <div class="team-years">10 J. Erfahrung</div>
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bg7" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#0c1010"/><stop offset="100%" stop-color="#040606"/></radialGradient>
-            <radialGradient id="sk7" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#c07858"/><stop offset="100%" stop-color="#704028"/></radialGradient>
-          </defs>
-          <rect width="300" height="300" fill="url(#bg7)"/>
-          <path d="M0 300 L0 210 Q36 190 64 178 L82 234 L100 206 L150 223 L200 206 L218 234 L236 178 Q264 190 300 210 L300 300 Z" fill="#101815"/>
-          <path d="M100 206 L82 176 L112 192 L150 223 Z" fill="#182215"/>
-          <path d="M200 206 L218 176 L188 192 L150 223 Z" fill="#182215"/>
-          <path d="M112 192 L150 204 L188 192 L184 178 L150 186 L116 178 Z" fill="#dde8e0"/>
-          <ellipse cx="150" cy="176" rx="21" ry="22" fill="url(#sk7)"/>
-          <ellipse cx="150" cy="122" rx="64" ry="76" fill="url(#sk7)"/>
-          <!-- Dark hair with slight wave — approachable look -->
-          <path d="M88 116 Q90 68 118 54 Q133 46 150 45 Q167 46 182 54 Q210 68 212 116 Q206 92 188 78 Q168 64 150 62 Q132 64 112 78 Q94 92 88 116 Z" fill="#120c08"/>
-          <!-- Wave detail -->
-          <path d="M88 116 Q90 100 96 90 Q100 86 98 94 Q95 104 92 118" fill="#120c08"/>
-          <!-- Eyebrows -->
-          <path d="M106 112 Q122 105 140 109" stroke="#120c08" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-          <path d="M160 109 Q178 105 194 112" stroke="#120c08" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-          <!-- Eyes -->
-          <ellipse cx="123" cy="126" rx="13" ry="9" fill="#fff" opacity="0.9"/>
-          <ellipse cx="177" cy="126" rx="13" ry="9" fill="#fff" opacity="0.9"/>
-          <ellipse cx="124" cy="126" rx="8.5" ry="7.5" fill="#1a0f08"/>
-          <ellipse cx="178" cy="126" rx="8.5" ry="7.5" fill="#1a0f08"/>
-          <ellipse cx="126" cy="124" rx="2" ry="2" fill="#fff" opacity="0.8"/>
-          <ellipse cx="180" cy="124" rx="2" ry="2" fill="#fff" opacity="0.8"/>
-          <!-- Nose -->
-          <path d="M150 138 L145 160 Q150 167 155 160 Z" fill="#8a5030" opacity="0.4"/>
-          <ellipse cx="144" cy="161" rx="7" ry="5" fill="#7a4020" opacity="0.3"/>
-          <ellipse cx="156" cy="161" rx="7" ry="5" fill="#7a4020" opacity="0.3"/>
-          <!-- Mouth -->
-          <path d="M131 175 Q150 184 169 175" stroke="#7a4020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <!-- Ears -->
-          <ellipse cx="88" cy="128" rx="9" ry="14" fill="url(#sk7)"/>
-          <ellipse cx="212" cy="128" rx="9" ry="14" fill="url(#sk7)"/>
-          <!-- Light stubble -->
-          <path d="M118 170 Q150 186 182 170 Q184 182 180 192 Q165 204 150 207 Q135 204 120 192 Q116 182 118 170 Z" fill="#2a1808" opacity="0.22"/>
-          <!-- Teal glow -->
-          <ellipse cx="150" cy="114" rx="62" ry="74" fill="none" stroke="#00d4aa" stroke-width="0.5" opacity="0.12"/>
-          <rect x="0" y="232" width="300" height="68" fill="url(#bg7)" opacity="0.65"/>
-        </svg>
-      </div>
-      <div class="team-info">
-        <div class="team-name">Florian Koch</div>
-        <div class="team-role">Senior Systemintegrator</div>
-        <div class="team-exp">10 Jahre OT/IT-Integration in der Fertigungsindustrie. Spezialist für OPC-UA, Siemens S7 und Beckhoff TwinCAT. Verantwortlich für alle Kundeninstallationen.</div>
-        <div class="team-skills">
-          <span class="ts-tag">OPC-UA · PROFINET</span><span class="ts-tag">Siemens S7</span>
-          <span class="ts-tag">Beckhoff TwinCAT</span><span class="ts-tag">Retrofit</span>
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=S+Kraemer&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="S. Kraemer">
         </div>
+        <div class="av-info"><h3>S. Kraemer</h3><p class="av-role">Technischer Service</p></div>
       </div>
-    </div>
 
-    <!-- 8: Office Management / Sekretärin -->
-    <div class="team-card reveal rd7">
-      <div class="team-portrait">
-        <div class="team-years">11 J. Erfahrung</div>
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bg8" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#100c14"/><stop offset="100%" stop-color="#060408"/></radialGradient>
-            <radialGradient id="sk8" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#dca888"/><stop offset="100%" stop-color="#9a6840"/></radialGradient>
-          </defs>
-          <rect width="300" height="300" fill="url(#bg8)"/>
-          <path d="M0 300 L0 216 Q34 196 60 184 L76 240 L98 210 L150 228 L202 210 L224 240 L240 184 Q266 196 300 216 L300 300 Z" fill="#160e20"/>
-          <path d="M98 210 L76 180 L110 196 L150 228 Z" fill="#201530"/>
-          <path d="M202 210 L224 180 L190 196 L150 228 Z" fill="#201530"/>
-          <path d="M110 196 L150 208 L190 196 L186 182 L150 190 L114 182 Z" fill="#f0e8f8"/>
-          <ellipse cx="150" cy="180" rx="19" ry="19" fill="url(#sk8)"/>
-          <ellipse cx="150" cy="120" rx="60" ry="74" fill="url(#sk8)"/>
-          <!-- Chestnut/dark auburn hair — elegant updo with loose strands -->
-          <path d="M92 112 Q94 66 120 52 Q134 44 150 43 Q166 44 180 52 Q206 66 208 112 Q202 85 182 69 Q164 57 150 55 Q136 57 118 69 Q98 85 92 112 Z" fill="#4a1e10"/>
-          <!-- Updo bun -->
-          <ellipse cx="150" cy="48" rx="25" ry="18" fill="#4a1e10"/>
-          <ellipse cx="150" cy="42" rx="18" ry="12" fill="#3a1608"/>
-          <!-- loose strand left -->
-          <path d="M92 112 Q88 140 90 172 Q96 178 93 155 Q90 132 93 115 Z" fill="#4a1e10"/>
-          <!-- loose strand right -->
-          <path d="M208 112 Q212 140 210 172 Q204 178 207 155 Q210 132 207 115 Z" fill="#4a1e10"/>
-          <!-- Eyebrows — defined, groomed -->
-          <path d="M110 108 Q126 101 142 105" stroke="#2a1008" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <path d="M158 105 Q174 101 190 108" stroke="#2a1008" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <!-- Eyes — warm, professional -->
-          <ellipse cx="126" cy="121" rx="13" ry="9" fill="#fff" opacity="0.95"/>
-          <ellipse cx="174" cy="121" rx="13" ry="9" fill="#fff" opacity="0.95"/>
-          <ellipse cx="127" cy="121" rx="8.5" ry="7.5" fill="#2a1408"/>
-          <ellipse cx="175" cy="121" rx="8.5" ry="7.5" fill="#2a1408"/>
-          <ellipse cx="129" cy="119" rx="2.5" ry="2.5" fill="#fff" opacity="0.85"/>
-          <ellipse cx="177" cy="119" rx="2.5" ry="2.5" fill="#fff" opacity="0.85"/>
-          <!-- Lashes -->
-          <path d="M113 117 Q126 111 139 117" stroke="#180808" stroke-width="2" fill="none" opacity="0.7"/>
-          <path d="M161 117 Q174 111 187 117" stroke="#180808" stroke-width="2" fill="none" opacity="0.7"/>
-          <!-- Nose -->
-          <path d="M150 131 L147 152 Q150 158 153 152 Z" fill="#8a6030" opacity="0.35"/>
-          <ellipse cx="146" cy="153" rx="5" ry="4" fill="#7a5030" opacity="0.25"/>
-          <ellipse cx="154" cy="153" rx="5" ry="4" fill="#7a5030" opacity="0.25"/>
-          <!-- Lips — warm rose -->
-          <path d="M133 166 Q150 175 167 166" stroke="#b85858" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <path d="M136 166 Q150 171 164 166" fill="#c86868" opacity="0.3"/>
-          <!-- Subtle lipgloss upper lip -->
-          <path d="M138 163 Q144 160 150 162 Q156 160 162 163" stroke="#d07878" stroke-width="1" fill="none" opacity="0.5"/>
-          <!-- Ears with small studs -->
-          <ellipse cx="91" cy="124" rx="8" ry="12" fill="url(#sk8)"/>
-          <ellipse cx="209" cy="124" rx="8" ry="12" fill="url(#sk8)"/>
-          <circle cx="91" cy="133" r="3" fill="#e4b15e" opacity="0.9"/>
-          <circle cx="209" cy="133" r="3" fill="#e4b15e" opacity="0.9"/>
-          <!-- Warm glow -->
-          <ellipse cx="150" cy="112" rx="58" ry="72" fill="none" stroke="#e4b15e" stroke-width="0.5" opacity="0.12"/>
-          <rect x="0" y="234" width="300" height="66" fill="url(#bg8)" opacity="0.65"/>
-        </svg>
-      </div>
-      <div class="team-info">
-        <div class="team-name">Katja Schmitt</div>
-        <div class="team-role">Office & Projektmanagement</div>
-        <div class="team-exp">11 Jahre Projektkoordination in technischen Beratungsunternehmen. Koordiniert Kundenprojekte, Verträge und den gesamten Onboarding-Prozess reibungslos vom ersten Kontakt bis zur Installation.</div>
-        <div class="team-skills">
-          <span class="ts-tag">Projektkoordination</span><span class="ts-tag">Vertragsmanagement</span>
-          <span class="ts-tag">Kunden-Onboarding</span><span class="ts-tag">DE/EN/FR</span>
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=T+Becker&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="T. Becker">
         </div>
+        <div class="av-info"><h3>T. Becker</h3><p class="av-role">Automatisierungstechnik</p></div>
       </div>
-    </div>
 
+      <div class="av-card reveal">
+        <div class="av-img-box">
+          <img src="https://ui-avatars.com/api/?name=L+Vogt&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="L. Vogt">
+        </div>
+        <div class="av-info"><h3>L. Vogt</h3><p class="av-role">Kundenbetreuung DACH</p></div>
+      </div>
+
+    </div>
   </div>
-</div>
+</section>
+
+<style>
+.av-card{background:var(--dark-card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all 0.4s ease;text-align:center;}
+.av-img-box{position:relative;background:#111;height:220px;overflow:hidden;}
+.av-img-box img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) brightness(0.75);transition:all 0.5s ease;}
+.av-badge{position:absolute;top:10px;right:10px;background:var(--gold);color:#000;font-family:var(--font-m);font-size:0.55rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
+.av-card:hover{border-color:var(--gold);transform:translateY(-5px);box-shadow:0 12px 40px rgba(228,177,94,0.12);}
+.av-card:hover .av-img-box img{filter:grayscale(0%) brightness(1);}
+.av-info{padding:18px;}
+.av-info h3{color:var(--gold);font-family:var(--font-d);font-size:1.05rem;margin-bottom:5px;letter-spacing:1px;}
+.av-role{color:var(--text-dim);font-size:0.72rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;}
+</style>
 
 <!-- VALUES -->
 <div class="values-section">
@@ -896,33 +474,29 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
       <div class="value-card reveal rd1">
         <div class="vc-icon">🔧</div>
         <div class="vc-title">Wir kennen den Shopfloor</div>
-        <div class="vc-desc">Jedes Teammitglied hat Zeit in Produktionshallen verbracht. Wir wissen wie eine CNC riecht wenn die Kühlung versagt — und wir entwickeln Lösungen die dort funktionieren wo es heiß, laut und schmutzig ist.</div>
+        <div class="vc-desc">Jahrelange Arbeit in produzierenden Betrieben hat uns gelehrt was auf dem Shopfloor wirklich passiert. Wir entwickeln Lösungen die dort funktionieren, wo es heiß, laut und schmutzig ist.</div>
       </div>
       <div class="value-card reveal rd2">
         <div class="vc-icon">🤝</div>
         <div class="vc-title">Partnerschaft statt Transaktion</div>
-        <div class="vc-desc">Wir wachsen mit unseren Kunden. Jede Installation ist der Beginn einer langfristigen Partnerschaft — kein einmaliger Auftrag. Unsere Kunden haben direkten Zugang zu Sascha Forbach persönlich.</div>
+        <div class="vc-desc">Jede Installation ist der Beginn einer langfristigen Partnerschaft. Unsere Kunden haben direkten Zugang zu Sascha Forbach persönlich — kein Callcenter, kein Ticket-System.</div>
       </div>
     </div>
   </div>
 </div>
 
-
-<!-- ══════════════════════════════════════════
-     KONTAKTFORMULAR
-══════════════════════════════════════════ -->
+<!-- KONTAKTFORMULAR -->
 <div class="contact-section" id="kontakt">
   <div class="contact-inner">
     <div class="section-label" style="justify-content:center;margin-bottom:0.5rem;">Erstgespräch vereinbaren</div>
-    <h2 style="text-align:center;font-family:var(--font-d,'Oswald',sans-serif);font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:2px;line-height:1.1;">SCHREIBEN SIE<br><span style="background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">UNS DIREKT AN</span></h2>
-    <p style="text-align:center;color:var(--text-dim,#a0a0a0);margin-top:1rem;font-size:0.95rem;line-height:1.7;">In 20 Minuten sehen Sie ob und wie wir Ihre Anlage überwachen können.<br>Kostenlos, unverbindlich, konkret.</p>
+    <h2 style="text-align:center;font-family:var(--font-d);font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:2px;line-height:1.1;">SCHREIBEN SIE<br><span style="background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">UNS DIREKT AN</span></h2>
+    <p style="text-align:center;color:var(--text-dim);margin-top:1rem;font-size:0.95rem;line-height:1.7;">In 20 Minuten sehen Sie ob und wie wir Ihre Anlage überwachen können.<br>Kostenlos, unverbindlich, konkret.</p>
 
     <form class="contact-form" id="contactForm">
       <input type="hidden" name="access_key" value="IHRE_WEB3FORMS_ACCESS_KEY_HIER">
       <input type="hidden" name="subject" value="Neue Kontaktanfrage — Forbach & Partners">
       <input type="hidden" name="from_name" value="Forbach & Partners Website">
       <input type="hidden" name="redirect" value="false">
-
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Ihr Name *</label>
@@ -940,7 +514,7 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
         </div>
         <div class="form-group">
           <label class="form-label">Telefon</label>
-          <input type="tel" name="phone" class="form-input" placeholder="+49 211 …">
+          <input type="tel" name="phone" class="form-input" placeholder="+49 …">
         </div>
       </div>
       <div class="form-group">
@@ -953,7 +527,6 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
           <option>Schweißroboter</option>
           <option>Hydraulik-Aggregat</option>
           <option>Verpackungslinie</option>
-          <option>Förderband / Logistik</option>
           <option>Mehrere Typen</option>
         </select>
       </div>
@@ -961,67 +534,75 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
         <label class="form-label">Ihre Nachricht *</label>
         <textarea name="message" class="form-textarea" placeholder="Beschreiben Sie kurz Ihre Situation — wie viele Maschinen, welche Probleme, was Sie sich wünschen…" required></textarea>
       </div>
-      <button type="submit" class="form-submit" id="formSubmitBtn">
-        KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →
-      </button>
-      <div class="form-success" id="formSuccess">
+      <button type="submit" class="form-submit" id="formSubmitBtn">KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →</button>
+      <div class="form-success" id="formSuccess" style="display:none;background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.3);border-radius:10px;padding:1.5rem;text-align:center;color:#00ff88;font-family:var(--font-m);font-size:0.8rem;letter-spacing:1px;">
         ✓ NACHRICHT ERHALTEN — Sascha Forbach meldet sich persönlich innerhalb von 24 Stunden.
       </div>
-      <div class="form-error" id="formError">
+      <div class="form-error" id="formError" style="display:none;background:rgba(255,56,96,0.08);border:1px solid rgba(255,56,96,0.3);border-radius:10px;padding:1rem;text-align:center;color:#ff3860;font-size:0.8rem;">
         Fehler beim Senden. Bitte schreiben Sie direkt an info@forbachandpartners.com
       </div>
     </form>
-    <div style="text-align:center;margin-top:1.5rem;font-family:var(--font-m,'JetBrains Mono',monospace);font-size:0.58rem;color:var(--text-muted,#555);letter-spacing:2px;">
-      📞 +49 211 90989962 · ✉ INFO@FORBACHANDPARTNERS.COM · PAPHOS, ZYPERN
+    <div style="text-align:center;margin-top:1.5rem;font-family:var(--font-m);font-size:0.58rem;color:var(--text-muted);letter-spacing:2px;">
+      📞 Jetzt anrufen · ✉ INFO@FORBACHANDPARTNERS.COM · PAPHOS, ZYPERN
     </div>
   </div>
 </div>
-
-<script>
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const btn = document.getElementById('formSubmitBtn');
-  const success = document.getElementById('formSuccess');
-  const error = document.getElementById('formError');
-  btn.disabled = true;
-  btn.textContent = 'WIRD GESENDET…';
-  const data = new FormData(this);
-  try {
-    const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body: data });
-    const json = await res.json();
-    if (json.success) {
-      this.style.display = 'none';
-      success.style.display = 'block';
-    } else { throw new Error(); }
-  } catch {
-    btn.disabled = false;
-    btn.textContent = 'KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →';
-    error.style.display = 'block';
-  }
-});
-</script>
-
-
 
 <footer>
   <div class="f-logo">FORBACH & PARTNERS</div>
   <div class="f-tag">Predictive Intelligence · Maschinenbau · Industry 4.0</div>
   <div class="f-links">
-    <a class="f-link" href="/">Home</a>
-    <a class="f-link" href="ueber-uns.html" class="nav-link active">Über uns</a>
+    <a class="f-link" href="index.html">Home</a>
+    <a class="f-link" href="ueber-uns.html">Über uns</a>
     <a class="f-link" href="cnc-fraeszentren.html">CNC</a>
     <a class="f-link" href="spritzguss.html">Spritzguss</a>
     <a class="f-link" href="laserschneiden.html">Laser</a>
     <a class="f-link" href="robotik.html">Robotik</a>
-    
-    <a class="f-link" href="/impressum">Impressum</a>
+    <a class="f-link" href="blog.html">Blog</a>
+    <a class="f-link" href="kontakt.html">Kontakt</a>
   </div>
   <div class="f-copy">© 2026 Forbach and Partners Ltd · Reg. Cyprus · All rights reserved</div>
 </footer>
 
+<style>
+.contact-form{display:grid;gap:1rem;margin-top:2.5rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:600px){.form-row{grid-template-columns:1fr;}}
+.form-group{display:flex;flex-direction:column;gap:0.4rem;}
+.form-label{font-family:var(--font-m);font-size:0.62rem;color:rgba(228,177,94,0.8);text-transform:uppercase;letter-spacing:2px;}
+.form-input,.form-select,.form-textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(228,177,94,0.2);border-radius:8px;padding:0.75rem 1rem;color:#fff;font-family:inherit;font-size:0.875rem;transition:border-color 0.2s;width:100%;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:rgba(228,177,94,0.7);background:rgba(228,177,94,0.04);}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23e4b15e' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;}
+.form-select option{background:#111;color:#fff;}
+.form-textarea{resize:vertical;min-height:120px;line-height:1.6;}
+.form-submit{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);color:#000;border:none;padding:0.9rem 2rem;border-radius:8px;font-weight:700;font-size:0.875rem;cursor:pointer;transition:all 0.3s;width:100%;}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(248,223,165,0.35);}
+.form-submit:disabled{opacity:0.6;transform:none;cursor:not-allowed;}
+</style>
+
 <script>
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v');});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('formSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'WIRD GESENDET…';
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body: new FormData(this) });
+    const json = await res.json();
+    if (json.success) {
+      this.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else { throw new Error(); }
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →';
+    document.getElementById('formError').style.display = 'block';
+  }
+});
 </script>
+<script src="common.js"></script>
 </body>
 </html>

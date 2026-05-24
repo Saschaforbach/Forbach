@@ -17,8 +17,8 @@
   --font-d:'Oswald',sans-serif;--font-b:'Raleway',sans-serif;--font-m:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--text);font-family:var(--font-b);line-height:1.6;overflow-x:hidden;}
+html,body{scroll-behavior:smooth;overflow-x:hidden;max-width:100vw;}
+body{overflow-x:hidden;max-width:100%;background:var(--black);color:var(--text);font-family:var(--font-b);line-height:1.6;overflow-x:hidden;}
 
 nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:100;background:rgba(0,0,0,0.88);backdrop-filter:blur(20px);border:1px solid var(--border-strong);border-radius:14px;padding:0 2rem;height:58px;display:flex;align-items:center;justify-content:space-between;gap:2rem;width:min(1200px,calc(100vw - 2rem));}
 .nav-logo{font-family:var(--font-d);font-size:1.2rem;letter-spacing:2px;background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;white-space:nowrap;}
@@ -159,10 +159,10 @@ h2 .gold{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-back
 .faq-item{border-bottom:1px solid var(--border);padding:1.5rem 0;}
 .faq-q{font-size:1rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:color 0.2s;}
 .faq-q:hover{color:var(--gold);}
-.faq-q span{font-size:1.2rem;color:var(--gold);transition:transform 0.3s;}
+.faq-q span{font-size:0.9rem;color:var(--gold);transition:transform 0.3s;display:inline-block;}
 .faq-a{font-size:0.875rem;color:var(--text-dim);line-height:1.75;max-height:0;overflow:hidden;opacity:0;transform:translateY(-6px);transition:max-height 0.45s cubic-bezier(0.25,0.46,0.45,0.94),opacity 0.35s ease,transform 0.35s ease,padding 0.3s ease;}
 .faq-item.open .faq-a{max-height:600px;padding-top:1rem;opacity:1;transform:translateY(0);}
-.faq-item.open .faq-q span{transform:rotate(135deg);}.faq-item.open{background:rgba(228,177,94,0.04);border-color:rgba(228,177,94,0.28)!important;}
+.faq-item.open .faq-q span{transform:translateY(-2px);}.faq-item.open{background:rgba(228,177,94,0.04);border-color:rgba(228,177,94,0.28)!important;}
 .cta-banner{background:linear-gradient(135deg,rgba(0,212,170,0.07),rgba(228,177,94,0.04));border:1px solid rgba(0,212,170,0.25);border-radius:20px;padding:3rem;text-align:center;position:relative;overflow:hidden;}
 .cta-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,212,170,0.05) 0%,transparent 70%);}
 .cta-banner-inner{position:relative;}
@@ -206,8 +206,9 @@ body.lang-en .de{display:none;}body.lang-en .en{display:block;}
     <a href="verpackung.html" class="nav-link active" class="nav-link active">Verpackung</a>
   
     <a href="blog.html" class="nav-link">Blog</a>
+    <a href="kontakt.html" class="nav-link">Kontakt</a>
   </div>
-  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">📞 +49 211 90989962</a><a href="mailto:info@forbachandpartners.com" class="nav-cta">Termin vereinbaren</a>
+  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">📞 Jetzt anrufen</a><a href="mailto:info@forbachandpartners.com" class="nav-cta">Termin vereinbaren</a>
 </nav>
 
 <section class="hero">
@@ -232,8 +233,14 @@ body.lang-en .de{display:none;}body.lang-en .en{display:block;}
         <div><span class="kpi-val">€ 218K</span><span class="kpi-lbl de">Ersparnis / Linie / Jahr</span><span class="kpi-lbl en">Savings / line / year</span></div>
       </div>
       <div class="hero-btns">
-        <a href="mailto:info@forbachandpartners.com" class="btn-gold"><span class="de">Kostenlose Demo anfragen</span><span class="en">Request a free demo</span></a>
-        <a href="#specs" class="btn-outline"><span class="de">Technische Specs</span><span class="en">Technical specs</span></a>
+        <a href="#" onclick="openTerminModal(); return false;" class="btn-gold">
+          <span class="de">Termin vereinbaren</span>
+          <span class="en">Book a Meeting</span>
+        </a>
+        <a href="index.html#roi" class="btn-outline">
+          <span class="de">ROI berechnen</span>
+          <span class="en">Calculate ROI</span>
+        </a>
       </div>
     </div>
 
@@ -385,17 +392,17 @@ body.lang-en .de{display:none;}body.lang-en .en{display:block;}
   <div class="section-label de">Häufige Fragen</div><div class="section-label en">FAQ</div>
   <h2><span class="de">IHRE FRAGEN — <span class="gold">KLARE ANTWORTEN</span></span><span class="en">YOUR QUESTIONS — <span class="gold">CLEAR ANSWERS</span></span></h2>
   <div class="faq-item" onclick="toggleFAQ(this)">
-    <div class="faq-q"><span class="de">Funktioniert das System auch bei 1.200 Takten pro Minute?</span><span class="en">Does the system work at 1,200 cycles per minute?</span><span>+</span></div>
+    <div class="faq-q"><span class="de">Funktioniert das System auch bei 1.200 Takten pro Minute?</span><span class="en">Does the system work at 1,200 cycles per minute?</span><span>▼</span></div>
     <div class="faq-a de">Ja — unsere Sensorik erfasst Schwingungen mit 25,6 kHz und Siegelkräfte mit bis zu 10 kHz Abtastrate. Selbst bei 1.200 Takten/min werden alle relevanten Messgrößen je Takt erfasst. Edge-Computing sorgt für Latenz < 50 ms.</div>
     <div class="faq-a en">Yes — our sensors capture vibrations at 25.6 kHz and sealing forces at up to 10 kHz sampling rate. Even at 1,200 cycles/min, all relevant parameters are captured per cycle. Edge computing ensures latency < 50 ms.</div>
   </div>
   <div class="faq-item" onclick="toggleFAQ(this)">
-    <div class="faq-q"><span class="de">Kann das System Siegelnahtqualität inline bewerten?</span><span class="en">Can the system evaluate seal quality inline?</span><span>+</span></div>
+    <div class="faq-q"><span class="de">Kann das System Siegelnahtqualität inline bewerten?</span><span class="en">Can the system evaluate seal quality inline?</span><span>▼</span></div>
     <div class="faq-a de">Ja — durch Kombination von Siegelkraft, Temperaturprofil und optionaler Kamerainspektions-KI wird jede Siegelnaht bewertet. Undichte Packungen werden erkannt und ausgeschleust bevor sie die Linie verlassen — 100 % Inline-Qualitätskontrolle ohne Taktreduktion.</div>
     <div class="faq-a en">Yes — by combining sealing force, temperature profile and optional camera inspection AI, every seal seam is evaluated. Leaking packages are detected and rejected before leaving the line — 100% inline quality control without cycle reduction.</div>
   </div>
   <div class="faq-item" onclick="toggleFAQ(this)">
-    <div class="faq-q"><span class="de">Wie wird das System an bestehende MES/ERP-Systeme angebunden?</span><span class="en">How is the system connected to existing MES/ERP systems?</span><span>+</span></div>
+    <div class="faq-q"><span class="de">Wie wird das System an bestehende MES/ERP-Systeme angebunden?</span><span class="en">How is the system connected to existing MES/ERP systems?</span><span>▼</span></div>
     <div class="faq-a de">Über Standard-REST-API, OPC-UA oder MQTT. Wartungsaufträge werden direkt in SAP PM, Infor EAM, IFS oder eigene CMMS-Systeme übertragen. Schichtberichte und OEE-Daten werden automatisch exportiert. Keine manuelle Dateneingabe.</div>
     <div class="faq-a en">Via standard REST API, OPC-UA or MQTT. Maintenance orders are transferred directly to SAP PM, Infor EAM, IFS or custom CMMS systems. Shift reports and OEE data are automatically exported. No manual data entry.</div>
   </div>
@@ -433,10 +440,10 @@ body.lang-en .de{display:none;}body.lang-en .en{display:block;}
   <div class="f-logo">FORBACH & PARTNERS</div>
   <div class="f-tag">Predictive Intelligence · Maschinenbau · Industry 4.0</div>
   <div class="f-links">
-    <a class="f-link" href="/">Home</a><a class="f-link" href="cnc-fraeszentren.html">CNC</a>
+    <a class="f-link" href="index.html">Home</a><a class="f-link" href="cnc-fraeszentren.html">CNC</a>
     <a class="f-link" href="spritzguss.html">Spritzguss</a><a class="f-link" href="laserschneiden.html">Laser</a>
     <a class="f-link" href="robotik.html">Robotik</a><a class="f-link" href="verpackung.html" class="nav-link active">Verpackung</a>
-    <a class="f-link" href="hydraulik.html">Hydraulik</a><a class="f-link" href="/impressum">Impressum</a>
+    <a class="f-link" href="hydraulik.html">Hydraulik</a><a class="f-link" href="impressum.html">Impressum</a>
   </div>
   <div class="f-copy">© 2026 Forbach and Partners Ltd · Reg. Cyprus · All rights reserved</div>
 </footer>
@@ -460,5 +467,6 @@ const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.targe
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 setInterval(flicker,1800);flicker();
 </script>
+<script src="common.js"></script>
 </body>
 </html>

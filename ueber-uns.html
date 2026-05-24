@@ -172,6 +172,26 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
 
   *,*::before,*::after{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, auto;}
   a,button,[role=button],.service-card,.monitor-card,.machine-card{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, pointer;}
+
+/* ── CONTACT FORM ── */
+.contact-section{padding:5rem 2rem;background:var(--dark-2,#111);border-top:1px solid rgba(228,177,94,0.15);}
+.contact-inner{max-width:680px;margin:0 auto;}
+.contact-form{display:grid;gap:1rem;margin-top:2.5rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:600px){.form-row{grid-template-columns:1fr;}}
+.form-group{display:flex;flex-direction:column;gap:0.4rem;}
+.form-label{font-family:var(--font-m,'JetBrains Mono',monospace);font-size:0.62rem;color:rgba(228,177,94,0.8);text-transform:uppercase;letter-spacing:2px;}
+.form-input,.form-select,.form-textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(228,177,94,0.2);border-radius:8px;padding:0.75rem 1rem;color:#fff;font-family:inherit;font-size:0.875rem;transition:border-color 0.2s,background 0.2s;width:100%;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:rgba(228,177,94,0.7);background:rgba(228,177,94,0.04);}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23e4b15e' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;}
+.form-select option{background:#111;color:#fff;}
+.form-textarea{resize:vertical;min-height:120px;line-height:1.6;}
+.form-submit{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);color:#000;border:none;padding:0.9rem 2rem;border-radius:8px;font-weight:700;font-size:0.875rem;cursor:pointer;transition:all 0.3s;letter-spacing:0.5px;width:100%;}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(248,223,165,0.35);}
+.form-submit:disabled{opacity:0.6;transform:none;cursor:not-allowed;}
+.form-success{display:none;background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.3);border-radius:10px;padding:1.5rem;text-align:center;color:#00ff88;font-family:var(--font-m,'JetBrains Mono',monospace);font-size:0.8rem;letter-spacing:1px;}
+.form-error{display:none;background:rgba(255,56,96,0.08);border:1px solid rgba(255,56,96,0.3);border-radius:10px;padding:1rem;text-align:center;color:#ff3860;font-size:0.8rem;}
+
 </style>
 </head>
 <body>
@@ -887,21 +907,101 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
   </div>
 </div>
 
-<!-- CTA -->
-<div class="cta-section">
-  <div class="cta-inner reveal">
-    <div class="section-label" style="justify-content:center;">Nächster Schritt</div>
-    <div class="cta-title">LERNEN SIE<br><span style="background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">UNS KENNEN</span></div>
-    <p class="cta-sub">In einem 20-minütigen Gespräch mit Sascha Forbach persönlich zeigen wir was unser Team für Ihre Anlage leisten kann — konkret, messbar, ohne Verpflichtung.</p>
-    <div class="cta-btns">
-      <a href="mailto:info@forbachandpartners.com" class="btn-gold">Direkt an Sascha Forbach schreiben</a>
-      <a href="index.html#roi" class="btn-outline">ROI berechnen</a>
-    </div>
-    <div style="margin-top:1.5rem;font-family:var(--font-m);font-size:0.62rem;color:var(--text-muted);letter-spacing:2px;">
-      INFO@FORBACHANDPARTNERS.COM · PAPHOS, ZYPERN
+
+<!-- ══════════════════════════════════════════
+     KONTAKTFORMULAR
+══════════════════════════════════════════ -->
+<div class="contact-section" id="kontakt">
+  <div class="contact-inner">
+    <div class="section-label" style="justify-content:center;margin-bottom:0.5rem;">Erstgespräch vereinbaren</div>
+    <h2 style="text-align:center;font-family:var(--font-d,'Oswald',sans-serif);font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:2px;line-height:1.1;">SCHREIBEN SIE<br><span style="background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">UNS DIREKT AN</span></h2>
+    <p style="text-align:center;color:var(--text-dim,#a0a0a0);margin-top:1rem;font-size:0.95rem;line-height:1.7;">In 20 Minuten sehen Sie ob und wie wir Ihre Anlage überwachen können.<br>Kostenlos, unverbindlich, konkret.</p>
+
+    <form class="contact-form" id="contactForm">
+      <input type="hidden" name="access_key" value="IHRE_WEB3FORMS_ACCESS_KEY_HIER">
+      <input type="hidden" name="subject" value="Neue Kontaktanfrage — Forbach & Partners">
+      <input type="hidden" name="from_name" value="Forbach & Partners Website">
+      <input type="hidden" name="redirect" value="false">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Ihr Name *</label>
+          <input type="text" name="name" class="form-input" placeholder="Max Mustermann" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Unternehmen *</label>
+          <input type="text" name="company" class="form-input" placeholder="Musterfirma GmbH" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">E-Mail *</label>
+          <input type="email" name="email" class="form-input" placeholder="m.mustermann@firma.de" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Telefon</label>
+          <input type="tel" name="phone" class="form-input" placeholder="+49 211 …">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Maschinentyp</label>
+        <select name="machine_type" class="form-select">
+          <option value="">Bitte wählen…</option>
+          <option>CNC-Fräszentrum</option>
+          <option>Spritzgussmaschine</option>
+          <option>Laserschneidanlage</option>
+          <option>Schweißroboter</option>
+          <option>Hydraulik-Aggregat</option>
+          <option>Verpackungslinie</option>
+          <option>Förderband / Logistik</option>
+          <option>Mehrere Typen</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ihre Nachricht *</label>
+        <textarea name="message" class="form-textarea" placeholder="Beschreiben Sie kurz Ihre Situation — wie viele Maschinen, welche Probleme, was Sie sich wünschen…" required></textarea>
+      </div>
+      <button type="submit" class="form-submit" id="formSubmitBtn">
+        KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →
+      </button>
+      <div class="form-success" id="formSuccess">
+        ✓ NACHRICHT ERHALTEN — Sascha Forbach meldet sich persönlich innerhalb von 24 Stunden.
+      </div>
+      <div class="form-error" id="formError">
+        Fehler beim Senden. Bitte schreiben Sie direkt an info@forbachandpartners.com
+      </div>
+    </form>
+    <div style="text-align:center;margin-top:1.5rem;font-family:var(--font-m,'JetBrains Mono',monospace);font-size:0.58rem;color:var(--text-muted,#555);letter-spacing:2px;">
+      📞 +49 211 90989962 · ✉ INFO@FORBACHANDPARTNERS.COM · PAPHOS, ZYPERN
     </div>
   </div>
 </div>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('formSubmitBtn');
+  const success = document.getElementById('formSuccess');
+  const error = document.getElementById('formError');
+  btn.disabled = true;
+  btn.textContent = 'WIRD GESENDET…';
+  const data = new FormData(this);
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body: data });
+    const json = await res.json();
+    if (json.success) {
+      this.style.display = 'none';
+      success.style.display = 'block';
+    } else { throw new Error(); }
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →';
+    error.style.display = 'block';
+  }
+});
+</script>
+
+
 
 <footer>
   <div class="f-logo">FORBACH & PARTNERS</div>

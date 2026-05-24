@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forbach & Partners | High-End CNC Predictive Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Raleway:wght@200;300;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c49040;
+            --gold-bright: #e4b15e;
+            --dark-bg: #050505;
+            --glass: rgba(15, 15, 15, 0.85);
+            --border: rgba(196, 144, 64, 0.25);
+            --text-dim: #999;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Raleway', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Navigationsleiste */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            display: flex; justify-content: space-between;
+            padding: 40px 8%; box-sizing: border-box;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: 'Oswald';
+            letter-spacing: 4px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .lang-switch {
+            display: flex; gap: 15px;
+        }
+
+        .lang-switch span {
+            font-size: 0.7rem; letter-spacing: 2px; cursor: pointer;
+            color: var(--text-dim); transition: 0.3s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .lang-switch span.active {
+            color: var(--gold); border-bottom: 1px solid var(--gold);
+        }
+
+        /* Hero Bereich */
+        .hero {
+            height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center;
+            padding: 0 10%;
+            background: radial-gradient(circle at center, #111 0%, #050505 100%);
+        }
+
+        .hero-tag {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .hero h1 {
+            font-family: 'Oswald';
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            line-height: 1.1;
+            margin: 0;
+            text-transform: uppercase;
+            font-weight: 500;
+            background: linear-gradient(to bottom, #fff 40%, #555 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Glass-Card ROI Sektion */
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 80px;
+            max-width: 1000px;
+            margin: -150px auto 100px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 50px 120px rgba(0,0,0,0.9);
+        }
+
+        .card-header {
+            font-family: 'Oswald';
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-top: 50px;
+            align-items: flex-start;
+        }
+
+        .input-group label {
+            display: block; font-size: 0.7rem; color: var(--gold);
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
+        }
+
+        .input-group input {
+            width: 100%; background: transparent; border: none;
+            border-bottom: 1px solid #333; color: #fff;
+            padding: 12px 0; font-size: 1.4rem; margin-bottom: 35px;
+            transition: border-color 0.4s;
+            font-family: 'Oswald';
+        }
+
+        .input-group input:focus {
+            outline: none; border-color: var(--gold);
+        }
+
+        .result-box {
+            text-align: center;
+            border-left: 1px solid rgba(255,255,255,0.05);
+            padding-left: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .result-val {
+            font-family: 'Oswald';
+            font-size: 5rem;
+            color: #fff;
+            margin: 20px 0;
+            font-weight: 700;
+        }
+
+        .cta-btn {
+            background: var(--gold);
+            color: #000;
+            padding: 22px 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            margin-top: 20px;
+        }
+
+        .cta-btn:hover {
+            background: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(196, 144, 64, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 100px 8%;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 850px) {
+            .roi-grid { grid-template-columns: 1fr; gap: 40px; }
+            .result-box { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 60px; }
+            .glass-card { padding: 40px; margin-top: -50px; width: 85%; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">FORBACH <span style="color:var(--gold)">&</span> PARTNERS</div>
+    <div class="lang-switch">
+        <span id="btn-de" class="active" onclick="switchLang('de')">DEUTSCH</span>
+        <span id="btn-en" onclick="switchLang('en')">ENGLISH</span>
+    </div>
+</nav>
+
+<section class="hero">
+    <span class="hero-tag" id="hero-tag">CNC Application Engineering</span>
+    <h1 id="hero-title">PRECISION<br>INTELLIGENCE.</h1>
+</section>
+
+<section class="glass-card">
+    <div class="card-header" id="card-header">Wirtschaftlichkeits-Analyse</div>
+    <p id="card-desc" style="color: var(--text-dim); max-width: 600px;">Validieren Sie den Impact von Predictive Intelligence auf Ihre OEE. Berechnen Sie das Einsparpotenzial durch Eliminierung ungeplanter Spindel-Stillstände.</p>
+    
+    <div class="roi-grid">
+        <div class="roi-inputs">
+            <div class="input-group">
+                <label id="lbl-rate">Stundensatz Maschine (€)</label>
+                <input type="number" id="rate" value="180" oninput="calc()">
+            </div>
+            <div class="input-group">
+                <label id="lbl-hours">Stillstand pro Monat (Std)</label>
+                <input type="number" id="hours" value="12" oninput="calc()">
+            </div>
+            <div class="input-group">
+                <label id="lbl-crashes">Kosten pro Spindelbruch (€)</label>
+                <input type="number" id="repair" value="18000" oninput="calc()">
+            </div>
+        </div>
+        
+        <div class="result-box">
+            <span id="res-label" style="text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; color: var(--gold); font-weight: 500;">Jährliches Einsparpotenzial</span>
+            <div class="result-val" id="total">€ 0</div>
+            <button class="cta-btn" id="cta-btn">Expertise anfordern</button>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div style="margin-bottom: 20px; font-family: 'Oswald'; color: #fff;">FORBACH & PARTNERS LTD</div>
+    <div id="footer-text">Spezialisierte KI-Lösungen für High-End CNC-Zentren.</div>
+</footer>
+
+<script>
+    const translations = {
+        de: {
+            hero_tag: "CNC Application Engineering",
+            hero_title: "PRECISION<br>INTELLIGENCE.",
+            card_header: "Wirtschaftlichkeits-Analyse",
+            card_desc: "Validieren Sie den Impact von Predictive Intelligence auf Ihre OEE. Berechnen Sie das Einsparpotenzial durch Eliminierung ungeplanter Spindel-Stillstände.",
+            lbl_rate: "Stundensatz Maschine (€)",
+            lbl_hours: "Stillstand pro Monat (Std)",
+            lbl_crashes: "Kosten pro Spindelbruch (€)",
+            res_label: "Jährliches Einsparpotenzial",
+            cta: "Expertise anfordern",
+            footer: "Spezialisierte KI-Lösungen für High-End CNC-Zentren."
+        },
+        en: {
+            hero_tag: "CNC Application Engineering",
+            hero_title: "PRECISION<br>INTELLIGENCE.",
+            card_header: "ROI ANALYSIS",
+            card_desc: "Validate the impact of Predictive Intelligence on your OEE. Calculate the savings potential by eliminating unplanned spindle downtime.",
+            lbl_rate: "Machine Hourly Rate (€)",
+            lbl_hours: "Downtime per Month (Hrs)",
+            lbl_crashes: "Cost per Spindle Crash (€)",
+            res_label: "Annual Savings Potential",
+            cta: "Request Expertise",
+            footer: "Specialized AI solutions for high-end CNC machining centers."
+        }
+    };
+
+    function switchLang(lang) {
+        document.getElementById('hero-tag').innerText = translations[lang].hero_tag;
+        document.getElementById('hero-title').innerHTML = translations[lang].hero_title;
+        document.getElementById('card-header').innerText = translations[lang].card_header;
+        document.getElementById('card-desc').innerText = translations[lang].card_desc;
+        document.getElementById('lbl-rate').innerText = translations[lang].lbl_rate;
+        document.getElementById('lbl-hours').innerText = translations[lang].lbl_hours;
+        document.getElementById('lbl-crashes').innerText = translations[lang].lbl_crashes;
+        document.getElementById('res-label').innerText = translations[lang].res_label;
+        document.getElementById('cta-btn').innerText = translations[lang].cta;
+        document.getElementById('footer-text').innerText = translations[lang].footer;
+
+        document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        calc();
+    }
+
+    function calc() {
+        const rate = parseFloat(document.getElementById('rate').value) || 0;
+        const hours = parseFloat(document.getElementById('hours').value) || 0;
+        const repair = parseFloat(document.getElementById('repair').value) || 0;
+        
+        // Berechnung: (Ausfallkosten pro Std * Std/Monat * 12) + (Spindelreparatur * 0.5 [statistische Wahrscheinlichkeit])
+        const annual = (rate * hours * 12) + (repair * 0.5);
+        document.getElementById('total').innerText = '€ ' + Math.round(annual).toLocaleString('de-DE');
+    }
+    
+    window.onload = calc;
+</script>
+
+</body>
+</html>

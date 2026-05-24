@@ -16,7 +16,7 @@
 //
 // ✅ VERFÜGBARE KATEGORIEN:
 //  "Technologie" | "Fallstudie" | "ROI & Wirtschaftlichkeit"
-//  "CNC" | "Industrie 4.0"
+//  "Robotik" | "Industrie 4.0" | "CNC" | "Spritzguss" | "Laser"
 //  Oder einfach eine neue Kategorie erfinden — sie erscheint automatisch!
 //
 // ═══════════════════════════════════════════════════════════════════
@@ -86,7 +86,7 @@ const POSTS = [
   },
 
   // ─────────────────────────────────────────────
-  // POST 12 — CNC Vorschubachsen
+  // POST 12 — Hydraulikdruck fällt ab
   // ─────────────────────────────────────────────
   {
     id: 12,
@@ -94,26 +94,28 @@ const POSTS = [
     date: "2026-05-15",
     dateFormatted: "15. Mai 2026",
     readTime: "6 Min.",
-    category: "CNC",
+    category: "Hydraulik",
     author: "Sascha Forbach",
-    title: "Vorschubachsen an CNC-Bearbeitungszentren: Diese 5 Verschleißmuster kündigen den Ausfall an",
-    excerpt: "Kugelgewindetrieb, Linearführung, Servomotor — die Vorschubachsen eines CNC-Zentrums sind die am häufigsten unterschätzte Verschleißquelle. Wir zeigen, welche Signale 2–4 Wochen vor dem Ausfall sichtbar werden.",
-    tags: ["CNC", "Vorschubachse", "Kugelgewindetrieb", "Linearführung", "Predictive Maintenance"],
+    title: "Hydraulikdruck fällt ab — 7 Ursachen und wie KI sie unterscheidet",
+    excerpt: "Druckabfall im Hydrauliksystem ist einer der häufigsten Ausfallgründe bei Spritzguss- und Stanzmaschinen. Hier sind die 7 wahren Ursachen — und warum nur eine davon sofort teuer wird.",
+    tags: ["Hydraulik", "Druckabfall", "Spritzguss", "Predictive Maintenance", "Instandhaltung"],
     content: `
-      <p class="detail-lead">Eine verschlissene Vorschubachse kostet selten durch den plötzlichen Totalausfall — sondern durch schleichenden Genauigkeitsverlust, Ausschuss und die Notfall-Reparatur im ungünstigsten Moment.</p>
-      <h2>Die 5 Verschleißmuster und ihre KI-Signatur</h2>
+      <p class="detail-lead">Nicht jeder Druckabfall ist gleich gefährlich. Aber alle beginnen gleich: mit einer kleinen Abweichung im Druckverlaufsgraphen — die niemand sieht, bis es zu spät ist.</p>
+      <h2>Die 7 Ursachen für sinkenden Hydraulikdruck</h2>
       <ul>
-        <li><strong>1. Kugelgewindetrieb-Verschleiß (Ballscrew):</strong> Das häufigste Verschleißbild. Der Vorschubfehler (Positionsabweichung) steigt langsam über Wochen. KI-Kennzeichen: steigende Schleppfehler-Varianz im Servoregler bei gleichem Vorschubprofil.</li>
-        <li><strong>2. Linearführungs-Reibungserhöhung:</strong> Wälzkörper in der Führung beginnen zu phasenweise zu klemmen. Erkennbar durch impulsartige Stromspitzen im Servomotor — typischerweise 3–8× pro Meter Vorschubweg.</li>
-        <li><strong>3. Spiel im Umkehrpunkt (Backlash):</strong> Zeigt sich zuerst bei Richtungswechseln. Maßtoleranzen am Werkstück beginnen zu schwanken. KI erkennt die charakteristische Totgang-Signatur im Schleppfehler-Verlauf 3–5 Wochen vor sichtbarem Ausschuss.</li>
-        <li><strong>4. Servomotor-Lagerdefekt:</strong> Gleiche BPFO/BPFI-Frequenzmuster wie bei Spindellagern — nur bei niedrigeren Frequenzen (Vorschubmotoren laufen mit 500–3.000 U/min). Erkennbar durch Kurtosis-Anstieg im Stromsignal.</li>
-        <li><strong>5. Thermische Drift durch Kugelgewindetrieb-Erwärmung:</strong> Lange Laufwege ohne Thermokompensation führen zu messbarem Längenversatz. Unsere KI korreliert Achstemperatur mit Positionsfehler-Trend und erkennt beginnende Thermokompensations-Defizite.</li>
+        <li><strong>1. Internes Leckage am Hydraulikzylinder:</strong> Die häufigste Ursache. Kolbendichtung verschlissen — Druck bricht unter Last zusammen. Erkennbar durch asymmetrischen Druckverlauf in der Haltedruckphase.</li>
+        <li><strong>2. Pumpenabnutzung (Zahnradpumpe):</strong> Volumetrischer Wirkungsgrad sinkt. Das System kompensiert durch höhere Pumpendrehzahl — Energieverbrauch steigt messbar. KI-Kennzeichen: Druck + Stromaufnahme korrelieren nicht mehr.</li>
+        <li><strong>3. Ölviskositätsverlust durch Überhitzung:</strong> Hydrauliköl über 65 °C verliert Schmierwirkung. Führt zu beschleunigtem Pumpen- und Ventilverschleiß. Erkennbar durch Temperaturtrend > 0,8 °C/Stunde.</li>
+        <li><strong>4. Verstopfter Rücklauffilter:</strong> Schleichend steigender Gegendruck. Drucksensor zeigt Normalwert — der Bypass öffnet jedoch bereits. Erkennbar nur durch differenzielle Druckmessung vor/nach Filter.</li>
+        <li><strong>5. Ventilspiel am Proportionalventil:</strong> Hysterese im Regelverhalten nimmt zu. Druckschwankungen ±3–5 bar bei stabilen Sollwerten. Häufig unterschätzt, bis Maßhaltigkeit leidet.</li>
+        <li><strong>6. Lufteintrag (Kavitation):</strong> Druckspitzen mit hoher Frequenz (> 500 Hz), begleitet von charakeristischem Knistern. Führt innerhalb von Stunden zu Pumpen-Fresser.</li>
+        <li><strong>7. Undichte externe Leitungsverbindung:</strong> Meistens sichtbar — aber erst nachdem 10–15 Liter Öl gelaufen sind und jemand auf dem Boden ausrutscht.</li>
       </ul>
       <div class="highlight-box">
-        <strong>Praxiswert:</strong> Bei einem 5-Achs-Bearbeitungszentrum (DMG MORI DMU 60) erkannten wir einen beginnenden Kugelgewindetrieb-Schaden an der Y-Achse durch ansteigende Schleppfehler-Varianz — 22 Tage vor dem ersten sichtbaren Maßfehler am Werkstück. Geplanter Tausch in der Betriebsurlaubs-Woche statt Notfall-Stillstand im laufenden Auftrag.
+        <strong>Wichtig:</strong> Ursache 1–5 lassen sich 24–96 Stunden im Voraus durch KI erkennen. Ursache 6 (Kavitation) muss in Echtzeit erkannt werden — weil der Schaden in Minuten entsteht. Unser System unterscheidet automatisch zwischen allen 7 Mustern.
       </div>
-      <h2>Was das für Ihre Planbarkeit bedeutet</h2>
-      <p>Der Unterschied zwischen "überraschter Notfallreparatur" und "geplantem Werkzeugwechsel" liegt bei CNC-Bearbeitungszentren typisch bei 8.000–25.000 Euro — allein durch den Unterschied zwischen Notfall-Serviceeinsatz und eingeplanter Wartungsschicht. Dazu kommt der Ausschuss in der Degradationsphase, der oft unbemerkt läuft.</p>
+      <h2>Was unterscheidet die KI-Diagnose vom Manometer?</h2>
+      <p>Ein Manometer zeigt den aktuellen Druck. Unsere KI analysiert den <em>Druckverlauf</em> über Zeit — Anstiegsrate, Haltephasen, Druckabfall unter verschiedenen Lastprofilen — und vergleicht das mit dem Baseline-Muster derselben Maschine aus den letzten 90 Tagen. Abweichungen von weniger als 2 bar, die ein Mensch nie bemerken würde, werden erkannt und klassifiziert.</p>
     `
   },
 
@@ -186,7 +188,7 @@ const POSTS = [
   },
 
   // ─────────────────────────────────────────────
-  // POST 15 — CNC Werkzeugwechsler
+  // POST 15 — Spritzguss Einspritzdruck schwankt
   // ─────────────────────────────────────────────
   {
     id: 15,
@@ -194,27 +196,26 @@ const POSTS = [
     date: "2026-04-28",
     dateFormatted: "28. April 2026",
     readTime: "5 Min.",
-    category: "CNC",
+    category: "Spritzguss",
     author: "Sascha Forbach",
-    title: "Werkzeugwechsler an CNC-Fräszentren: Wie Sie den Ausfall 2 Wochen früher erkennen",
-    excerpt: "Der automatische Werkzeugwechsler (ATC) ist eine der zuverlässigsten Baugruppen an einem CNC-Bearbeitungszentrum — bis er es plötzlich nicht mehr ist. Wir zeigen, welche Signale auf einen bevorstehenden Ausfall hinweisen.",
-    tags: ["CNC", "Werkzeugwechsler", "ATC", "Greiferarm", "Predictive Maintenance"],
+    title: "Einspritzdruck schwankt bei der Spritzgussmaschine — Ursachen und Lösung",
+    excerpt: "Schwankender Einspritzdruck ist der häufigste Grund für Qualitätsprobleme im Spritzguss. Wir zeigen, welche 5 Ursachen dahinterstecken und wie Sie sie voneinander unterscheiden.",
+    tags: ["Spritzguss", "Einspritzdruck", "Hydraulik", "Qualitätssicherung", "Predictive Maintenance"],
     content: `
-      <p class="detail-lead">Ein Werkzeugwechsler-Ausfall mitten im Bearbeitungsprogramm ist mehr als ein Stillstand — er bedeutet oft ein beschädigtes Werkstück, ein eingeklemmtes Werkzeug und mehrere Stunden Störungsdiagnose.</p>
-      <h2>Wie der automatische Werkzeugwechsler (ATC) funktioniert</h2>
-      <p>Der ATC besteht aus Magazin, Greiferarm (Doppelgreifer), Nockenwelle und Antriebsmotor. Bei jedem Wechsel führt der Greiferarm eine definierte Sequenz aus: Greifen → Herausziehen → Drehen → Einsetzen. Diese Sequenz hat eine charakteristische Zeitdauer und ein typisches Motorstrom-Profil — der ideale Fingerabdruck für die KI-Überwachung.</p>
-      <h2>Die 4 häufigsten Ausfallmuster</h2>
+      <p class="detail-lead">±8 bar Druckschwankung im Einspritzprozess klingt nach wenig. Bei Präzisionsteilen für die Automobil- oder Medizintechnik bedeutet das 3–12% Ausschuss — und manchmal eine Rückrufaktion.</p>
+      <h2>5 Ursachen für schwankenden Einspritzdruck</h2>
       <ul>
-        <li><strong>1. Greifer-Verschleiß:</strong> Der Federring im Greifer verliert Spannkraft. Werkzeuge sitzen nicht mehr exakt — die Wechselzeit variiert. KI-Signal: steigende Standardabweichung der Wechselzeit über 200+ Zyklen.</li>
-        <li><strong>2. Nockenwellen-Reibungserhöhung:</strong> Schmierstoffverlust oder Fremdpartikel erhöhen die Reibung in der Nockenwelle. Erkennbar durch ansteigenden Motorstrom-Peak beim Drehbewegungsstart — oft 8–15% über Baseline.</li>
-        <li><strong>3. Magazin-Positionierfehler:</strong> Schrittmotorfehler oder mechanisches Spiel führen zu ungenauer Magazinpositionierung. Erste Anzeichen: gelegentliche Wiederholversuche beim Werkzeugaufruf (im NC-Log sichtbar).</li>
-        <li><strong>4. Späneeintrag in die Werkzeugaufnahme:</strong> Kühlmittelmangel oder falsche Blasluftdruckhöhe lassen Späne in die HSK/SK-Aufnahme gelangen. Erkennbar durch ansteigende Auszieh-Kraft beim Werkzeugwechsel (Stromsignal).</li>
+        <li><strong>1. Rückstromsperre verschlissen:</strong> Die häufigste Ursache. Wenn die Rückstromsperre nicht mehr sauber schließt, variiert das eingespritzte Volumen pro Schuss um 1–4%. Erkennbar durch ansteigende Standardabweichung im Einspritzdruck über Schuss-Verlauf.</li>
+        <li><strong>2. Hydraulikpumpe mit nachlassendem Volumenwirkungsgrad:</strong> Pumpenabnutzung führt zu Druckabfall unter dynamischer Last — genau dann, wenn die Maschine den vollen Einspritzdruck abruft. Muster: Druck normal bei niedriger Last, Abfall bei Einspritzung.</li>
+        <li><strong>3. Temperaturschwankungen in der Plastifiziereinheit:</strong> Viskositätsschwankungen der Schmelze durch ±5°C Zonendifferenz. Gleiche Pumpeinstellung — unterschiedlicher Widerstand — unterschiedlicher Druckaufbau.</li>
+        <li><strong>4. Schneckenverschleiß:</strong> Schnecke und Zylinder mit fortgeschrittenem Verschleiß zeigen inkonsistentes Plastifiziervolumen. Erkennbar durch langfristigen Trend sinkender Einspritzdrücke bei gleichem Prozessparameter-Set.</li>
+        <li><strong>5. Proportionalventil mit Hysterese:</strong> Elektro-hydraulisches Proportionalventil regelt den Einspritzdruck. Bei steigender Hysterese (typisch nach 15.000+ Betriebsstunden) reagiert das Ventil träger — die Regelung beginnt zu "jagen".</li>
       </ul>
+      <h2>Warum das nicht per Sichtprüfung erkennbar ist</h2>
+      <p>Alle fünf Ursachen erzeugen auf dem Maschinendisplay denselben Effekt: Druckschwankungen. Ohne Trendanalyse über Hunderte von Schüssen ist eine Unterscheidung praktisch unmöglich. Unsere KI trennt die Muster durch Cross-Korrelation von Druck-, Temperatur-, Stromaufnahme- und Zeitdaten — und benennt die Ursache direkt.</p>
       <div class="highlight-box">
-        <strong>Praxisfall:</strong> 4-Achs-Bearbeitungszentrum, Lohnfertigung, 3-Schicht-Betrieb. Unser System erkannte über 340 Wechselzyklen eine langsam steigende Nockenwellen-Reibung (+11% Strom-Peak). Schmierung in der Folgefrühschicht — kein Ausfall, kein Stillstand. Vorwarnzeit: 16 Tage.
+        <strong>Fallbeispiel:</strong> Spritzgussbetrieb, 800-t-Maschine, Automobilinnenteile. Ausschussquote stieg von 0,8% auf 4,1% über 3 Wochen. Diagnose nach 48h Sensor-Monitoring: Rückstromsperre verschlissen + Proportionalventil-Hysterese. Geplanter Tausch in Wochenendschicht. Ausschussquote: zurück auf 0,7%.
       </div>
-      <h2>Was ein ATC-Ausfall kostet</h2>
-      <p>Typische Direktkosten bei einem ATC-Notfallausfall: 1.200–4.500 € für Ersatzteile und Servicebesuch, dazu 4–12 Stunden Maschinenausfall. Bei 2.200 €/Stunde Maschinensatz ergibt das schnell 12.000 € pro Ereignis — verhindert durch rechtzeitige Schmierung oder geplanten Greifertausch für ca. 180 €.</p>
     `
   },
 
@@ -302,7 +303,7 @@ const POSTS = [
   },
 
   // ─────────────────────────────────────────────
-  // POST 2 — Fallstudie CNC Spindelausfall
+  // POST 2
   // ─────────────────────────────────────────────
   {
     id: 2,
@@ -312,43 +313,44 @@ const POSTS = [
     readTime: "5 Min.",
     category: "Fallstudie",
     author: "Sascha Forbach",
-    title: "5-Achs-CNC: Spindelausfall verhindert — 4 Tage vorher erkannt",
-    excerpt: "Ein 5-Achs-Bearbeitungszentrum zeigte über 4 Tage eine klassische Vor-Ausfall-Signatur im Frontlager. Wir zeigen, was die Daten genau zeigten — und was ein Totalausfall gekostet hätte.",
-    tags: ["CNC", "Spindel", "Lagerdiagnose", "Fallstudie", "ROI"],
+    title: "Spritzgussmaschine 800 t: Hydraulikversagen verhindert — 3 Tage vorher",
+    excerpt: "Eine 800-Tonnen-Spritzgussmaschine zeigte über 3 Tage eine klassische Vor-Ausfall-Signatur im Hydraulikdruck. So haben wir den Schaden verhindert — und was die Daten genau gezeigt haben.",
+    tags: ["Spritzguss", "Hydraulik", "Fallstudie", "Druckanalyse", "ROI"],
     content: `
       <p class="detail-lead">
-        Eine CNC-Spindel mit 18.000 U/min ist die teuerste Einzelbaugruppe an einem modernen Bearbeitungszentrum. Ein Totalausfall kostet nicht nur die Spindel — sondern auch das eingespannte Werkstück, den Fräser und mehrere Tage Produktionsausfall.
+        Eine 800-Tonnen-Spritzgussmaschine ist der Herzschlag jeder Kunstoffproduktionslinie. Wenn sie ausfällt, steht alles. Dieser Artikel beschreibt, wie unser System einen drohenden Hydraulikausfall 72 Stunden im Voraus erkannte.
       </p>
 
       <h2>Ausgangslage</h2>
       <p>
-        5-Achs-Bearbeitungszentrum, Lohnfertiger, 2-Schicht-Betrieb, Automobilzulieferer. Die Spindel lief seit 14.800 Betriebsstunden — kein akutes Problem, letzte Wartung vor 3 Monaten. Unser System überwachte Vibration (3-Achsen, 10 kHz), Temperatur am Spindellager und Kühlmitteldurchfluss.
+        Die Maschine lief seit 21.140 Betriebsstunden — innerhalb des Wartungsplans, keine bekannten Probleme. Unser System überwachte Hydraulikdruck, Schmelzetemperatur, Zykluszeit und Vibration der Hydraulikpumpe.
       </p>
 
-      <h2>Was die Daten zeigten — über 4 Tage</h2>
+      <h2>Was die Daten zeigten</h2>
+      <p>Über 3 Tage entwickelte sich folgendes Muster:</p>
       <ul>
-        <li><strong>Tag 1:</strong> Kurtosis steigt von 3,1 auf 4,8 (Schwellenwert: 5,0). Isolation-Forest-Score: 0,14. Kein Alarm.</li>
-        <li><strong>Tag 2:</strong> BPFO-Frequenz (Ball Pass Frequency Outer Race) taucht im FFT-Spektrum auf. Amplitude noch gering. Score: 0,31.</li>
-        <li><strong>Tag 3:</strong> BPFO-Amplitude +180%. Kurtosis: 7,4. System löst GELB-Alarm aus. Score: 0,67.</li>
-        <li><strong>Tag 4:</strong> Harmonische der BPFO-Frequenz erscheinen. Gesamtvibration +22% über Baseline. ROT-Alarm. Score: 0,84.</li>
+        <li>Druckabfall beim Schließen um 4,2 % pro Tag (normalerweise ±0,3 %)</li>
+        <li>Steigende Pulsation im Druckverlauf (typisch für verschlissene Pumpenkolben)</li>
+        <li>Temperaturanstieg am Hydraulikaggregat von 58 °C auf 71 °C</li>
+        <li>Isolation-Forest-Score: 0,08 → 0,82 über 72 Stunden</li>
       </ul>
 
       <div class="highlight-box">
-        <span class="stat-highlight">96 Std.</span>
-        Vorwarnzeit vor prognostiziertem Totalausfall
-        <br><br>
-        <span class="stat-highlight">€ 58.000</span>
-        Vermiedene Kosten (Spindel + Werkstück + Stillstand)
+        <span class="stat-highlight">72 Std.</span>
+        Vorwarnzeit bis zum prognostizierten Ausfall
       </div>
 
       <h2>Reaktion und Ergebnis</h2>
       <p>
-        Nach dem ROT-Alarm wurde die Maschine nach der laufenden Schicht planmäßig gestoppt. Lagertausch durch den Spindelhersteller in 6 Stunden. Kosten: 2.800 € Lager + 6h Stillstand. Die Spindel zeigt nach Inspektion einen Außenring-Riss — ein weiterer Tag Betrieb hätte die gesamte Spindel zerstört.
+        Das System löste nach 48 Stunden einen AMBER-Alarm aus. Nach weiteren 12 Stunden (Isolation-Forest-Score > 0,75) wurde auf ROT eskaliert. Der Betrieb tauschte den Kolbensatz der Hydraulikpumpe in einer geplanten 4-Stunden-Wartung aus.
+      </p>
+      <p>
+        Hätte die Pumpe versagt: 2–3 Schichten Ausfall, Notfall-Reparatur, mögliche Folgeschäden am Steuerblock. Gesamtkosten geschätzt bei <strong>€ 62.000</strong>.
       </p>
 
       <blockquote>
-        "Das System hat uns die Spindel gerettet. Wir hatten keine Ahnung, dass da etwas nicht stimmt. Im Display war alles grün."
-        <br><br>— Fertigungsleiter, anonymisiert
+        "Wir haben die Maschine noch nie so gut im Griff gehabt. Früher haben wir auf das Klopfen gewartet. Jetzt sehen wir es in den Daten — bevor wir es hören."
+        <br><br>— Produktionsleiter, anonymisiert
       </blockquote>
     `
   },
@@ -461,7 +463,7 @@ const POSTS = [
   },
 
   // ─────────────────────────────────────────────
-  // POST 5 — CNC Kühlmittel & Thermomanagement
+  // POST 5
   // ─────────────────────────────────────────────
   {
     id: 5,
@@ -469,36 +471,43 @@ const POSTS = [
     date: "2026-03-28",
     dateFormatted: "28. März 2026",
     readTime: "5 Min.",
-    category: "CNC",
+    category: "Robotik",
     author: "Sascha Forbach",
-    title: "Kühlmittelüberwachung an CNC-Fräszentren: Warum Temperatur alles entscheidet",
-    excerpt: "Das Kühlmittelsystem ist der unterschätzte Lebensnerv jedes CNC-Bearbeitungszentrums. Temperaturfehler über 4 °C kosten Maßhaltigkeit, Standzeit und im schlimmsten Fall die Spindel.",
-    tags: ["CNC", "Kühlmittel", "Thermomanagement", "Spindel", "Condition Monitoring"],
+    title: "Teach-Punkt-Drift bei 6-Achs-Robotern: früh erkennen, teuer reparieren vermeiden",
+    excerpt: "Wenn ein Schweißroboter beginnt, 0,3 mm daneben zu treffen, ist das kein Zufall — es ist das erste Signal eines Lagerverschleißes. Wie unsere KI diesen Drift erkennt, bevor er Ausschuss produziert.",
+    tags: ["Robotik", "6-Achs", "Teach-Punkt-Drift", "Gelenküberwachung", "Schweißen"],
     content: `
       <p class="detail-lead">
-        Spindeln, Achslager und Führungen tolerieren Wärme — aber nur innerhalb enger Grenzen. Abweichungen von ±3 °C im Kühlmittelsystem reichen aus, um die Maßhaltigkeit zu ruinieren und die Spindellebensdauer um 40 % zu verkürzen.
+        Schweißroboter sind präzise — bis sie es plötzlich nicht mehr sind. Teach-Punkt-Drift ist eine der häufigsten Ursachen für Ausschuss und Nacharbeit in automatisierten Schweißlinien. Und er kündigt sich immer an.
       </p>
 
-      <h2>Was das Kühlmittelsystem wirklich leisten muss</h2>
+      <h2>Was ist Teach-Punkt-Drift?</h2>
       <p>
-        An einem modernen 5-Achs-Bearbeitungszentrum übernimmt das Kühlmittel drei Aufgaben gleichzeitig: Spänestransport, Schneidzonenkühlung und — über den Spindelkühler — die Temperaturstabilisierung der Spindellager. Fällt eine dieser Funktionen auch nur teilweise aus, beginnt eine Kaskade von Folgeproblemen.
+        Jeder Roboter wird auf exakte Positionen (Teach-Punkte) programmiert. Mit zunehmender Betriebsstundenzahl beginnen Lager, Getriebe und Harmonic-Drive-Einheiten zu verschleißen — die TCP-Position (Tool Center Point) weicht langsam von der programmierten Position ab.
+      </p>
+      <p>
+        Typische Progression: 0,1 mm → 0,3 mm → 0,8 mm → sichtbarer Ausschuss. Die ersten 0,3 mm sind mit dem Auge unsichtbar, produzieren aber bereits Qualitätsprobleme.
       </p>
 
-      <h2>Die 4 häufigsten Kühlmittelfehler und ihre Auswirkung</h2>
+      <h2>Unsere Erkennung: Drehmomentsignatur-Analyse</h2>
+      <p>
+        Jede Roboterachse hat einen Servomotor mit Stromregelung. Das Strom-/Drehmomentprofil bei einer definierten Bewegungssequenz ist ein präziser Fingerabdruck des mechanischen Zustands. Wir analysieren:
+      </p>
       <ul>
-        <li><strong>1. Durchflussabfall durch verstopften Filter:</strong> Reduzierter Volumenstrom senkt die Wärmeabfuhr. Erste Auswirkung: Spindellager-Temperatur steigt schleichend (+0,5 °C/Stunde). KI erkennt den Trend über gleitende Regression — 6–12 Stunden bevor die Temperaturgrenze erreicht wird.</li>
-        <li><strong>2. Konzentrationsverlust (Emulsion):</strong> Kühlmittelkonzentration unter 6% erhöht Korrosionsrisiko und reduziert Schmierwirkung. Erkennbar durch steigende Schneidkraftkomponente (Servostrom-Analyse) bei gleichem Vorschub.</li>
-        <li><strong>3. Pumpen-Kavitation:</strong> Lufteintrag durch undichte Ansaugseite erzeugt Druckpulsation im Kühlmittelkreis. Charakteristisches Hochfrequenzsignal (800–1.200 Hz) am Pumpenaggregat. Führt zu ungleichmäßiger Kühlung und Wärmezonen in der Spindel.</li>
-        <li><strong>4. Kühlmittelkühler-Degradation:</strong> Schleichend sinkende Kühlleistung des Wärmetauschers durch Ablagerungen. Erkennbar durch langfristig steigendes Temperaturdelta zwischen Vorlauf und Rücklauf — oft über Wochen unsichtbar.</li>
+        <li>Drehmomentvarianz bei Wiederholbewegungen</li>
+        <li>Stromsignal-Kurtosis (Stoßimpulse im Getriebe)</li>
+        <li>Phasenversatz zwischen Soll- und Ist-Position</li>
+        <li>Reibungskoeffizient-Trend über Zeit</li>
       </ul>
 
       <div class="highlight-box">
-        <strong>Praxiszahl:</strong> Eine CNC-Spindel bei 60 °C statt 40 °C Lagertemperatur verliert nach Herstellerangaben 38 % ihrer Restlebensdauer pro 1.000 Betriebsstunden. Bei einer Spindel-Neubestückung von 18.000 € bedeutet das: jede ersparte Überhitzungsstunde ist bares Geld.
+        <span class="stat-highlight">0,08 mm</span>
+        Drift, den unser System erkennt (vor sichtbarem Ausschuss)
       </div>
 
-      <h2>Was permanente Überwachung hier leistet</h2>
+      <h2>Praxis-Ergebnis</h2>
       <p>
-        Statt monatlicher Kühlmittel-Stichprobe und gelegentlichem Temperaturcheck installieren wir 3 Temperatursensoren (Spindellager, Vorlauf, Rücklauf) und einen Durchflusssensor. Die KI überwacht alle vier Parameter kontinuierlich, erkennt Trends und sendet einen Alarm, bevor die Grenzwerte erreicht sind — nicht danach.
+        Bei einem Kunden mit 4 Schweißrobotern reduzierten wir die ausschussbedingten Nacharbeitskosten um 67 % im ersten Betriebsjahr. Die Lager werden jetzt geplant getauscht — nicht notfallmäßig.
       </p>
     `
   },

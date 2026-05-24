@@ -3,37 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- ═══════════════════════════════════════════════════
-     SEO META TAGS — Google, Bing, AI-Suchmaschinen
-═══════════════════════════════════════════════════ -->
 <title>Blog — Predictive Maintenance Insights | Forbach & Partners</title>
-<meta name="description" content="Expertenwissen zu Predictive Maintenance, CNC-Diagnose, Spritzguss-Überwachung und Industrie 4.0. Aktuelle Einblicke von Forbach & Partners.">
-<meta name="keywords" content="Predictive Maintenance, CNC Überwachung, Spritzguss Anomalieerkennung, Industrie 4.0, Vibrationssensoren, KI Maschinenbau, Isolation Forest, LSTM Zeitreihen, OPC UA, MQTT">
+<meta name="description" content="Expertenwissen zu Predictive Maintenance, CNC-Diagnose und Industrie 4.0. Aktuelle Einblicke von Forbach & Partners.">
+<meta name="keywords" content="Predictive Maintenance, CNC Überwachung, Anomalieerkennung, Industrie 4.0, Vibrationssensoren, KI Maschinenbau, Isolation Forest, LSTM Zeitreihen, OPC UA, MQTT">
 <meta name="author" content="Sascha Forbach, Forbach and Partners Ltd">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <link rel="canonical" href="https://www.forbachandpartners.com/blog">
 
-<!-- Open Graph (LinkedIn, Facebook, WhatsApp) -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Forbach & Partners">
 <meta property="og:title" content="Blog — Predictive Maintenance Insights | Forbach & Partners">
 <meta property="og:description" content="Expertenwissen zu Predictive Maintenance, CNC-Diagnose und Industrie 4.0 von Sascha Forbach.">
 <meta property="og:url" content="https://www.forbachandpartners.com/blog">
-<meta property="og:image" content="https://www.forbachandpartners.com/og-blog.png">
 
-<!-- Twitter / X Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Predictive Maintenance Blog — Forbach & Partners">
 <meta name="twitter:description" content="KI-gestützte Maschinenüberwachung — Praxis-Einblicke und Technologie-Updates.">
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- ═══════════════════════════════════════════════════
-     JSON-LD STRUCTURED DATA
-     Wird von Google, ChatGPT, Gemini, Perplexity gelesen
-═══════════════════════════════════════════════════ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,87 +32,35 @@
   "publisher": {
     "@type": "Organization",
     "name": "Forbach and Partners Ltd",
-    "url": "https://www.forbachandpartners.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.forbachandpartners.com/logos/Forbachundpartners.png"
-    }
+    "url": "https://www.forbachandpartners.com"
   },
   "author": {
     "@type": "Person",
     "name": "Sascha Forbach",
     "jobTitle": "Gründer & Geschäftsführer",
-    "url": "https://www.forbachandpartners.com/ueber-uns",
-    "sameAs": ["https://www.linkedin.com/in/sascha-forbach"]
+    "url": "https://www.forbachandpartners.com/ueber-uns"
   }
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Was ist Predictive Maintenance?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Predictive Maintenance (vorausschauende Wartung) ist ein KI-gestützter Ansatz, bei dem Sensordaten von Maschinen kontinuierlich analysiert werden, um Ausfälle 48–72 Stunden im Voraus zu erkennen. Statt nach Zeitplan zu warten, wird nur dann gewartet, wenn die Daten es anzeigen."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Wie erkennt KI Maschinenausfälle?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "KI-Systeme wie Isolation Forest und LSTM-Netzwerke analysieren Vibrationsdaten, Temperaturen und Druckverläufe. Sobald Muster von der Normalkurve abweichen (3-Sigma-Regel), wird ein Alarm ausgelöst — noch bevor der Schaden sichtbar ist."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Welche Maschinen können überwacht werden?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "CNC-Fräszentren, Spritzgussmaschinen, Laserschneidanlagen, Schweißroboter, Verpackungslinien, Hydraulik-Aggregate und Förderbandanlagen. Das System läuft auf allen Maschinentypen mit Standard-Beschleunigungssensoren."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Was kostet Predictive Maintenance?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Die Investition amortisiert sich typischerweise in 6–14 Monaten. Bei einer Anlage mit 6 Stillstunden pro Jahr und 3.000 €/h Ausfallkosten spart das System im Schnitt 72% der Ausfallkosten — rund 13.000 € im ersten Jahr pro Maschine."
-      }
-    }
-  ]
 }
 </script>
 
 <style>
 :root {
-  --gold: #e4b15e;
-  --gold-light: #f8dfa5;
-  --gold-dark: #c49040;
-  --black: #000;
-  --dark-2: #0e0e0e;
-  --dark-3: #141414;
-  --dark-card: #111;
-  --border: rgba(228,177,94,0.15);
-  --border-strong: rgba(228,177,94,0.38);
-  --text: #fff;
-  --text-dim: #a0a0a0;
-  --text-muted: #555;
-  --green: #00ff88;
-  --red: #ff3860;
-  --amber: #ffb800;
-  --font-d: 'Oswald', sans-serif;
-  --font-b: 'Raleway', sans-serif;
-  --font-m: 'JetBrains Mono', monospace;
+  --gold: #e4b15e; --gold-light: #f8dfa5; --gold-dark: #c49040;
+  --black: #000; --dark-2: #0e0e0e; --dark-3: #141414; --dark-card: #111;
+  --border: rgba(228,177,94,0.15); --border-strong: rgba(228,177,94,0.38);
+  --text: #fff; --text-dim: #a0a0a0; --text-muted: #555;
+  --font-d: 'Oswald', sans-serif; --font-b: 'Raleway', sans-serif; --font-m: 'JetBrains Mono', monospace;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { background: var(--black); color: var(--text); font-family: var(--font-b); line-height: 1.6; overflow-x: hidden; }
+
+/* ── LANG TOGGLE ── */
+.en { display: none; }
+body.lang-en .de { display: none !important; }
+body.lang-en .en { display: block !important; }
+body.lang-en span.en { display: inline !important; }
+body.lang-en span.de { display: none !important; }
 
 /* ── NAV ── */
 nav {
@@ -148,6 +84,7 @@ nav {
   padding: 0.4rem 1.1rem; border-radius: 6px; font-weight: 700; font-size: 0.78rem;
   text-decoration: none; white-space: nowrap; transition: all 0.2s; }
 .nav-cta:hover { box-shadow: 0 4px 20px rgba(248,223,165,0.3); transform: translateY(-1px); }
+@media(max-width:900px){ .nav-links { display: none; } }
 
 /* ── HERO ── */
 .blog-hero {
@@ -179,8 +116,7 @@ nav {
 
 /* ── BLOG CONTROLS ── */
 .blog-controls {
-  max-width: 1200px; margin: 0 auto;
-  padding: 2rem 2rem 0;
+  max-width: 1200px; margin: 0 auto; padding: 2rem 2rem 0;
   display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;
 }
 .search-wrap { position: relative; flex: 1; min-width: 220px; max-width: 380px; }
@@ -240,17 +176,14 @@ nav {
   letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 1rem;
 }
 .post-title { font-family: var(--font-d); font-size: 1.4rem; letter-spacing: 1px;
-  line-height: 1.15; margin-bottom: 0.75rem; color: var(--text);
-  transition: color 0.2s; }
+  line-height: 1.15; margin-bottom: 0.75rem; color: var(--text); transition: color 0.2s; }
 .post-card:hover .post-title { color: var(--gold-light); }
-.post-excerpt { font-size: 0.84rem; color: var(--text-dim); line-height: 1.7;
-  margin-bottom: 1.25rem; }
+.post-excerpt { font-size: 0.84rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 1.25rem; }
 
 .post-card-footer { margin-top: auto; padding: 0 1.5rem 1.5rem;
   display: flex; align-items: center; justify-content: space-between; }
 .post-meta { display: flex; flex-direction: column; gap: 2px; }
-.post-date { font-family: var(--font-m); font-size: 0.55rem; color: var(--text-muted);
-  letter-spacing: 1px; }
+.post-date { font-family: var(--font-m); font-size: 0.55rem; color: var(--text-muted); letter-spacing: 1px; }
 .post-author { font-family: var(--font-m); font-size: 0.58rem; color: var(--text-dim); }
 .post-read-more { font-family: var(--font-m); font-size: 0.6rem; color: var(--gold);
   letter-spacing: 1.5px; text-transform: uppercase; display: flex; align-items: center; gap: 5px;
@@ -262,7 +195,6 @@ nav {
   background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
   border-radius: 3px; padding: 2px 7px; letter-spacing: 0.8px; text-transform: uppercase; }
 
-/* Featured post (first) */
 .post-card.featured { grid-column: span 2; }
 @media (max-width: 640px) { .post-card.featured { grid-column: span 1; } }
 .post-card.featured .post-title { font-size: 2rem; }
@@ -275,10 +207,7 @@ nav {
   display: none; overflow-y: auto;
 }
 .post-overlay.open { display: block; }
-.post-detail {
-  max-width: 820px; margin: 0 auto; padding: 5rem 2rem 8rem;
-  position: relative;
-}
+.post-detail { max-width: 820px; margin: 0 auto; padding: 5rem 2rem 8rem; position: relative; }
 .post-close {
   position: fixed; top: 1.5rem; right: 2rem;
   background: rgba(255,255,255,0.07); border: 1px solid var(--border);
@@ -353,15 +282,9 @@ nav {
 .author-name { font-weight: 700; font-size: 0.95rem; }
 .author-role { font-family: var(--font-m); font-size: 0.55rem; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
 
-/* empty state */
 .no-results { text-align: center; padding: 4rem 2rem; color: var(--text-muted);
   font-family: var(--font-m); font-size: 0.8rem; letter-spacing: 2px; }
 
-/* divider */
-.section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
-  margin: 0 2rem; max-width: 1200px; margin-left: auto; margin-right: auto; }
-
-/* footer */
 footer { background: var(--dark-2, #111); border-top: 1px solid var(--border);
   padding: 3rem 2rem 2rem; text-align: center; }
 .f-logo { font-family: var(--font-d); font-size: 1.6rem; letter-spacing: 2px;
@@ -376,8 +299,8 @@ footer { background: var(--dark-2, #111); border-top: 1px solid var(--border);
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.v { opacity: 1; transform: translateY(0); }
 
-  *,*::before,*::after{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, auto;}
-  a,button,[role=button],.service-card,.monitor-card,.machine-card{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, pointer;}
+*,*::before,*::after{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, auto;}
+a,button,[role=button],.post-card{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, pointer;}
 </style>
 </head>
 <body style="overflow-x:hidden;">
@@ -387,22 +310,36 @@ footer { background: var(--dark-2, #111); border-top: 1px solid var(--border);
   <a href="index.html" class="nav-logo">FORBACH &amp; PARTNERS</a>
   <div class="nav-links">
     <a href="index.html" class="nav-link">Home</a>
-    <a href="ueber-uns.html" class="nav-link">Über uns</a>
-    <a href="cnc-fraeszentren.html" class="nav-link">CNC</a>
-    <a href="spritzguss.html" class="nav-link">Spritzguss</a>
-    <a href="robotik.html" class="nav-link">Robotik</a>
-    <a href="blog.html" class="nav-link active" class="nav-link active">Blog</a>
+    <a href="ueber-uns.html" class="nav-link"><span class="de">Über uns</span><span class="en">About Us</span></a>
+    <a href="cnc-fraeszentren.html" class="nav-link">CNC-Anlagen</a>
+    <a href="blog.html" class="nav-link active">Blog</a>
+    <a href="kontakt.html" class="nav-link"><span class="de">Kontakt</span><span class="en">Contact</span></a>
   </div>
-  <a href="mailto:info@forbachandpartners.com" class="nav-cta">Termin vereinbaren</a>
+  <div class="lang-toggle-nav">
+    <button class="lang-btn-nav btn-de active" onclick="setLang('de')">DE</button>
+    <button class="lang-btn-nav btn-en" onclick="setLang('en')">EN</button>
+  </div>
+  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">
+    <span class="de">📞 Jetzt anrufen</span><span class="en">📞 Call Now</span>
+  </a>
+  <a href="kontakt.html" class="nav-cta">
+    <span class="de">Termin vereinbaren</span><span class="en">Schedule a Call</span>
+  </a>
 </nav>
 
 <!-- ══ HERO ══ -->
 <section class="blog-hero">
   <div class="blog-hero-bg"></div>
   <div class="blog-hero-inner">
-    <div class="eyebrow">Insights &amp; Expertenwissen</div>
+    <div class="eyebrow">
+      <span class="de">Insights &amp; Expertenwissen</span>
+      <span class="en">Insights &amp; Expert Knowledge</span>
+    </div>
     <h1>PREDICTIVE<br><span class="gold">INTELLIGENCE</span><br>BLOG</h1>
-    <p class="blog-hero-sub">Praxis-Einblicke, Technologie-Updates und Fallstudien rund um KI-gestützte Zustandsüberwachung im Maschinenbau. Von Sascha Forbach und dem Team.</p>
+    <p class="blog-hero-sub">
+      <span class="de">Praxis-Einblicke, Technologie-Updates und Fallstudien rund um KI-gestützte Zustandsüberwachung im Maschinenbau. Von Sascha Forbach und dem Team.</span>
+      <span class="en">Practical insights, technology updates and case studies on AI-driven condition monitoring in mechanical engineering. From Sascha Forbach and the team.</span>
+    </p>
   </div>
 </section>
 
@@ -410,7 +347,7 @@ footer { background: var(--dark-2, #111); border-top: 1px solid var(--border);
 <div class="blog-controls">
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
-    <input type="text" id="searchInput" placeholder="Artikel suchen…" oninput="filterPosts()">
+    <input type="text" id="searchInput" oninput="filterPosts()">
   </div>
   <div class="category-tabs" id="catTabs"></div>
 </div>
@@ -421,61 +358,60 @@ footer { background: var(--dark-2, #111); border-top: 1px solid var(--border);
 <main>
   <div class="post-grid" id="postGrid"></div>
   <div class="no-results" id="noResults" style="display:none">
-    Keine Artikel gefunden. Versuche einen anderen Suchbegriff oder eine andere Kategorie.
+    <span class="de">Keine Artikel gefunden. Versuche einen anderen Suchbegriff oder eine andere Kategorie.</span>
+    <span class="en">No articles found. Try a different search term or category.</span>
   </div>
 </main>
 
 <!-- ══ POST DETAIL OVERLAY ══ -->
 <div class="post-overlay" id="postOverlay">
   <div class="post-detail" id="postDetail"></div>
-  <button class="post-close" onclick="closePost()">✕ SCHLIESSEN</button>
+  <button class="post-close" onclick="closePost()">
+    <span class="de">✕ SCHLIESSEN</span><span class="en">✕ CLOSE</span>
+  </button>
 </div>
 
 <footer>
   <div class="f-logo">FORBACH &amp; PARTNERS</div>
-  <div class="f-tag">Predictive Intelligence · Maschinenbau · Industry 4.0</div>
+  <div class="f-tag">
+    <span class="de">Predictive Intelligence · Maschinenbau · Industry 4.0</span>
+    <span class="en">Predictive Intelligence · Mechanical Engineering · Industry 4.0</span>
+  </div>
   <div class="f-links">
     <a class="f-link" href="index.html">Home</a>
-    <a class="f-link" href="ueber-uns.html">Über uns</a>
-    <a class="f-link" href="cnc-fraeszentren.html">CNC</a>
-    <a class="f-link" href="spritzguss.html">Spritzguss</a>
-    <a class="f-link" href="laserschneiden.html">Laser</a>
-    <a class="f-link" href="robotik.html">Robotik</a>
-    <a class="f-link" href="blog.html" class="nav-link active">Blog</a>
+    <a class="f-link" href="ueber-uns.html"><span class="de">Über uns</span><span class="en">About Us</span></a>
+    <a class="f-link" href="cnc-fraeszentren.html">CNC-Anlagen</a>
+    <a class="f-link" href="blog.html">Blog</a>
+    <a class="f-link" href="kontakt.html"><span class="de">Kontakt</span><span class="en">Contact</span></a>
     <a class="f-link" href="impressum.html">Impressum</a>
     <a class="f-link" href="datenschutz.html">Datenschutz</a>
   </div>
-  <div class="f-copy">© 2026 Forbach and Partners Ltd · Reg. Cyprus · Alle Rechte vorbehalten</div>
+  <div class="f-copy">© 2026 Forbach and Partners Ltd · Reg. Cyprus HE 483586 · <span class="de">Alle Rechte vorbehalten</span><span class="en">All Rights Reserved</span></div>
 </footer>
 
-
-<!-- ══════════════════════════════════════════════════════════════════
-     BLOG POSTS DATA
-     ─────────────────────────────────────────────────────────────────
-     SO FÜGEN SIE EINEN NEUEN ARTIKEL HINZU:
-     1. Kopieren Sie einen bestehenden Block von { bis }
-     2. Ändern Sie id (eindeutige Zahl), date, category, title, excerpt, tags, content
-     3. Setzen Sie featured: true nur für den neuesten Hauptartikel
-     4. Speichern Sie die Datei — fertig!
-══════════════════════════════════════════════════════════════════ -->
 <script src="blog-posts.js"></script>
 <script>
+// Language helper
+function t(de, en) {
+  return document.body.classList.contains('lang-en') ? en : de;
+}
 
-// ─────────────────────────────────────────────────────────────────────
-// KATEGORIEN — werden automatisch aus den Posts generiert
-// Zum Anpassen: einfach neue Kategorien in den Posts vergeben
-// ─────────────────────────────────────────────────────────────────────
 const ALL_CATEGORIES = ['Alle', ...new Set(POSTS.map(p => p.category))];
-
 let activeCategory = 'Alle';
 let searchQuery = '';
 
-// ── Render category tabs ──────────────────────────────────────────────
+// Update search placeholder on lang change
+function updateSearchPlaceholder() {
+  document.getElementById('searchInput').placeholder = t('Artikel suchen…', 'Search articles…');
+}
+
+// Render category tabs
 function renderCats() {
   const container = document.getElementById('catTabs');
-  container.innerHTML = ALL_CATEGORIES.map(cat => `
-    <button class="cat-tab${cat === activeCategory ? ' active' : ''}" onclick="setCategory('${cat}')">${cat}</button>
-  `).join('');
+  container.innerHTML = ALL_CATEGORIES.map(cat => {
+    const label = cat === 'Alle' ? t('Alle', 'All') : cat;
+    return `<button class="cat-tab${cat === activeCategory ? ' active' : ''}" onclick="setCategory('${cat}')">${label}</button>`;
+  }).join('');
 }
 
 function setCategory(cat) {
@@ -484,20 +420,21 @@ function setCategory(cat) {
   filterPosts();
 }
 
-// ── Filter & render posts ─────────────────────────────────────────────
+// Filter & render posts
 function filterPosts() {
   searchQuery = document.getElementById('searchInput').value.toLowerCase();
   const visible = POSTS.filter(p => {
     const matchCat = activeCategory === 'Alle' || p.category === activeCategory;
     const matchSearch = !searchQuery || [p.title, p.excerpt, p.category, ...p.tags]
-      .some(t => t.toLowerCase().includes(searchQuery));
+      .some(tx => tx.toLowerCase().includes(searchQuery));
     return matchCat && matchSearch;
   });
 
+  const totalCats = ALL_CATEGORIES.length - 1;
   document.getElementById('postsMeta').textContent =
     visible.length === POSTS.length
-      ? `${POSTS.length} Artikel · ${ALL_CATEGORIES.length - 1} Kategorien`
-      : `${visible.length} von ${POSTS.length} Artikeln`;
+      ? t(`${POSTS.length} Artikel · ${totalCats} Kategorien`, `${POSTS.length} Articles · ${totalCats} Categories`)
+      : t(`${visible.length} von ${POSTS.length} Artikeln`, `${visible.length} of ${POSTS.length} articles`);
 
   const grid = document.getElementById('postGrid');
   grid.innerHTML = visible.map((p, i) => `
@@ -510,14 +447,14 @@ function filterPosts() {
         <p class="post-excerpt" itemprop="description">${p.excerpt}</p>
       </div>
       <div class="post-tags">
-        ${p.tags.map(t => `<span class="post-tag" itemprop="keywords">${t}</span>`).join('')}
+        ${p.tags.map(tag => `<span class="post-tag" itemprop="keywords">${tag}</span>`).join('')}
       </div>
       <div class="post-card-footer">
         <div class="post-meta">
           <span class="post-date" itemprop="datePublished" content="${p.date}">${p.dateFormatted}</span>
           <span class="post-author" itemprop="author">${p.author} · ${p.readTime}</span>
         </div>
-        <span class="post-read-more">Lesen →</span>
+        <span class="post-read-more">${t('Lesen →', 'Read →')}</span>
       </div>
     </article>
   `).join('');
@@ -526,12 +463,11 @@ function filterPosts() {
   initReveal();
 }
 
-// ── Open post detail ──────────────────────────────────────────────────
+// Open post detail
 function openPost(id) {
   const p = POSTS.find(x => x.id === id);
   if (!p) return;
 
-  // Inject JSON-LD for this post (for SEO when crawled)
   const ldScript = document.getElementById('ld-current-post');
   if (ldScript) ldScript.remove();
   const ld = document.createElement('script');
@@ -545,11 +481,7 @@ function openPost(id) {
     "datePublished": p.date,
     "dateModified": p.date,
     "author": { "@type": "Person", "name": p.author },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Forbach and Partners Ltd",
-      "url": "https://www.forbachandpartners.com"
-    },
+    "publisher": { "@type": "Organization", "name": "Forbach and Partners Ltd", "url": "https://www.forbachandpartners.com" },
     "keywords": p.tags.join(', '),
     "articleSection": p.category,
     "url": `https://www.forbachandpartners.com/blog/${id}`
@@ -560,20 +492,20 @@ function openPost(id) {
     <div class="detail-eyebrow">
       <span class="detail-cat">${p.category}</span>
       <span class="detail-date">${p.dateFormatted}</span>
-      <span class="detail-read-time">· ${p.readTime} Lesezeit</span>
+      <span class="detail-read-time">· ${p.readTime} ${t('Lesezeit', 'read time')}</span>
     </div>
     <h1 class="detail-title">${p.title}</h1>
     <article class="detail-body" itemprop="articleBody">
       ${p.content}
     </article>
     <div class="detail-tags">
-      ${p.tags.map(t => `<span class="detail-tag">${t}</span>`).join('')}
+      ${p.tags.map(tag => `<span class="detail-tag">${tag}</span>`).join('')}
     </div>
     <div class="detail-author">
       <div class="author-avatar">${p.author.split(' ').map(n => n[0]).join('')}</div>
       <div>
         <div class="author-name">${p.author}</div>
-        <div class="author-role">Forbach &amp; Partners · Gründer & Experte</div>
+        <div class="author-role">Forbach &amp; Partners · ${t('Gründer & Experte', 'Founder & Expert')}</div>
       </div>
     </div>
   `;
@@ -588,10 +520,8 @@ function closePost() {
   document.body.style.overflow = '';
 }
 
-// Close overlay on Escape key
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePost(); });
 
-// ── Scroll reveal ─────────────────────────────────────────────────────
 function initReveal() {
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
@@ -599,8 +529,15 @@ function initReveal() {
   document.querySelectorAll('.reveal:not(.v)').forEach(el => obs.observe(el));
 }
 
-// ── Init ──────────────────────────────────────────────────────────────
+// Re-render on language change
+document.addEventListener('langChanged', () => {
+  updateSearchPlaceholder();
+  renderCats();
+  filterPosts();
+});
+
 document.addEventListener('DOMContentLoaded', () => {
+  updateSearchPlaceholder();
   renderCats();
   filterPosts();
 });

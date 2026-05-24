@@ -11,14 +11,6 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{scroll-behavior:smooth;overflow-x:hidden;max-width:100vw;}
 body{background:var(--black);color:var(--text);font-family:var(--font-b);line-height:1.6;}
-
-/* ── LANG TOGGLE ── */
-.en{display:none;}
-body.lang-en .de{display:none!important;}
-body.lang-en .en{display:block!important;}
-body.lang-en span.en{display:inline!important;}
-body.lang-en span.de{display:none!important;}
-
 *,*::before,*::after{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, auto;}
 a,button{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, pointer;}
 
@@ -44,6 +36,7 @@ h1{font-family:var(--font-d);font-size:clamp(2.5rem,6vw,5.5rem);line-height:0.92
 .contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:start;}
 @media(max-width:800px){.contact-grid{grid-template-columns:1fr;}}
 
+/* Kontaktinfos links */
 .contact-info-card{background:var(--dark-card);border:1px solid var(--border-strong);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;}
 .contact-info-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 .ci-label{font-family:var(--font-m);font-size:0.58rem;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:0.5rem;}
@@ -59,6 +52,7 @@ h1{font-family:var(--font-d);font-size:clamp(2.5rem,6vw,5.5rem);line-height:0.92
 .avail-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#00ff88;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
 
+/* Formular rechts */
 .form-card{background:var(--dark-card);border:1px solid var(--border-strong);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;}
 .form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 .form-label-top{font-family:var(--font-m);font-size:0.58rem;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:0.5rem;}
@@ -97,55 +91,48 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
   <a href="index.html" class="nav-logo">FORBACH & PARTNERS</a>
   <div class="nav-links">
     <a href="index.html" class="nav-link">Home</a>
-    <a href="ueber-uns.html" class="nav-link"><span class="de">Über uns</span><span class="en">About Us</span></a>
-    <a href="cnc-fraeszentren.html" class="nav-link">CNC-Anlagen</a>
+    <a href="ueber-uns.html" class="nav-link">Über uns</a>
+    <a href="cnc-fraeszentren.html" class="nav-link">CNC</a>
+    <a href="spritzguss.html" class="nav-link">Spritzguss</a>
+    <a href="robotik.html" class="nav-link">Robotik</a>
+    <a href="index.html#roi" class="nav-link">ROI-Rechner</a>
     <a href="blog.html" class="nav-link">Blog</a>
-    <a href="kontakt.html" class="nav-link active"><span class="de">Kontakt</span><span class="en">Contact</span></a>
+    <a href="kontakt.html" class="nav-link active">Kontakt</a>
   </div>
   <div class="lang-toggle-nav">
-    <button class="lang-btn-nav btn-de active" onclick="setLang('de')">DE</button>
-    <button class="lang-btn-nav btn-en" onclick="setLang('en')">EN</button>
-  </div>
-  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">
-    <span class="de">📞 Jetzt anrufen</span><span class="en">📞 Call Now</span>
-  </a>
-  <a href="kontakt.html" class="nav-cta">
-    <span class="de">Termin vereinbaren</span><span class="en">Schedule a Call</span>
-  </a>
+      <button class="lang-btn-nav btn-de active" onclick="setLang('de')">DE</button>
+      <button class="lang-btn-nav btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">📞 Jetzt anrufen</a>
+  <a href="#" onclick="openTerminModal(); return false;" class="nav-cta">Termin vereinbaren</a>
 </nav>
 
 <section class="hero">
   <div class="hero-inner">
-    <div class="eyebrow">
-      <span class="de">Kontakt</span><span class="en">Contact</span>
-    </div>
-    <h1>
-      <span class="de">SPRECHEN WIR<br><span class="gold">ÜBER IHR WERK</span></span>
-      <span class="en">LET'S TALK<br><span class="gold">ABOUT YOUR PLANT</span></span>
-    </h1>
-    <p class="hero-sub">
-      <span class="de">Kein Verkaufsgespräch, kein Skript. In 20 Minuten sehen Sie ob und wie wir Ihre Anlage überwachen können.</span>
-      <span class="en">No sales pitch, no script. In 20 minutes you'll see whether and how we can monitor your machines.</span>
-    </p>
+    <div class="eyebrow">Kontakt</div>
+    <h1>SPRECHEN WIR<br><span class="gold">ÜBER IHR WERK</span></h1>
+    <p class="hero-sub">Kein Verkaufsgespräch, kein Skript. In 20 Minuten sehen Sie ob und wie wir Ihre Anlage überwachen können.</p>
   </div>
 </section>
 
 <div class="main">
   <div class="contact-grid">
 
-    <!-- LEFT: Contact Info -->
+    <!-- LINKE SPALTE: Infos -->
     <div>
       <div class="contact-info-card">
-        <div class="ci-label">
-          <span class="de">Direktkontakt</span><span class="en">Direct Contact</span>
-        </div>
+        <div class="ci-label">Direktkontakt</div>
         <div class="ci-title">SASCHA<br><span class="gold">FORBACH</span></div>
 
         <div class="ci-item">
           <div class="ci-icon">📞</div>
           <div>
-            <div class="ci-text-label"><span class="de">Telefon</span><span class="en">Phone</span></div>
-            <div class="ci-text-val"><a href="tel:004921190989962">+49 211 90989962</a></div>
+            <div class="ci-text-label">Telefon</div>
+            <div class="ci-text-val"><div class="lang-toggle-nav">
+      <button class="lang-btn-nav btn-de active" onclick="setLang('de')">DE</button>
+      <button class="lang-btn-nav btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  <a href="tel:004921190989962">+49 211 90989962</a></div>
           </div>
         </div>
 
@@ -168,8 +155,8 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
         <div class="ci-item">
           <div class="ci-icon">🌍</div>
           <div>
-            <div class="ci-text-label"><span class="de">Hauptsitz</span><span class="en">Headquarters</span></div>
-            <div class="ci-text-val">Agias Irinis 46<br>8504 Paphos, <span class="de">Zypern</span><span class="en">Cyprus</span></div>
+            <div class="ci-text-label">Hauptsitz</div>
+            <div class="ci-text-val">Agias Irinis 46<br>8504 Paphos, Zypern</div>
           </div>
         </div>
 
@@ -181,25 +168,15 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
           </div>
         </div>
 
-        <div class="avail-badge">
-          ● <span class="de">Antwort innerhalb 24h</span><span class="en">Reply within 24h</span>
-        </div>
+        <div class="avail-badge">● Antwort innerhalb 24h</div>
       </div>
     </div>
 
-    <!-- RIGHT: Form -->
+    <!-- RECHTE SPALTE: Formular -->
     <div class="form-card">
-      <div class="form-label-top">
-        <span class="de">Erstgespräch vereinbaren</span><span class="en">Schedule a Discovery Call</span>
-      </div>
-      <div class="form-title">
-        <span class="de">TERMIN<br><span class="gold">ANFRAGEN</span></span>
-        <span class="en">REQUEST<br><span class="gold">A MEETING</span></span>
-      </div>
-      <p class="form-sub">
-        <span class="de">Kostenlos · Unverbindlich · 20 Minuten</span>
-        <span class="en">Free · No Obligation · 20 Minutes</span>
-      </p>
+      <div class="form-label-top">Erstgespräch vereinbaren</div>
+      <div class="form-title">TERMIN<br><span class="gold">ANFRAGEN</span></div>
+      <p class="form-sub">Kostenlos · Unverbindlich · 20 Minuten</p>
 
       <form id="kontaktForm" onsubmit="submitKontakt(event)">
         <input type="hidden" name="access_key" value="IHRE_WEB3FORMS_ACCESS_KEY_HIER">
@@ -208,70 +185,45 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
         <input type="hidden" name="redirect" value="false">
 
         <div style="margin-bottom:1rem;">
-          <div class="fl" style="margin-bottom:0.6rem;">
-            <span class="de">Meeting-Plattform</span><span class="en">Meeting Platform</span>
-          </div>
+          <div class="fl" style="margin-bottom:0.6rem;">Meeting-Plattform</div>
           <div class="plat-grid">
             <div class="plat-opt" onclick="selectPlat(this,'Microsoft Teams')">🟦 MS Teams</div>
             <div class="plat-opt" onclick="selectPlat(this,'Google Meet')">🟩 Google Meet</div>
             <div class="plat-opt" onclick="selectPlat(this,'Zoom')">🟦 Zoom</div>
             <div class="plat-opt" onclick="selectPlat(this,'FaceTime')">🍏 FaceTime</div>
-            <div class="plat-opt" onclick="selectPlat(this,'Telefon')" style="grid-column:1/-1;">
-              📞 <span class="de">Lieber per Telefon</span><span class="en">Prefer by Phone</span>
-            </div>
+            <div class="plat-opt" onclick="selectPlat(this,'Telefon')" style="grid-column:1/-1;">📞 Lieber per Telefon</div>
           </div>
           <input type="hidden" id="platVal" name="platform" value="">
         </div>
 
         <div class="form-grid">
-          <div class="fg">
-            <label class="fl"><span class="de">Ihr Name *</span><span class="en">Your Name *</span></label>
-            <input type="text" name="name" class="fi" placeholder="Max Mustermann" required>
-          </div>
-          <div class="fg">
-            <label class="fl"><span class="de">Unternehmen *</span><span class="en">Company *</span></label>
-            <input type="text" name="company" class="fi" placeholder="Musterfirma GmbH" required>
-          </div>
+          <div class="fg"><label class="fl">Ihr Name *</label><input type="text" name="name" class="fi" placeholder="Max Mustermann" required></div>
+          <div class="fg"><label class="fl">Unternehmen *</label><input type="text" name="company" class="fi" placeholder="Musterfirma GmbH" required></div>
         </div>
         <div class="form-grid">
-          <div class="fg">
-            <label class="fl">E-Mail *</label>
-            <input type="email" name="email" class="fi" placeholder="m.mustermann@firma.de" required>
-          </div>
-          <div class="fg">
-            <label class="fl"><span class="de">Telefon</span><span class="en">Phone</span></label>
-            <input type="tel" name="phone" class="fi" placeholder="+49 …">
-          </div>
+          <div class="fg"><label class="fl">E-Mail *</label><input type="email" name="email" class="fi" placeholder="m.mustermann@firma.de" required></div>
+          <div class="fg"><label class="fl">Telefon</label><input type="tel" name="phone" class="fi" placeholder="+49 …"></div>
         </div>
         <div class="fg" style="margin-bottom:1rem;">
-          <label class="fl"><span class="de">Maschinentyp</span><span class="en">Machine Type</span></label>
+          <label class="fl">Maschinentyp</label>
           <select name="machine_type" class="fs">
-            <option value=""><span class="de">Bitte wählen…</span><span class="en">Please select…</span></option>
-            <option>CNC-Fräszentrum (3-Achs)</option>
-            <option>CNC-Fräszentrum (5-Achs)</option>
-            <option>Bearbeitungszentrum (BAZ)</option>
-            <option>CNC-Drehzentrum</option>
-            <option>Dreh-Fräszentrum</option>
-            <option>Mehrere CNC-Anlagen</option>
-            <option>Sonstiges / Other</option>
+            <option value="">Bitte wählen…</option>
+            <option>CNC-Fräszentrum</option>
+            <option>Spritzgussmaschine</option>
+            <option>Laserschneidanlage</option>
+            <option>Schweißroboter</option>
+            <option>Hydraulik-Aggregat</option>
+            <option>Verpackungslinie</option>
+            <option>Mehrere Typen</option>
           </select>
         </div>
         <div class="fg" style="margin-bottom:1rem;">
-          <label class="fl"><span class="de">Ihre Nachricht *</span><span class="en">Your Message *</span></label>
-          <textarea name="message" class="ft" id="kontaktTextarea" required></textarea>
+          <label class="fl">Ihre Nachricht *</label>
+          <textarea name="message" class="ft" placeholder="Anzahl Maschinen, aktuelles Problem, was Sie sich wünschen…" required></textarea>
         </div>
-        <button type="submit" class="btn-submit" id="kontaktSubmitBtn">
-          <span class="de">KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →</span>
-          <span class="en">REQUEST FREE DISCOVERY CALL →</span>
-        </button>
-        <div class="msg-success" id="kontaktSuccess">
-          <span class="de">✓ NACHRICHT ERHALTEN — Sascha Forbach meldet sich persönlich innerhalb von 24 Stunden.</span>
-          <span class="en">✓ MESSAGE RECEIVED — Sascha Forbach will get back to you personally within 24 hours.</span>
-        </div>
-        <div class="msg-error" id="kontaktError">
-          <span class="de">Fehler beim Senden. Bitte direkt an info@forbachandpartners.com schreiben.</span>
-          <span class="en">Error sending. Please write directly to info@forbachandpartners.com</span>
-        </div>
+        <button type="submit" class="btn-submit" id="kontaktSubmitBtn">KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →</button>
+        <div class="msg-success" id="kontaktSuccess">✓ NACHRICHT ERHALTEN — Sascha Forbach meldet sich persönlich innerhalb von 24 Stunden.</div>
+        <div class="msg-error" id="kontaktError">Fehler beim Senden. Bitte direkt an info@forbachandpartners.com schreiben.</div>
       </form>
     </div>
 
@@ -280,46 +232,32 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
 
 <footer>
   <div class="f-logo">FORBACH & PARTNERS</div>
-  <div class="f-tag">
-    <span class="de">Predictive Intelligence · Maschinenbau · Industry 4.0</span>
-    <span class="en">Predictive Intelligence · Mechanical Engineering · Industry 4.0</span>
-  </div>
+  <div class="f-tag">Predictive Intelligence · Maschinenbau · Industry 4.0</div>
   <div class="f-links">
     <a class="f-link" href="index.html">Home</a>
-    <a class="f-link" href="ueber-uns.html"><span class="de">Über uns</span><span class="en">About Us</span></a>
-    <a class="f-link" href="cnc-fraeszentren.html">CNC-Anlagen</a>
+    <a class="f-link" href="ueber-uns.html">Über uns</a>
+    <a class="f-link" href="cnc-fraeszentren.html">CNC</a>
+    <a class="f-link" href="spritzguss.html">Spritzguss</a>
+    <a class="f-link" href="laserschneiden.html">Laser</a>
+    <a class="f-link" href="robotik.html">Robotik</a>
     <a class="f-link" href="blog.html">Blog</a>
-    <a class="f-link" href="kontakt.html"><span class="de">Kontakt</span><span class="en">Contact</span></a>
+    <a class="f-link" href="kontakt.html">Kontakt</a>
     <a class="f-link" href="impressum.html">Impressum</a>
     <a class="f-link" href="datenschutz.html">Datenschutz</a>
   </div>
-  <div class="f-copy">© 2026 Forbach and Partners Ltd · Reg. Cyprus HE 483586 · <span class="de">Alle Rechte vorbehalten</span><span class="en">All Rights Reserved</span></div>
+  <div class="f-copy">© 2026 Forbach and Partners Ltd · Reg. Cyprus HE 483586 · Alle Rechte vorbehalten</div>
 </footer>
 
 <script>
-// Textarea placeholder based on language
-function updateKontaktPlaceholder(){
-  var ta = document.getElementById('kontaktTextarea');
-  if(!ta) return;
-  ta.placeholder = document.body.classList.contains('lang-en')
-    ? 'Number of machines, current problem, what you need…'
-    : 'Anzahl Maschinen, aktuelles Problem, was Sie sich wünschen…';
-}
-document.addEventListener('langChanged', updateKontaktPlaceholder);
-updateKontaktPlaceholder();
-
 function selectPlat(el, val){
   document.querySelectorAll('.plat-opt').forEach(function(o){ o.classList.remove('sel'); });
   el.classList.add('sel');
   document.getElementById('platVal').value = val;
 }
-
 async function submitKontakt(e){
   e.preventDefault();
   var btn = document.getElementById('kontaktSubmitBtn');
-  var isEn = document.body.classList.contains('lang-en');
-  btn.disabled = true;
-  btn.innerHTML = isEn ? 'SENDING…' : 'WIRD GESENDET…';
+  btn.disabled = true; btn.textContent = 'WIRD GESENDET…';
   try {
     var res = await fetch('https://api.web3forms.com/submit', { method:'POST', body: new FormData(e.target) });
     var json = await res.json();
@@ -328,10 +266,7 @@ async function submitKontakt(e){
       btn.style.display = 'none';
     } else { throw new Error(); }
   } catch(err){
-    btn.disabled = false;
-    btn.innerHTML = isEn
-      ? '<span class="de">KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →</span><span class="en">REQUEST FREE DISCOVERY CALL →</span>'
-      : '<span class="de">KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →</span><span class="en">REQUEST FREE DISCOVERY CALL →</span>';
+    btn.disabled = false; btn.textContent = 'KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →';
     document.getElementById('kontaktError').style.display = 'block';
   }
 }

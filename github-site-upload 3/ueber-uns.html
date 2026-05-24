@@ -19,13 +19,6 @@
 html,body{scroll-behavior:smooth;overflow-x:hidden;max-width:100vw;}
 body{background:var(--black);color:var(--text);font-family:var(--font-b);line-height:1.6;overflow-x:hidden;}
 
-/* ── LANG TOGGLE ── */
-.en{display:none;}
-body.lang-en .de{display:none!important;}
-body.lang-en .en{display:block!important;}
-body.lang-en span.en{display:inline!important;}
-body.lang-en span.de{display:none!important;}
-
 nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:100;background:rgba(0,0,0,0.88);backdrop-filter:blur(20px);border:1px solid var(--border-strong);border-radius:14px;padding:0 2rem;height:58px;display:flex;align-items:center;justify-content:space-between;gap:2rem;width:min(1200px,calc(100vw - 2rem));}
 .nav-logo{font-family:var(--font-d);font-size:1.2rem;letter-spacing:2px;background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;white-space:nowrap;}
 .nav-links{display:flex;gap:0.25rem;}
@@ -34,7 +27,6 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:100;back
 .nav-link.active{color:var(--gold);}
 .nav-cta{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);color:#000;padding:0.4rem 1.1rem;border-radius:6px;font-weight:700;font-size:0.78rem;text-decoration:none;white-space:nowrap;transition:all 0.2s;}
 .nav-cta:hover{box-shadow:0 4px 20px rgba(248,223,165,0.3);transform:translateY(-1px);}
-@media(max-width:900px){.nav-links{display:none;}}
 
 /* HERO */
 .hero{min-height:80vh;display:flex;align-items:center;padding:140px 2rem 80px;position:relative;overflow:hidden;}
@@ -69,6 +61,7 @@ h1 .gold{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-back
 .founder-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 .founder-card::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 20% 50%,rgba(228,177,94,0.04) 0%,transparent 60%);pointer-events:none;}
 
+/* Portrait — large, premium */
 .portrait-wrap{position:relative;}
 .portrait-frame{
   width:100%;aspect-ratio:3/4;border-radius:16px;
@@ -120,6 +113,30 @@ h2{font-family:var(--font-d);font-size:clamp(2.2rem,4vw,4rem);letter-spacing:1px
 h2 .gold{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
 .section-sub{font-size:0.95rem;color:var(--text-dim);max-width:580px;line-height:1.75;margin-bottom:3rem;}
 
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+@media(max-width:1100px){.team-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.team-grid{grid-template-columns:1fr;}}
+
+.team-card{
+  background:var(--dark-card);border:1px solid var(--border);
+  border-radius:18px;overflow:hidden;
+  transition:all 0.35s;position:relative;
+}
+.team-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity 0.3s;}
+.team-card:hover::before{opacity:1;}
+.team-card:hover{border-color:var(--border-strong);transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,0.7);}
+
+.team-portrait{width:100%;aspect-ratio:1;background:var(--dark-3);position:relative;overflow:hidden;}
+.team-portrait svg{width:100%;height:100%;}
+
+.team-info{padding:1.25rem;}
+.team-name{font-size:1.05rem;font-weight:700;margin-bottom:2px;}
+.team-role{font-family:var(--font-m);font-size:0.58rem;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:0.75rem;}
+.team-exp{font-size:0.78rem;color:var(--text-dim);line-height:1.6;margin-bottom:0.75rem;}
+.team-skills{display:flex;flex-wrap:wrap;gap:5px;}
+.ts-tag{font-family:var(--font-m);font-size:0.5rem;color:var(--text-muted);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:3px;padding:2px 7px;letter-spacing:0.8px;text-transform:uppercase;}
+.team-years{position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-family:var(--font-m);font-size:0.55rem;color:var(--gold);letter-spacing:1px;}
+
 /* VALUES SECTION */
 .values-section{padding:5rem 2rem;background:var(--dark-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
 .values-inner{max-width:1200px;margin:0 auto;}
@@ -129,6 +146,17 @@ h2 .gold{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-back
 .vc-icon{font-size:2rem;margin-bottom:1rem;}
 .vc-title{font-size:1.1rem;font-weight:700;margin-bottom:0.6rem;}
 .vc-desc{font-size:0.82rem;color:var(--text-dim);line-height:1.7;}
+
+/* CTA */
+.cta-section{padding:6rem 2rem;text-align:center;}
+.cta-inner{max-width:640px;margin:0 auto;}
+.cta-title{font-family:var(--font-d);font-size:clamp(2.5rem,5vw,5rem);letter-spacing:2px;margin-bottom:1rem;}
+.cta-sub{font-size:1rem;color:var(--text-dim);margin-bottom:2.5rem;line-height:1.7;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-gold{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);color:#000;padding:0.85rem 2rem;border-radius:8px;font-weight:700;font-size:0.875rem;text-decoration:none;border:none;cursor:pointer;transition:all 0.3s;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(248,223,165,0.35);}
+.btn-outline{background:transparent;color:var(--gold);padding:0.85rem 2rem;border-radius:8px;font-weight:600;font-size:0.875rem;text-decoration:none;border:1px solid var(--border-strong);cursor:pointer;transition:all 0.3s;}
+.btn-outline:hover{background:rgba(228,177,94,0.08);}
 
 footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 2rem 2rem;text-align:center;}
 .f-logo{font-family:var(--font-d);font-size:1.6rem;letter-spacing:2px;background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.35rem;}
@@ -142,17 +170,17 @@ footer{background:var(--dark-2);border-top:1px solid var(--border);padding:3rem 
 .reveal.v{opacity:1;transform:translateY(0);}
 .rd1{transition-delay:0.1s;}.rd2{transition-delay:0.15s;}.rd3{transition-delay:0.2s;}.rd4{transition-delay:0.25s;}.rd5{transition-delay:0.3s;}.rd6{transition-delay:0.35s;}.rd7{transition-delay:0.4s;}
 
-*,*::before,*::after{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, auto;}
-a,button,[role=button],.value-card,.av-card{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, pointer;}
+  *,*::before,*::after{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, auto;}
+  a,button,[role=button],.service-card,.monitor-card,.machine-card{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='22' viewBox='0 0 18 22'%3E%3Cpath fill='%23e4b15e' stroke='%23000' stroke-width='1.2' stroke-linejoin='round' d='M3 1 L3 17 L7 13 L10 20 L12 19 L9 12 L15 12 Z'/%3E%3C/svg%3E") 3 1, pointer;}
 
-/* CONTACT FORM */
-.contact-section{padding:5rem 2rem;background:var(--dark-2);border-top:1px solid rgba(228,177,94,0.15);}
+/* ── CONTACT FORM ── */
+.contact-section{padding:5rem 2rem;background:var(--dark-2,#111);border-top:1px solid rgba(228,177,94,0.15);}
 .contact-inner{max-width:680px;margin:0 auto;}
 .contact-form{display:grid;gap:1rem;margin-top:2.5rem;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
 @media(max-width:600px){.form-row{grid-template-columns:1fr;}}
 .form-group{display:flex;flex-direction:column;gap:0.4rem;}
-.form-label{font-family:var(--font-m);font-size:0.62rem;color:rgba(228,177,94,0.8);text-transform:uppercase;letter-spacing:2px;}
+.form-label{font-family:var(--font-m,'JetBrains Mono',monospace);font-size:0.62rem;color:rgba(228,177,94,0.8);text-transform:uppercase;letter-spacing:2px;}
 .form-input,.form-select,.form-textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(228,177,94,0.2);border-radius:8px;padding:0.75rem 1rem;color:#fff;font-family:inherit;font-size:0.875rem;transition:border-color 0.2s,background 0.2s;width:100%;}
 .form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:rgba(228,177,94,0.7);background:rgba(228,177,94,0.04);}
 .form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23e4b15e' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;}
@@ -161,19 +189,9 @@ a,button,[role=button],.value-card,.av-card{cursor:url("data:image/svg+xml,%3Csv
 .form-submit{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);color:#000;border:none;padding:0.9rem 2rem;border-radius:8px;font-weight:700;font-size:0.875rem;cursor:pointer;transition:all 0.3s;letter-spacing:0.5px;width:100%;}
 .form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(248,223,165,0.35);}
 .form-submit:disabled{opacity:0.6;transform:none;cursor:not-allowed;}
-.form-success{display:none;background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.3);border-radius:10px;padding:1.5rem;text-align:center;color:#00ff88;font-family:var(--font-m);font-size:0.8rem;letter-spacing:1px;}
+.form-success{display:none;background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.3);border-radius:10px;padding:1.5rem;text-align:center;color:#00ff88;font-family:var(--font-m,'JetBrains Mono',monospace);font-size:0.8rem;letter-spacing:1px;}
 .form-error{display:none;background:rgba(255,56,96,0.08);border:1px solid rgba(255,56,96,0.3);border-radius:10px;padding:1rem;text-align:center;color:#ff3860;font-size:0.8rem;}
 
-/* TEAM CARDS */
-.av-card{background:var(--dark-card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all 0.4s ease;text-align:center;}
-.av-img-box{position:relative;background:#111;height:220px;overflow:hidden;}
-.av-img-box img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) brightness(0.75);transition:all 0.5s ease;}
-.av-badge{position:absolute;top:10px;right:10px;background:var(--gold);color:#000;font-family:var(--font-m);font-size:0.55rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
-.av-card:hover{border-color:var(--gold);transform:translateY(-5px);box-shadow:0 12px 40px rgba(228,177,94,0.12);}
-.av-card:hover .av-img-box img{filter:grayscale(0%) brightness(1);}
-.av-info{padding:18px;}
-.av-info h3{color:var(--gold);font-family:var(--font-d);font-size:1.05rem;margin-bottom:5px;letter-spacing:1px;}
-.av-role{color:var(--text-dim);font-size:0.72rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;}
 </style>
 </head>
 <body style="overflow-x:hidden;">
@@ -181,56 +199,33 @@ a,button,[role=button],.value-card,.av-card{cursor:url("data:image/svg+xml,%3Csv
 <nav>
   <a href="index.html" class="nav-logo">FORBACH & PARTNERS</a>
   <div class="nav-links">
-    <a href="index.html" class="nav-link"><span class="de">Home</span><span class="en">Home</span></a>
-    <a href="ueber-uns.html" class="nav-link active"><span class="de">Über uns</span><span class="en">About Us</span></a>
-    <a href="cnc-fraeszentren.html" class="nav-link">CNC-Anlagen</a>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="ueber-uns.html" class="nav-link active" class="nav-link active">Über uns</a>
+    <a href="cnc-fraeszentren.html" class="nav-link">CNC</a>
+    <a href="spritzguss.html" class="nav-link">Spritzguss</a>
+    <a href="robotik.html" class="nav-link">Robotik</a>
+    <a href="index.html#roi" class="nav-link">ROI-Rechner</a>
     <a href="blog.html" class="nav-link">Blog</a>
-    <a href="kontakt.html" class="nav-link"><span class="de">Kontakt</span><span class="en">Contact</span></a>
   </div>
   <div class="lang-toggle-nav">
-    <button class="lang-btn-nav btn-de active" onclick="setLang('de')">DE</button>
-    <button class="lang-btn-nav btn-en" onclick="setLang('en')">EN</button>
-  </div>
-  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">
-    <span class="de">📞 Jetzt anrufen</span><span class="en">📞 Call Now</span>
-  </a>
-  <a href="kontakt.html" class="nav-cta">
-    <span class="de">Termin vereinbaren</span><span class="en">Schedule a Call</span>
-  </a>
+      <button class="lang-btn-nav btn-de active" onclick="setLang('de')">DE</button>
+      <button class="lang-btn-nav btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  <a href="tel:004921190989962" style="font-family:monospace;font-size:0.7rem;color:#a0a0a0;text-decoration:none;white-space:nowrap;margin-right:0.5rem;">📞 Jetzt anrufen</a><a href="mailto:info@forbachandpartners.com" class="nav-cta">Termin vereinbaren</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-inner">
-    <div class="eyebrow">
-      <span class="de">Über uns</span><span class="en">About Us</span>
-    </div>
-    <h1>
-      <span class="de">EXPERTEN.<br><span class="gold">KEIN BLABLA.</span><br>NUR ERGEBNISSE.</span>
-      <span class="en">EXPERTS.<br><span class="gold">NO FLUFF.</span><br>ONLY RESULTS.</span>
-    </h1>
-    <p class="hero-sub">
-      <span class="de">Wir sind ein Team aus Maschinenbau-Ingenieuren, KI-Spezialisten und Industriepraktikern — vereint durch eine Mission: Produktionsausfälle zu eliminieren, bevor sie entstehen.</span>
-      <span class="en">We are a team of mechanical engineers, AI specialists and industry practitioners — united by one mission: eliminating production downtime before it happens.</span>
-    </p>
+    <div class="eyebrow">Über uns</div>
+    <h1>EXPERTEN.<br><span class="gold">KEIN BLABLA.</span><br>NUR ERGEBNISSE.</h1>
+    <p class="hero-sub">Wir sind ein Team aus Maschinenbau-Ingenieuren, KI-Spezialisten und Industriepraktikern — vereint durch eine Mission: Produktionsausfälle zu eliminieren, bevor sie entstehen.</p>
     <div class="stats-row">
-      <div class="stat-item">
-        <span class="stat-val">12+</span>
-        <span class="stat-lbl"><span class="de">Jahre Branchenerfahrung</span><span class="en">Years Industry Experience</span></span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-val">4</span>
-        <span class="stat-lbl"><span class="de">Jahre KI-Entwicklung</span><span class="en">Years AI Development</span></span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-val">6</span>
-        <span class="stat-lbl"><span class="de">Maschinentypen</span><span class="en">Machine Types</span></span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-val">100%</span>
-        <span class="stat-lbl"><span class="de">Fokus auf Produktion</span><span class="en">Focus on Production</span></span>
-      </div>
+      <div class="stat-item"><span class="stat-val">12+</span><span class="stat-lbl">Jahre Branchenerfahrung</span></div>
+      <div class="stat-item"><span class="stat-val">4</span><span class="stat-lbl">Jahre KI-Entwicklung</span></div>
+      <div class="stat-item"><span class="stat-val">6</span><span class="stat-lbl">Maschinentypen</span></div>
+      <div class="stat-item"><span class="stat-val">100%</span><span class="stat-lbl">Fokus auf Produktion</span></div>
     </div>
   </div>
 </section>
@@ -242,6 +237,7 @@ a,button,[role=button],.value-card,.av-card{cursor:url("data:image/svg+xml,%3Csv
     <!-- Portrait -->
     <div class="portrait-wrap">
       <div class="portrait-frame">
+        <!-- Professional AI-style SVG portrait — Sascha Forbach, male, 35-45, confident, dark background -->
         <svg viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
           <defs>
             <radialGradient id="bgGrad" cx="50%" cy="30%" r="70%">
@@ -264,123 +260,135 @@ a,button,[role=button],.value-card,.av-card{cursor:url("data:image/svg+xml,%3Csv
             <filter id="soft"><feGaussianBlur stdDeviation="1.2"/></filter>
             <filter id="softer"><feGaussianBlur stdDeviation="2.5"/></filter>
           </defs>
+
+          <!-- Background -->
           <rect width="420" height="560" fill="url(#bgGrad)"/>
           <ellipse cx="210" cy="140" rx="180" ry="120" fill="url(#lightGrad)"/>
+
+          <!-- Suit / body — dark navy blazer -->
           <path d="M0 560 L0 370 Q60 340 105 320 L130 430 L160 390 L210 410 L260 390 L290 430 L315 320 Q360 340 420 370 L420 560 Z" fill="#0d1520"/>
+          <!-- Suit lapels -->
           <path d="M160 390 L130 320 L175 350 L210 410 Z" fill="#1a2535"/>
           <path d="M260 390 L290 320 L245 350 L210 410 Z" fill="#1a2535"/>
+          <!-- Tie -->
           <path d="M210 355 L200 380 L205 395 L210 410 L215 395 L220 380 Z" fill="#8a1c1c"/>
           <path d="M200 355 L210 355 L220 355 L215 365 L205 365 Z" fill="#6a1010"/>
+          <!-- Shirt collar white -->
           <path d="M175 345 L210 360 L245 345 L240 330 L210 340 L180 330 Z" fill="#e8e8e8"/>
+
+          <!-- Neck -->
           <ellipse cx="210" cy="315" rx="28" ry="30" fill="url(#skinGrad)"/>
           <ellipse cx="210" cy="315" rx="28" ry="30" fill="url(#skinShad)"/>
+
+          <!-- Head shape -->
           <ellipse cx="210" cy="210" rx="90" ry="108" fill="url(#skinGrad)"/>
           <ellipse cx="210" cy="210" rx="90" ry="108" fill="url(#skinShad)"/>
+
+          <!-- Jaw / chin definition -->
           <path d="M135 240 Q140 300 160 320 Q185 335 210 338 Q235 335 260 320 Q280 300 285 240" fill="url(#skinGrad)" opacity="0.6"/>
+
+          <!-- Hair — dark brown, short, professional side part -->
           <path d="M125 170 Q130 110 160 95 Q185 82 210 80 Q240 82 265 95 Q295 115 295 175 Q290 150 270 135 Q245 120 210 118 Q175 120 150 135 Q130 148 125 170 Z" fill="#1a0f08"/>
           <path d="M125 170 Q122 195 128 210 Q126 190 132 178 Q140 155 160 140 Q180 128 210 126 Q240 128 260 140 Q280 155 288 178 Q293 190 292 210 Q298 195 295 175 Q290 150 270 135 Q245 120 210 118 Q175 120 150 135 Q130 148 125 170 Z" fill="#100a05"/>
+          <!-- Side part detail -->
           <path d="M155 112 Q165 108 180 108" stroke="#2a1a0e" stroke-width="2" fill="none"/>
+
+          <!-- Eyebrows — strong, dark -->
           <path d="M155 185 Q170 178 188 180" stroke="#1a0f08" stroke-width="4" fill="none" stroke-linecap="round"/>
           <path d="M232 180 Q250 178 265 185" stroke="#1a0f08" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+          <!-- Eyes -->
+          <!-- Left eye -->
           <ellipse cx="172" cy="200" rx="16" ry="10" fill="#fff" opacity="0.95"/>
           <ellipse cx="174" cy="200" rx="10" ry="9" fill="#3a2010"/>
           <ellipse cx="174" cy="200" rx="6.5" ry="6.5" fill="#1a0f06"/>
           <ellipse cx="177" cy="197" rx="2" ry="2" fill="#fff" opacity="0.8"/>
           <path d="M156 195 Q172 188 188 196" stroke="#1a0f08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
           <path d="M156 205 Q172 212 188 205" stroke="#8a7060" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+          <!-- Right eye -->
           <ellipse cx="248" cy="200" rx="16" ry="10" fill="#fff" opacity="0.95"/>
           <ellipse cx="246" cy="200" rx="10" ry="9" fill="#3a2010"/>
           <ellipse cx="246" cy="200" rx="6.5" ry="6.5" fill="#1a0f06"/>
           <ellipse cx="249" cy="197" rx="2" ry="2" fill="#fff" opacity="0.8"/>
           <path d="M232 196 Q248 188 264 195" stroke="#1a0f08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
           <path d="M232 205 Q248 212 264 205" stroke="#8a7060" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+          <!-- Nose -->
           <path d="M210 205 L205 235 Q210 242 215 235 Z" fill="#a06840" opacity="0.5"/>
           <ellipse cx="203" cy="236" rx="7" ry="5" fill="#8a5830" opacity="0.4"/>
           <ellipse cx="217" cy="236" rx="7" ry="5" fill="#8a5830" opacity="0.4"/>
           <path d="M197 240 Q210 246 223 240" stroke="#7a4820" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+          <!-- Mouth — subtle confident smile -->
           <path d="M185 270 Q198 280 210 278 Q222 280 235 270" stroke="#8a5030" stroke-width="2.5" fill="none" stroke-linecap="round"/>
           <path d="M190 270 Q210 276 230 270" stroke="#c07840" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+          <!-- Cheekbones / face shading -->
           <ellipse cx="155" cy="230" rx="28" ry="20" fill="#a06040" opacity="0.12"/>
           <ellipse cx="265" cy="230" rx="28" ry="20" fill="#a06040" opacity="0.12"/>
+
+          <!-- Ears -->
           <ellipse cx="123" cy="215" rx="12" ry="18" fill="url(#skinGrad)"/>
           <ellipse cx="123" cy="215" rx="8" ry="13" fill="#9a6840" opacity="0.4"/>
           <ellipse cx="297" cy="215" rx="12" ry="18" fill="url(#skinGrad)"/>
           <ellipse cx="297" cy="215" rx="8" ry="13" fill="#9a6840" opacity="0.4"/>
+
+          <!-- Short beard / stubble effect -->
           <path d="M175 260 Q210 278 245 260 Q248 275 245 285 Q230 305 210 308 Q190 305 175 285 Q172 275 175 260 Z" fill="#1a0f08" opacity="0.25"/>
+
+          <!-- Gold light rim on face -->
           <path d="M125 165 Q122 210 130 250" stroke="#e4b15e" stroke-width="1" fill="none" opacity="0.15"/>
           <ellipse cx="210" cy="190" rx="88" ry="106" fill="none" stroke="#e4b15e" stroke-width="0.5" opacity="0.08"/>
+
+          <!-- Overlay gradient bottom -->
           <rect x="0" y="400" width="420" height="160" fill="url(#bgGrad)" opacity="0.7"/>
         </svg>
         <div class="portrait-badge">
           <div class="pb-name">SASCHA FORBACH</div>
-          <div class="pb-title">
-            <span class="de">Gründer & Geschäftsführer · Forbach and Partners Ltd</span>
-            <span class="en">Founder & CEO · Forbach and Partners Ltd</span>
-          </div>
+          <div class="pb-title">Gründer & Geschäftsführer · Forbach and Partners Ltd</div>
         </div>
       </div>
     </div>
 
     <!-- Info -->
     <div>
-      <div class="founder-tag">
-        <span class="de">Gründer & CEO</span><span class="en">Founder & CEO</span>
-      </div>
+            <div class="founder-tag">Gründer & CEO</div>
       <div class="founder-name">SASCHA<br>FORBACH</div>
-      <div class="founder-role">
-        <span class="de">Gründer & Geschäftsführer · Forbach and Partners Ltd</span>
-        <span class="en">Founder & CEO · Forbach and Partners Ltd</span>
-      </div>
+      <div class="founder-role">Gründer & Geschäftsführer · Forbach and Partners Ltd</div>
       <p class="founder-bio">
-        <span class="de">
-          Sascha Forbach hat BWL studiert und ist seit über <strong>12 Jahren selbstständig</strong> — begonnen in der Unternehmensberatung mit Fokus auf produzierende Betriebe, heute Gründer eines Software- und KI-Unternehmens das eigene Lösungen entwickelt.
-          <br><br>
-          Vor 4 Jahren hat er Forbach and Partners konsequent auf <strong>eigene Software- und KI-Entwicklung</strong> ausgerichtet. Das Ergebnis: ein Predictive-Maintenance-System das aus der Praxis des Maschinenbaus heraus gebaut wurde — nicht aus dem Lehrbuch.
-          <br><br>
-          Er weiß was Produktionsleiter und Geschäftsführer wirklich brauchen: <strong>keine schönen Präsentationen, sondern messbare Ergebnisse</strong>. Zuverlässigkeit und Verantwortungsbewusstsein sind für ihn keine Marketingworte — sondern die Grundlage jeder Kundenbeziehung.
-        </span>
-        <span class="en">
-          Sascha Forbach studied business administration and has been <strong>self-employed for over 12 years</strong> — starting in management consulting with a focus on manufacturing companies, now founder of a software and AI company building its own solutions.
-          <br><br>
-          Four years ago he pivoted Forbach and Partners fully toward <strong>proprietary software and AI development</strong>. The result: a predictive maintenance system built from real-world manufacturing practice — not from a textbook.
-          <br><br>
-          He knows what production managers and business owners actually need: <strong>not polished presentations, but measurable results</strong>. Reliability and accountability are not marketing buzzwords for him — they are the foundation of every client relationship.
-        </span>
+        Sascha Forbach hat BWL studiert und ist seit über <strong>12 Jahren selbstständig</strong> — begonnen in der Unternehmensberatung mit Fokus auf produzierende Betriebe, heute Gründer eines Software- und KI-Unternehmens das eigene Lösungen entwickelt.
+        <br><br>
+        Vor 4 Jahren hat er Forbach and Partners konsequent auf <strong>eigene Software- und KI-Entwicklung</strong> ausgerichtet. Das Ergebnis: ein Predictive-Maintenance-System das aus der Praxis des Maschinenbaus heraus gebaut wurde — nicht aus dem Lehrbuch.
+        <br><br>
+        Er weiß was Produktionsleiter und Geschäftsführer wirklich brauchen: <strong>keine schönen Präsentationen, sondern messbare Ergebnisse</strong>. Zuverlässigkeit und Verantwortungsbewusstsein sind für ihn keine Marketingworte — sondern die Grundlage jeder Kundenbeziehung.
       </p>
       <div class="founder-expertise">
-        <span class="fe-tag"><span class="de">12 J. Selbstständig</span><span class="en">12 Yrs. Self-Employed</span></span>
-        <span class="fe-tag"><span class="de">BWL & Unternehmensberatung</span><span class="en">Business & Consulting</span></span>
-        <span class="fe-tag"><span class="de">4 J. KI & Software</span><span class="en">4 Yrs. AI & Software</span></span>
+        <span class="fe-tag">12 J. Selbstständig</span>
+        <span class="fe-tag">BWL & Unternehmensberatung</span>
+        <span class="fe-tag">4 J. KI & Software</span>
         <span class="fe-tag">Predictive Maintenance</span>
-        <span class="fe-tag"><span class="de">Maschinenbau-Praxis</span><span class="en">Mechanical Engineering</span></span>
+        <span class="fe-tag">Maschinenbau-Praxis</span>
         <span class="fe-tag">Industrie 4.0</span>
-        <span class="fe-tag">Paphos, Cyprus · DACH</span>
+        <span class="fe-tag">Paphos, Zypern · DACH</span>
         <a href="https://www.linkedin.com/in/sascha-p-forbach-6aa52b396/" target="_blank" class="fe-tag" style="background:rgba(0,119,181,0.2);border-color:rgba(0,119,181,0.5);color:#0077b5;text-decoration:none;">in LinkedIn</a>
       </div>
       <div class="founder-quote">
-        <span class="de">„12 Jahre Unternehmensberatung haben mir eines gelehrt: Betriebe verlieren kein Geld weil ihre Maschinen schlecht sind — sie verlieren es weil niemand früh genug hinschaut. Das ändern wir."</span>
-        <span class="en">"12 years of management consulting taught me one thing: companies don't lose money because their machines are bad — they lose it because nobody looks closely enough, soon enough. That's what we change."</span>
+        „12 Jahre Unternehmensberatung haben mir eines gelehrt: Betriebe verlieren kein Geld weil ihre Maschinen schlecht sind — sie verlieren es weil niemand früh genug hinschaut. Das ändern wir."
       </div>
     </div>
   </div>
 </div>
-
-<!-- SPECIALIST TEAM -->
+<!-- ══════════════════════════════════════════
+     SPEZIALISTENTEAM
+══════════════════════════════════════════ -->
 <section style="padding:100px 0;background:var(--dark-2);">
   <div style="max-width:1100px;margin:0 auto;padding:0 2rem;">
 
     <div class="reveal" style="text-align:center;margin-bottom:60px;">
-      <div class="section-label" style="justify-content:center;margin-bottom:1rem;">
-        <span class="de">Das Spezialistenteam</span><span class="en">The Specialist Team</span>
-      </div>
-      <h2>
-        <span class="de">EXPERTEN DIE<br><span class="gold">MASCHINEN VERSTEHEN</span></span>
-        <span class="en">EXPERTS WHO<br><span class="gold">UNDERSTAND MACHINES</span></span>
-      </h2>
-      <p class="section-sub" style="margin-top:1rem;margin-left:auto;margin-right:auto;">
-        <span class="de">Kombinierte Expertise aus Maschinenbau, Elektrotechnik und angewandter KI-Entwicklung — jeder Spezialist direkt erreichbar, kein Callcenter.</span>
-        <span class="en">Combined expertise in mechanical engineering, electrical engineering and applied AI development — every specialist reachable directly, no call centre.</span>
-      </p>
+      <div class="section-label" style="justify-content:center;margin-bottom:1rem;">Das Spezialistenteam</div>
+      <h2>EXPERTEN DIE<br><span class="gold">MASCHINEN VERSTEHEN</span></h2>
+      <p class="section-sub" style="margin-top:1rem;">Kombinierte Expertise aus Maschinenbau, Elektrotechnik und angewandter KI-Entwicklung — jeder Spezialist direkt erreichbar, kein Callcenter.</p>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;">
@@ -388,141 +396,101 @@ a,button,[role=button],.value-card,.av-card{cursor:url("data:image/svg+xml,%3Csv
       <div class="av-card reveal">
         <div class="av-img-box">
           <img src="https://ui-avatars.com/api/?name=S+Forbach&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="S. Forbach">
-          <div class="av-badge"><span class="de">Gründer</span><span class="en">Founder</span></div>
+          <div class="av-badge">Gründer</div>
         </div>
-        <div class="av-info">
-          <h3>S. Forbach</h3>
-          <p class="av-role"><span class="de">Unternehmensstrategie & KI</span><span class="en">Corporate Strategy & AI</span></p>
-        </div>
+        <div class="av-info"><h3>S. Forbach</h3><p class="av-role">Unternehmensstrategie & KI</p></div>
       </div>
 
       <div class="av-card reveal">
         <div class="av-img-box">
           <img src="https://ui-avatars.com/api/?name=H+Weber&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="H. Weber">
         </div>
-        <div class="av-info">
-          <h3>H. Weber</h3>
-          <p class="av-role"><span class="de">Sondermaschinenbau</span><span class="en">Special Machine Engineering</span></p>
-        </div>
+        <div class="av-info"><h3>H. Weber</h3><p class="av-role">Sondermaschinenbau</p></div>
       </div>
 
       <div class="av-card reveal">
         <div class="av-img-box">
           <img src="https://ui-avatars.com/api/?name=A+Makris&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="A. Makris">
         </div>
-        <div class="av-info">
-          <h3>A. Makris</h3>
-          <p class="av-role"><span class="de">Leitung KI-Entwicklung</span><span class="en">Head of AI Development</span></p>
-        </div>
+        <div class="av-info"><h3>A. Makris</h3><p class="av-role">Leitung KI-Entwicklung</p></div>
       </div>
 
       <div class="av-card reveal">
         <div class="av-img-box">
           <img src="https://ui-avatars.com/api/?name=M+Steiner&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="M. Steiner">
         </div>
-        <div class="av-info">
-          <h3>M. Steiner</h3>
-          <p class="av-role"><span class="de">CNC-Systemtechnik</span><span class="en">CNC Systems Engineering</span></p>
-        </div>
+        <div class="av-info"><h3>M. Steiner</h3><p class="av-role">CNC-Systemtechnik</p></div>
       </div>
 
       <div class="av-card reveal">
         <div class="av-img-box">
           <img src="https://ui-avatars.com/api/?name=S+Kraemer&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="S. Kraemer">
         </div>
-        <div class="av-info">
-          <h3>S. Kraemer</h3>
-          <p class="av-role"><span class="de">Technischer Service</span><span class="en">Technical Service</span></p>
-        </div>
+        <div class="av-info"><h3>S. Kraemer</h3><p class="av-role">Technischer Service</p></div>
       </div>
 
       <div class="av-card reveal">
         <div class="av-img-box">
           <img src="https://ui-avatars.com/api/?name=T+Becker&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="T. Becker">
         </div>
-        <div class="av-info">
-          <h3>T. Becker</h3>
-          <p class="av-role"><span class="de">Automatisierungstechnik</span><span class="en">Automation Engineering</span></p>
-        </div>
+        <div class="av-info"><h3>T. Becker</h3><p class="av-role">Automatisierungstechnik</p></div>
       </div>
 
       <div class="av-card reveal">
         <div class="av-img-box">
           <img src="https://ui-avatars.com/api/?name=L+Vogt&background=1a1a1a&color=e4b15e&size=300&bold=true&font-size=0.38" alt="L. Vogt">
         </div>
-        <div class="av-info">
-          <h3>L. Vogt</h3>
-          <p class="av-role"><span class="de">Kundenbetreuung DACH</span><span class="en">Customer Success DACH</span></p>
-        </div>
+        <div class="av-info"><h3>L. Vogt</h3><p class="av-role">Kundenbetreuung DACH</p></div>
       </div>
 
     </div>
   </div>
 </section>
 
+<style>
+.av-card{background:var(--dark-card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all 0.4s ease;text-align:center;}
+.av-img-box{position:relative;background:#111;height:220px;overflow:hidden;}
+.av-img-box img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) brightness(0.75);transition:all 0.5s ease;}
+.av-badge{position:absolute;top:10px;right:10px;background:var(--gold);color:#000;font-family:var(--font-m);font-size:0.55rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
+.av-card:hover{border-color:var(--gold);transform:translateY(-5px);box-shadow:0 12px 40px rgba(228,177,94,0.12);}
+.av-card:hover .av-img-box img{filter:grayscale(0%) brightness(1);}
+.av-info{padding:18px;}
+.av-info h3{color:var(--gold);font-family:var(--font-d);font-size:1.05rem;margin-bottom:5px;letter-spacing:1px;}
+.av-role{color:var(--text-dim);font-size:0.72rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;}
+</style>
+
 <!-- VALUES -->
 <div class="values-section">
   <div class="values-inner">
-    <div class="section-label">
-      <span class="de">Unsere Werte</span><span class="en">Our Values</span>
-    </div>
-    <h2>
-      <span class="de">WAS UNS<br><span class="gold">ANTREIBT</span></span>
-      <span class="en">WHAT<br><span class="gold">DRIVES US</span></span>
-    </h2>
+    <div class="section-label">Unsere Werte</div>
+    <h2>WAS UNS<br><span class="gold">ANTREIBT</span></h2>
     <div style="height:2rem;"></div>
     <div class="values-grid">
       <div class="value-card reveal">
         <div class="vc-icon">🎯</div>
-        <div class="vc-title">
-          <span class="de">Keine Theorie — nur Ergebnisse</span>
-          <span class="en">No Theory — Only Results</span>
-        </div>
-        <div class="vc-desc">
-          <span class="de">Wir messen uns ausschließlich an konkreten Zahlen: verhinderte Ausfälle, eingesparte Euro, verbesserte OEE. Präsentationen ohne messbare Ergebnisse kommen bei uns nicht vor.</span>
-          <span class="en">We measure ourselves exclusively by concrete numbers: failures prevented, euros saved, OEE improved. Presentations without measurable outcomes simply don't exist at our company.</span>
-        </div>
+        <div class="vc-title">Keine Theorie — nur Ergebnisse</div>
+        <div class="vc-desc">Wir messen uns ausschließlich an konkreten Zahlen: verhinderte Ausfälle, eingesparte Euro, verbesserte OEE. Präsentationen ohne messbare Ergebnisse kommen bei uns nicht vor.</div>
       </div>
       <div class="value-card reveal rd1">
         <div class="vc-icon">🔧</div>
-        <div class="vc-title">
-          <span class="de">Wir kennen den Shopfloor</span>
-          <span class="en">We Know the Shopfloor</span>
-        </div>
-        <div class="vc-desc">
-          <span class="de">Jahrelange Arbeit in produzierenden Betrieben hat uns gelehrt was auf dem Shopfloor wirklich passiert. Wir entwickeln Lösungen die dort funktionieren, wo es heiß, laut und schmutzig ist.</span>
-          <span class="en">Years of work in manufacturing companies taught us what really happens on the shopfloor. We build solutions that work where it's hot, loud and dirty.</span>
-        </div>
+        <div class="vc-title">Wir kennen den Shopfloor</div>
+        <div class="vc-desc">Jahrelange Arbeit in produzierenden Betrieben hat uns gelehrt was auf dem Shopfloor wirklich passiert. Wir entwickeln Lösungen die dort funktionieren, wo es heiß, laut und schmutzig ist.</div>
       </div>
       <div class="value-card reveal rd2">
         <div class="vc-icon">🤝</div>
-        <div class="vc-title">
-          <span class="de">Partnerschaft statt Transaktion</span>
-          <span class="en">Partnership, Not Transaction</span>
-        </div>
-        <div class="vc-desc">
-          <span class="de">Jede Installation ist der Beginn einer langfristigen Partnerschaft. Unsere Kunden haben direkten Zugang zu Sascha Forbach persönlich — kein Callcenter, kein Ticket-System.</span>
-          <span class="en">Every installation is the start of a long-term partnership. Our clients have direct access to Sascha Forbach personally — no call centre, no ticket system.</span>
-        </div>
+        <div class="vc-title">Partnerschaft statt Transaktion</div>
+        <div class="vc-desc">Jede Installation ist der Beginn einer langfristigen Partnerschaft. Unsere Kunden haben direkten Zugang zu Sascha Forbach persönlich — kein Callcenter, kein Ticket-System.</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- CONTACT FORM -->
+<!-- KONTAKTFORMULAR -->
 <div class="contact-section" id="kontakt">
   <div class="contact-inner">
-    <div class="section-label" style="justify-content:center;margin-bottom:0.5rem;">
-      <span class="de">Erstgespräch vereinbaren</span><span class="en">Schedule a Discovery Call</span>
-    </div>
-    <h2 style="text-align:center;font-family:var(--font-d);font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:2px;line-height:1.1;">
-      <span class="de">SCHREIBEN SIE<br><span style="background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">UNS DIREKT AN</span></span>
-      <span class="en">SEND US<br><span style="background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">A MESSAGE</span></span>
-    </h2>
-    <p style="text-align:center;color:var(--text-dim);margin-top:1rem;font-size:0.95rem;line-height:1.7;">
-      <span class="de">In 20 Minuten sehen Sie ob und wie wir Ihre Anlage überwachen können.<br>Kostenlos, unverbindlich, konkret.</span>
-      <span class="en">In 20 minutes you'll know whether and how we can monitor your machines.<br>Free, no obligation, concrete.</span>
-    </p>
+    <div class="section-label" style="justify-content:center;margin-bottom:0.5rem;">Erstgespräch vereinbaren</div>
+    <h2 style="text-align:center;font-family:var(--font-d);font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:2px;line-height:1.1;">SCHREIBEN SIE<br><span style="background:linear-gradient(135deg,#e4b15e,#f8dfa5,#c49040);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">UNS DIREKT AN</span></h2>
+    <p style="text-align:center;color:var(--text-dim);margin-top:1rem;font-size:0.95rem;line-height:1.7;">In 20 Minuten sehen Sie ob und wie wir Ihre Anlage überwachen können.<br>Kostenlos, unverbindlich, konkret.</p>
 
     <form class="contact-form" id="contactForm">
       <input type="hidden" name="access_key" value="IHRE_WEB3FORMS_ACCESS_KEY_HIER">
@@ -531,11 +499,11 @@ a,button,[role=button],.value-card,.av-card{cursor:url("data:image/svg+xml,%3Csv
       <input type="hidden" name="redirect" value="false">
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label"><span class="de">Ihr Name *</span><span class="en">Your Name *</span></label>
+          <label class="form-label">Ihr Name *</label>
           <input type="text" name="name" class="form-input" placeholder="Max Mustermann" required>
         </div>
         <div class="form-group">
-          <label class="form-label"><span class="de">Unternehmen *</span><span class="en">Company *</span></label>
+          <label class="form-label">Unternehmen *</label>
           <input type="text" name="company" class="form-input" placeholder="Musterfirma GmbH" required>
         </div>
       </div>
@@ -545,87 +513,82 @@ a,button,[role=button],.value-card,.av-card{cursor:url("data:image/svg+xml,%3Csv
           <input type="email" name="email" class="form-input" placeholder="m.mustermann@firma.de" required>
         </div>
         <div class="form-group">
-          <label class="form-label"><span class="de">Telefon</span><span class="en">Phone</span></label>
+          <label class="form-label">Telefon</label>
           <input type="tel" name="phone" class="form-input" placeholder="+49 …">
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label"><span class="de">Maschinentyp</span><span class="en">Machine Type</span></label>
+        <label class="form-label">Maschinentyp</label>
         <select name="machine_type" class="form-select">
-          <option value=""><span class="de">Bitte wählen…</span></option>
-          <option>CNC-Fräszentrum (3-Achs)</option>
-          <option>CNC-Fräszentrum (5-Achs)</option>
-          <option>Bearbeitungszentrum (BAZ)</option>
-          <option>CNC-Drehzentrum</option>
-          <option>Dreh-Fräszentrum</option>
-          <option>Mehrere CNC-Anlagen</option>
-          <option>Sonstiges / Other</option>
+          <option value="">Bitte wählen…</option>
+          <option>CNC-Fräszentrum</option>
+          <option>Spritzgussmaschine</option>
+          <option>Laserschneidanlage</option>
+          <option>Schweißroboter</option>
+          <option>Hydraulik-Aggregat</option>
+          <option>Verpackungslinie</option>
+          <option>Mehrere Typen</option>
         </select>
       </div>
       <div class="form-group">
-        <label class="form-label"><span class="de">Ihre Nachricht *</span><span class="en">Your Message *</span></label>
-        <textarea name="message" class="form-textarea" required id="contactTextarea"></textarea>
+        <label class="form-label">Ihre Nachricht *</label>
+        <textarea name="message" class="form-textarea" placeholder="Beschreiben Sie kurz Ihre Situation — wie viele Maschinen, welche Probleme, was Sie sich wünschen…" required></textarea>
       </div>
-      <button type="submit" class="form-submit" id="formSubmitBtn">
-        <span class="de">KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →</span>
-        <span class="en">REQUEST FREE DISCOVERY CALL →</span>
-      </button>
-      <div class="form-success" id="formSuccess">
-        <span class="de">✓ NACHRICHT ERHALTEN — Sascha Forbach meldet sich persönlich innerhalb von 24 Stunden.</span>
-        <span class="en">✓ MESSAGE RECEIVED — Sascha Forbach will get back to you personally within 24 hours.</span>
+      <button type="submit" class="form-submit" id="formSubmitBtn">KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →</button>
+      <div class="form-success" id="formSuccess" style="display:none;background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.3);border-radius:10px;padding:1.5rem;text-align:center;color:#00ff88;font-family:var(--font-m);font-size:0.8rem;letter-spacing:1px;">
+        ✓ NACHRICHT ERHALTEN — Sascha Forbach meldet sich persönlich innerhalb von 24 Stunden.
       </div>
-      <div class="form-error" id="formError">
-        <span class="de">Fehler beim Senden. Bitte schreiben Sie direkt an info@forbachandpartners.com</span>
-        <span class="en">Error sending. Please write directly to info@forbachandpartners.com</span>
+      <div class="form-error" id="formError" style="display:none;background:rgba(255,56,96,0.08);border:1px solid rgba(255,56,96,0.3);border-radius:10px;padding:1rem;text-align:center;color:#ff3860;font-size:0.8rem;">
+        Fehler beim Senden. Bitte schreiben Sie direkt an info@forbachandpartners.com
       </div>
     </form>
     <div style="text-align:center;margin-top:1.5rem;font-family:var(--font-m);font-size:0.58rem;color:var(--text-muted);letter-spacing:2px;">
-      📞 <a href="tel:004921190989962" style="color:inherit;text-decoration:none;">+49 211 90989962</a> · ✉ INFO@FORBACHANDPARTNERS.COM · PAPHOS, CYPRUS
+      📞 Jetzt anrufen · ✉ INFO@FORBACHANDPARTNERS.COM · PAPHOS, ZYPERN
     </div>
   </div>
 </div>
 
 <footer>
   <div class="f-logo">FORBACH & PARTNERS</div>
-  <div class="f-tag">
-    <span class="de">Predictive Intelligence · Maschinenbau · Industry 4.0</span>
-    <span class="en">Predictive Intelligence · Mechanical Engineering · Industry 4.0</span>
-  </div>
+  <div class="f-tag">Predictive Intelligence · Maschinenbau · Industry 4.0</div>
   <div class="f-links">
-    <a class="f-link" href="index.html"><span class="de">Home</span><span class="en">Home</span></a>
-    <a class="f-link" href="ueber-uns.html"><span class="de">Über uns</span><span class="en">About Us</span></a>
-    <a class="f-link" href="cnc-fraeszentren.html">CNC-Anlagen</a>
+    <a class="f-link" href="index.html">Home</a>
+    <a class="f-link" href="ueber-uns.html">Über uns</a>
+    <a class="f-link" href="cnc-fraeszentren.html">CNC</a>
+    <a class="f-link" href="spritzguss.html">Spritzguss</a>
+    <a class="f-link" href="laserschneiden.html">Laser</a>
+    <a class="f-link" href="robotik.html">Robotik</a>
     <a class="f-link" href="blog.html">Blog</a>
-    <a class="f-link" href="kontakt.html"><span class="de">Kontakt</span><span class="en">Contact</span></a>
-    <a class="f-link" href="impressum.html">Impressum</a>
-    <a class="f-link" href="datenschutz.html">Datenschutz</a>
+    <a class="f-link" href="kontakt.html">Kontakt</a>
   </div>
-  <div class="f-copy">© 2026 Forbach and Partners Ltd · Reg. Cyprus HE 483586 · <span class="de">Alle Rechte vorbehalten</span><span class="en">All Rights Reserved</span></div>
+  <div class="f-copy">© 2026 Forbach and Partners Ltd · Reg. Cyprus · All rights reserved</div>
 </footer>
+
+<style>
+.contact-form{display:grid;gap:1rem;margin-top:2.5rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:600px){.form-row{grid-template-columns:1fr;}}
+.form-group{display:flex;flex-direction:column;gap:0.4rem;}
+.form-label{font-family:var(--font-m);font-size:0.62rem;color:rgba(228,177,94,0.8);text-transform:uppercase;letter-spacing:2px;}
+.form-input,.form-select,.form-textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(228,177,94,0.2);border-radius:8px;padding:0.75rem 1rem;color:#fff;font-family:inherit;font-size:0.875rem;transition:border-color 0.2s;width:100%;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:rgba(228,177,94,0.7);background:rgba(228,177,94,0.04);}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23e4b15e' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;}
+.form-select option{background:#111;color:#fff;}
+.form-textarea{resize:vertical;min-height:120px;line-height:1.6;}
+.form-submit{background:linear-gradient(135deg,#e4b15e,#f8dfa5,#e4b15e);color:#000;border:none;padding:0.9rem 2rem;border-radius:8px;font-weight:700;font-size:0.875rem;cursor:pointer;transition:all 0.3s;width:100%;}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(248,223,165,0.35);}
+.form-submit:disabled{opacity:0.6;transform:none;cursor:not-allowed;}
+</style>
 
 <script>
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v');});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// Set textarea placeholder based on language
-function updateTextareaPlaceholder(){
-  const ta = document.getElementById('contactTextarea');
-  if(!ta) return;
-  if(document.body.classList.contains('lang-en')){
-    ta.placeholder = 'Briefly describe your situation — how many machines, what issues, what you need…';
-  } else {
-    ta.placeholder = 'Beschreiben Sie kurz Ihre Situation — wie viele Maschinen, welche Probleme, was Sie sich wünschen…';
-  }
-}
-document.addEventListener('langChanged', updateTextareaPlaceholder);
-updateTextareaPlaceholder();
-
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const btn = document.getElementById('formSubmitBtn');
-  const isEn = document.body.classList.contains('lang-en');
   btn.disabled = true;
-  btn.innerHTML = isEn ? 'SENDING…' : 'WIRD GESENDET…';
+  btn.textContent = 'WIRD GESENDET…';
   try {
     const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body: new FormData(this) });
     const json = await res.json();
@@ -635,9 +598,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     } else { throw new Error(); }
   } catch {
     btn.disabled = false;
-    btn.innerHTML = isEn
-      ? '<span class="de">KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →</span><span class="en">REQUEST FREE DISCOVERY CALL →</span>'
-      : '<span class="de">KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →</span><span class="en">REQUEST FREE DISCOVERY CALL →</span>';
+    btn.textContent = 'KOSTENLOSES ERSTGESPRÄCH ANFRAGEN →';
     document.getElementById('formError').style.display = 'block';
   }
 });

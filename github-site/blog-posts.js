@@ -442,8 +442,8 @@ const POSTS = [
         <code>ROI Jahr 1 = (Einsparung − Investition) / Investition × 100</code>
       </div>
 
-      <h2>Reales Beispiel: 4 Maschinen, mittelständischer Betrieb</h2>
-      <p>Typische Konfiguration: 2 CNC-Fräsen, 1 Spritzguss, 1 Schweißroboter.</p>
+      <h2>Reales Beispiel: 4 CNC-Maschinen, mittelständischer Lohnfertiger</h2>
+      <p>Typische Konfiguration: 2 CNC-Fräszentren (5-Achs), 1 Bearbeitungszentrum, 1 CNC-Drehzentrum.</p>
       <ul>
         <li>Jährliche Stillstunden gesamt: 28 h</li>
         <li>Durchschnittlicher Stundensatz: 2.900 €</li>

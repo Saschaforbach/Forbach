@@ -1111,7 +1111,7 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:1000;bac
           <div class="roi-result-card highlight">
             <div class="rrc-label">Ihre Ersparnis / Jahr</div>
             <div class="rrc-val" id="roiSaving">€ 0</div>
-            <div class="rrc-sub">durch KI-Prognose (Ø 72 %)</div>
+            <div class="rrc-sub">durch KI-Prognose (Ø <span id="roiEfficacy">72</span> %)</div>
           </div>
           <div class="roi-result-card">
             <div class="rrc-label">Investition (Software + Wartung/Jahr)</div>
@@ -1846,10 +1846,17 @@ function renderROIInputs() {
   `).join('');
 }
 
+// Realistischer Wertebereich für Stillstunden/Jahr eines einzelnen CNC-Zentrums.
+// (Vorher stand hier maxH=200 -> bei realistischen 4-8h/Jahr kam praktisch immer ~0-4% raus.)
+const RISK_MAX_HOURS = 16;
+
+function riskPctForHours(h) {
+  return Math.min(100, Math.max(0, Math.round((h / RISK_MAX_HOURS) * 100)));
+}
+
 function updateRisk(i) {
   const h = parseFloat(document.getElementById('h_'+i)?.value)||0;
-  const maxH = 200;
-  const pct = Math.min(100, Math.round((h/maxH)*100));
+  const pct = riskPctForHours(h);
   const fill = document.getElementById('risk_'+i);
   const val  = document.getElementById('riskval_'+i);
   if (!fill||!val) return;
@@ -1857,45 +1864,57 @@ function updateRisk(i) {
   fill.className = 'mic-risk-fill ' + (pct>60?'fill-crit':pct>30?'fill-warn':'fill-ok');
   val.style.color = pct>60?'var(--red)':pct>30?'var(--amber)':'var(--green)';
   val.textContent = pct+'%';
+  if (typeof calcROI === 'function') calcROI();
 }
-
 // ─────────────────────────────────────────────
 // CALC ROI
 // ─────────────────────────────────────────────
 function calcROI() {
   let totalLoss = 0;
+  let totalSaving = 0;
   for (let i=0; i<roiMachines.length; i++) {
     const h = parseFloat(document.getElementById('h_'+i)?.value)||0;
     const c = parseFloat(document.getElementById('c_'+i)?.value)||0;
-    totalLoss += h * c;
+    const loss = h * c;
+    totalLoss += loss;
+
+    // Je höher das Risiko (siehe Risiko-Balken), desto mehr ungeplante
+    // Ausfälle erkennt das Modell rechtzeitig -> höhere vermeidbare Quote.
+    // Bandbreite 55-90%, Mittelwert liegt bei einem typischen Maschinenmix bei ~72%.
+    const riskPct  = riskPctForHours(h);
+    const efficacy = Math.min(0.90, Math.max(0.55, 0.55 + (riskPct/100)*0.40));
+    totalSaving += loss * efficacy;
   }
+  const saving = Math.round(totalSaving);
+  const efficacyLabel = totalLoss > 0 ? Math.round((saving/totalLoss)*100) : 72;
+  const efficacyEl = document.getElementById('roiEfficacy');
+  if (efficacyEl) efficacyEl.textContent = efficacyLabel;
 
   // Maschinenanzahl aus dem Slider (kann über 8 gehen)
   const machineCount = parseInt(document.getElementById('machineCountSlider')?.value) || roiMachines.length;
   document.getElementById('machineCountDisplay').textContent = machineCount + ' Maschinen';
 
-  // ── Staffelpreise Software (einmalig pro Maschine) ──────────────
-  // Maschinen  1 –  9 :  25.000 € / Maschine
-  // Maschinen 10 +    :  22.500 € / Maschine  (Mengenrabatt)
+  // ── Staffelpreise Software (einmalig pro Maschine) ────────────────
+  // Maschinen  1 –  9 :  6.000 € / Maschine  (Sensorik + Einrichtung)
+  // Maschinen 10 +    :  5.500 € / Maschine  (Mengenrabatt)
   let softwareCost;
   if (machineCount <= 9) {
-    softwareCost = machineCount * 25000;
+    softwareCost = machineCount * 6000;
   } else {
-    softwareCost = 9 * 25000 + (machineCount - 9) * 22500;
+    softwareCost = 9 * 6000 + (machineCount - 9) * 5500;
   }
 
-  // ── Wartungskosten jährlich (pro Maschine / Monat) ──────────────
-  // Maschinen  1 –  9 :  1.200 € / Monat / Maschine
-  // Maschinen 10 +    :    800 € / Monat / Maschine  (Mengenrabatt)
+  // ── Wartungskosten jährlich (pro Maschine / Monat) ────────────────
+  // Maschinen  1 –  9 :    250 € / Monat / Maschine
+  // Maschinen 10 +    :    200 € / Monat / Maschine  (Mengenrabatt)
   let maintenanceCost;
   if (machineCount <= 9) {
-    maintenanceCost = machineCount * 1200 * 12;
+    maintenanceCost = machineCount * 250 * 12;
   } else {
-    maintenanceCost = 9 * 1200 * 12 + (machineCount - 9) * 800 * 12;
+    maintenanceCost = 9 * 250 * 12 + (machineCount - 9) * 200 * 12;
   }
 
   const invest    = softwareCost + maintenanceCost;
-  const saving    = Math.round(totalLoss * 0.72);
   const roi       = invest > 0 ? Math.round(((saving - invest) / invest) * 100) : 0;
   const amort     = saving > 0 ? Math.round((invest / saving) * 12) : 99;
   const amortPct  = Math.min(100, Math.max(5, 100 - ((amort/24)*100)));
@@ -1922,7 +1941,7 @@ function calcROI() {
              ✓ Mengenrabatt aktiv — ab der 10. Maschine
            </span>`
         : `<span style="color:var(--text-muted);font-size:0.58rem;display:block;margin-top:3px;">
-             Ab 10 Maschinen: 22.500\u202f€ Software + 800\u202f€/Monat Wartung
+                          Ab 10 Maschinen: 5.500 € Software + 200 €/Monat Wartung
            </span>`
       );
   }
@@ -1936,8 +1955,8 @@ function calcROI() {
        eine Einsparung von <strong style="color:var(--green)">€\u202f${saving.toLocaleString('de-DE')} im ersten Jahr</strong>.
        Die Investition amortisiert sich in <strong style="color:var(--gold)">${amort} Monaten</strong>.
        ${hasDiscount
-         ? '<br><span style="color:var(--green);font-size:0.88em;">✓ Mengenrabatt: 22.500\u202f€ Software + 800\u202f€/Monat Wartung ab der 10.\u202fMaschine.</span>'
-         : '<br><span style="color:var(--text-muted);font-size:0.85em;">Tipp: Ab 10 Maschinen greifen Mengenrabatte — Software -10\u202f%, Wartung -33\u202f%.</span>'}`;
+                  ? '<br><span style="color:var(--green);font-size:0.88em;">✓ Mengenrabatt: 5.500 € Software + 200 €/Monat Wartung ab der 10. Maschine.</span>'
+                  : '<br><span style="color:var(--text-muted);font-size:0.85em;">Tipp: Ab 10 Maschinen greifen Mengenrabatte — Software -8 %, Wartung -20 %.</span>'}`;
 
   document.getElementById('roiMessage').innerHTML = msg;
 }
